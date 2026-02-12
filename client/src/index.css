@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-light: #e0e7ff;
+  --secondary: #64748b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --background: #f8fafc;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --sidebar-w: 260px;
+}
+
+.dark {
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-light: rgba(99, 102, 241, 0.1);
+  --background: #020617;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --glass-bg: rgba(15, 23, 42, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--background)] text-[var(--text-main)] font-sans antialiased selection:bg-indigo-500/30 transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-[var(--card-bg)] backdrop-blur-xl border border-[var(--glass-border)] rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-none transition-all duration-300;
+  }
+
+  .glass-navbar {
+    @apply bg-[var(--glass-bg)] backdrop-blur-md border-b border-[var(--glass-border)] sticky top-0 z-50;
+  }
+
+  .btn {
+    @apply px-5 py-2.5 rounded-2xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .btn-primary {
+    @apply bg-indigo-600 text-white hover:bg-indigo-500 shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 font-display;
+  }
+
+  .btn-secondary {
+    @apply bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-800 rounded-2xl focus:border-indigo-500 dark:focus:border-indigo-400 outline-none transition-all placeholder:text-slate-400 text-sm font-medium;
+  }
+
+  .card {
+    @apply glass-card p-6;
+  }
+
+  .badge {
+    @apply px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm;
+  }
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  opacity: 0;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Staggered Delay Helpers */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+}
+
+/* Page Background Gradient */
+.page-bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.03) 0, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(129, 140, 248, 0.03) 0, transparent 50%);
+}
