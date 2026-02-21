@@ -24,13 +24,15 @@ const ManagerDashboard = () => {
     const [rejectionReason, setRejectionReason] = useState('');
 
     useEffect(() => {
-        loadData();
-    }, []);
+        if (user) {
+            loadData();
+        }
+    }, [user]);
 
     const loadData = async () => {
         try {
             const [requestsRes, statsRes] = await Promise.all([
-                requestService.getAll(),
+                requestService.getAll({ status: 'Pending,Approved,Completed,Sent to Audit', limit: 100 }),
                 statsService.getRequestStats()
             ]);
 
@@ -85,8 +87,8 @@ const ManagerDashboard = () => {
     };
 
     const statusData = [
-        { name: 'Pending', value: pendingRequests.length },
-        { name: 'Approved', value: requests.filter(r => r.status === 'Approved').length },
+        { name: 'Pending', value: requests.filter(r => r.status === 'Pending').length },
+        { name: 'Approved', value: requests.filter(r => ['Approved', 'Completed', 'Sent to Audit'].includes(r.status)).length },
         { name: 'Rejected', value: requests.filter(r => r.status === 'Rejected').length },
     ];
 
@@ -124,7 +126,7 @@ const ManagerDashboard = () => {
                 <div className="animate-slide-up delay-200">
                     <KPICard
                         title="Monthly Thruput"
-                        value={stats?.summary?.approved ?? requests.filter(r => r.status === 'Approved').length}
+                        value={stats?.summary?.approved ?? requests.filter(r => ['Approved', 'Completed', 'Sent to Audit'].includes(r.status)).length}
                         trend="up"
                         trendValue="12%"
                         icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
@@ -183,16 +185,16 @@ const ManagerDashboard = () => {
                                     request.riskLevel === 'High' ? 'border-amber-100 dark:border-amber-900/30 hover:border-amber-200 dark:hover:border-amber-800' :
                                         'border-slate-100 dark:border-slate-800/50 hover:border-indigo-100 dark:hover:border-indigo-900/50'
                                     }`}>
-                                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br ${request.riskLevel === 'Critical' ? 'from-rose-50/50 via-transparent to-transparent dark:from-rose-900/10' :
-                                        request.riskLevel === 'High' ? 'from-amber-50/50 via-transparent to-transparent dark:from-amber-900/10' :
-                                            'from-indigo-50/50 via-transparent to-transparent dark:from-indigo-900/10'
+                                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br ${request.riskLevel === 'Critical' ? 'from-rose-500/10 via-transparent to-transparent' :
+                                        request.riskLevel === 'High' ? 'from-amber-500/10 via-transparent to-transparent' :
+                                            'from-indigo-500/10 via-transparent to-transparent'
                                         }`} />
                                     <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-6">
                                         <div className="flex-1">
                                             <div className="flex items-center gap-3 mb-4">
-                                                <span className={`text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider ${request.riskLevel === 'Critical' ? 'bg-rose-50 text-rose-600 dark:bg-rose-900/40 dark:text-rose-400' :
-                                                    request.riskLevel === 'High' ? 'bg-amber-50 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400' :
-                                                        'bg-sky-50 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400'
+                                                <span className={`text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider border ${request.riskLevel === 'Critical' ? 'bg-rose-500/20 text-rose-600 dark:text-rose-400 border-rose-500/40' :
+                                                    request.riskLevel === 'High' ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/40' :
+                                                        'bg-sky-500/20 text-sky-600 dark:text-sky-400 border-sky-500/40'
                                                     }`}>{request.riskLevel} Risk</span>
                                                 <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">{request.changeType}</span>
                                             </div>
@@ -248,8 +250,8 @@ const ManagerDashboard = () => {
                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">{item.label}</span>
                                     <span className="text-sm font-black text-slate-900 dark:text-white leading-none">{item.value}%</span>
                                 </div>
-                                <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                    <div className={`h-full ${item.color} rounded-full transition-all duration-[1.5s] ease-out shadow-sm`} style={{ width: `${item.value}%` }}></div>
+                                <div className="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden shadow-inner">
+                                    <div className={`h-full ${item.color} rounded-full transition-all duration-[1.5s] ease-out shadow-[0_0_12px_rgba(0,0,0,0.2)]`} style={{ width: `${item.value}%` }}></div>
                                 </div>
                             </div>
                         ))}

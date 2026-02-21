@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, login, getMe, logout, updateMe, updatePassword } from '../controllers/authController.js';
+import { register, login, getMe, logout, updateMe, updatePassword, updateAvatar } from '../controllers/authController.js';
 import { registerSchema, loginSchema, updateProfileSchema, updatePasswordSchema, validate } from '../validations/authValidation.js';
 import { protect } from '../middleware/auth.js';
 
@@ -19,6 +19,7 @@ router.get('/status', (req, res) => res.json({ success: true, message: 'Auth rou
 // Protected routes
 router.get('/me', protect, getMe);
 router.patch('/me', protect, validate(updateProfileSchema), updateMe);
+router.patch('/avatar', protect, updateAvatar);
 router.patch('/update-password', protect, validate(updatePasswordSchema), updatePassword);
 router.post('/logout', protect, logout);
 

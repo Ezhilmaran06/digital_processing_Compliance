@@ -7,7 +7,7 @@ const TrendChart = ({ data }) => {
                 <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                     <defs>
                         <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
+                            <stop offset="5%" stopColor="#6366f1" stopOpacity={0.5} />
                             <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
                         </linearGradient>
                     </defs>
@@ -40,8 +40,8 @@ const TrendChart = ({ data }) => {
                     <Area
                         type="monotone"
                         dataKey="value"
-                        stroke="#4f46e5"
-                        strokeWidth={4}
+                        stroke="#6366f1"
+                        strokeWidth={6}
                         fillOpacity={1}
                         fill="url(#colorValue)"
                         animationDuration={1500}

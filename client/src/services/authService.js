@@ -73,6 +73,35 @@ const authService = {
     },
 
     /**
+     * Upload user avatar
+     */
+    uploadAvatar: async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // 1. Upload the file to get the filename
+        const uploadResponse = await api.post('/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        if (uploadResponse.success) {
+            const avatarPath = `/uploads/${uploadResponse.data.filename}`;
+            // 2. Update user profile with the new avatar path
+            const profileResponse = await api.patch('/auth/avatar', { avatar: avatarPath });
+
+            if (profileResponse.success) {
+                const currentUser = authService.getCurrentUser();
+                const updatedUser = { ...currentUser, avatar: avatarPath };
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                return updatedUser;
+            }
+        }
+        throw new Error('Failed to upload avatar');
+    },
+
+    /**
      * Get current user from localStorage
      */
     getCurrentUser: () => {

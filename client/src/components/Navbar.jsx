@@ -30,8 +30,17 @@ const AppNavbar = () => {
 
     const isActive = (path) => location.pathname === path;
 
+    const getAvatarUrl = (path) => {
+        if (!path) return null;
+        if (path.startsWith('http')) return path;
+        const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '').replace(/\/$/, '') || '';
+        const cleanPath = path.startsWith('/') ? path : `/${path}`;
+        const timestamp = new Date().getTime();
+        return `${baseUrl}${cleanPath}?t=${timestamp}`;
+    };
+
     return (
-        <nav className="glass-navbar sticky top-4 mx-4 md:mx-8 px-6 py-4 rounded-[2.5rem] shadow-2xl shadow-indigo-500/10 z-[100] transition-all duration-300">
+        <nav className="glass-navbar sticky top-4 mx-4 md:mx-8 px-6 py-2.5 rounded-[2rem] shadow-premium z-[100] transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(99,102,241,0.15)] ring-1 ring-white/10">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 <div className="flex items-center gap-10">
                     <Link to="/" className="flex items-center gap-3.5 group">
@@ -77,8 +86,16 @@ const AppNavbar = () => {
                     <div className="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1 hidden md:block"></div>
 
                     <div className="hidden md:flex items-center gap-4 bg-white/30 dark:bg-white/5 p-1 pr-4 rounded-3xl border border-white/20">
-                        <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            {user?.name?.charAt(0)}
+                        <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden">
+                            {user?.avatar ? (
+                                <img
+                                    src={getAvatarUrl(user.avatar)}
+                                    alt={user.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                user?.name?.charAt(0)
+                            )}
                         </div>
                         <div className="text-left hidden lg:block">
                             <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">{user?.name}</p>
@@ -125,7 +142,17 @@ const AppNavbar = () => {
                         ))}
                         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between px-2">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold uppercase">{user?.name?.charAt(0)}</div>
+                                <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold uppercase overflow-hidden">
+                                    {user?.avatar ? (
+                                        <img
+                                            src={getAvatarUrl(user.avatar)}
+                                            alt={user.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        user?.name?.charAt(0)
+                                    )}
+                                </div>
                                 <div>
                                     <p className="text-sm font-bold dark:text-white">{user?.name}</p>
                                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{user?.role}</p>

@@ -187,7 +187,9 @@ export const getAnalytics = asyncHandler(async (req, res) => {
     // Get request statistics
     const totalRequests = await Request.countDocuments();
     const pendingRequests = await Request.countDocuments({ status: 'Pending' });
-    const approvedRequests = await Request.countDocuments({ status: 'Approved' });
+    const approvedRequests = await Request.countDocuments({
+        status: { $in: ['Approved', 'Completed', 'Sent to Audit'] }
+    });
     const rejectedRequests = await Request.countDocuments({ status: 'Rejected' });
 
     // Get user statistics
@@ -262,7 +264,7 @@ export const getAuditLogs = asyncHandler(async (req, res) => {
     const skip = (parseInt(page) - 1) * parseInt(limit);
 
     const logs = await AuditLog.find(query)
-        .populate('userId', 'name email role')
+        .populate('userId', 'name email role avatar')
         .populate('targetUserId', 'name email role')
         .populate('requestId', 'title status')
         .sort({ timestamp: -1 })
@@ -302,7 +304,7 @@ export const exportAuditLogs = asyncHandler(async (req, res) => {
     }
 
     const logs = await AuditLog.find(query)
-        .populate('userId', 'name email role')
+        .populate('userId', 'name email role avatar')
         .populate('targetUserId', 'name email role')
         .populate('requestId', 'title')
         .sort({ timestamp: -1 })

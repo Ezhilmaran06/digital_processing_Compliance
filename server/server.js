@@ -34,8 +34,11 @@ const app = express();
  * Security Middleware
  */
 
-// Helmet - Set security headers
-app.use(helmet());
+// Helmet - Set security headers (relaxed for development image serving)
+app.use(helmet({
+    contentSecurityPolicy: false,
+    crossOriginResourcePolicy: false,
+}));
 
 // CORS - Enable Cross-Origin Resource Sharing
 app.use(cors({
@@ -71,7 +74,12 @@ if (process.env.NODE_ENV === 'development') {
  * Static Files
  */
 // Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', (req, res, next) => {
+    try {
+        fs.appendFileSync(path.join(__dirname, 'static_debug.log'), `[${new Date().toISOString()}] Request: ${req.url}\n`);
+    } catch (e) { }
+    next();
+}, express.static(path.join(__dirname, 'uploads')));
 
 /**
  * Global Request Logger (Diagnostic)
@@ -100,6 +108,60 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/manager', managerRoutes);
 app.use('/api', uploadRoutes);
 
+// TEMPORARY DEBUG SEED ROUTE
+app.get('/api/debug/force-seed', async (req, res) => {
+    try {
+        const User = (await import('./models/User.js')).default;
+        const Request = (await import('./models/Request.js')).default;
+
+        // Case-insensitive role check
+        let admin = await User.findOne({ role: { $regex: /^admin$/i } });
+        if (!admin) {
+            admin = await User.create({
+                name: 'System Admin',
+                email: 'admin@changeflow.com',
+                password: 'admin123',
+                role: 'Admin',
+                isActive: true
+            });
+        }
+
+        await Request.deleteMany();
+
+        const types = ['Infrastructure', 'Application', 'Database', 'Network', 'Security'];
+        const risks = ['Low', 'Medium', 'High', 'Critical'];
+        const statuses = ['Approved', 'Pending', 'Rejected', 'In Progress', 'Completed'];
+
+        const reqData = [];
+        for (let i = 1; i <= 20; i++) {
+            const status = i <= 8 ? 'Approved' : statuses[Math.floor(Math.random() * statuses.length)];
+            reqData.push({
+                title: `Change #${i}: ${types[i % types.length]} System Upgrade`,
+                description: `Comprehensive upgrade of the ${types[i % types.length].toLowerCase()} component to improve compliance.`,
+                changeType: types[i % types.length],
+                riskLevel: risks[i % risks.length],
+                environment: 'Production',
+                plannedStartDate: new Date(),
+                plannedEndDate: new Date(Date.now() + 86400000),
+                implementationPlan: 'Step 1: Backup\nStep 2: Deploy\nStep 3: Verify',
+                rollbackPlan: 'Restore from backup',
+                testingPlan: 'End-to-end integration tests',
+                status: status,
+                priority: status === 'Approved' ? 'High' : 'Medium',
+                createdBy: admin._id,
+                approvedBy: status === 'Approved' ? admin._id : null,
+                approvalDate: status === 'Approved' ? new Date() : null
+            });
+        }
+
+        await Request.insertMany(reqData);
+
+        res.json({ success: true, message: 'Database forcefully seeded with 20 requests (8 Approved)', admin: admin.email });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
 /**
  * Health Check
  */
@@ -107,6 +169,7 @@ app.get('/api/health', (req, res) => {
     res.json({
         success: true,
         message: 'Server is running',
+        database: process.env.MONGODB_URI?.split('/').pop()?.split('?')[0] || 'changeflow',
         timestamp: new Date().toISOString(),
     });
 });
@@ -159,3 +222,11 @@ process.on('unhandledRejection', (err) => {
     // Close server & exit process
     process.exit(1);
 });
+
+
+
+
+
+
+
+// Server updated for avatar debugging: 2026-02-21 11:55:00

@@ -21,6 +21,12 @@ export const sendToAudit = asyncHandler(async (req, res) => {
         throw new Error(`Cannot send request with status "${request.status}" to audit. Only approved requests can be sent to audit.`);
     }
 
+    // Role Enforcement: Only Managers can send to audit
+    if (req.user.role !== 'Manager') {
+        res.status(403);
+        throw new Error('Not authorized. Only Managers can send requests to audit.');
+    }
+
     // Update status
     request.status = 'Sent to Audit';
     await request.save();

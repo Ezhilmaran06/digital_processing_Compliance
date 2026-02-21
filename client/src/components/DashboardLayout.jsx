@@ -27,12 +27,20 @@ const DashboardLayout = ({ allowedRoles = [] }) => {
 
     return (
         <ProtectedRoute allowedRoles={allowedRoles}>
-            <div className="min-h-screen relative pb-10">
-                <div className="page-bg-mesh"></div>
-                <AppNavbar />
-                <main className="content-container animate-fade-in px-4 md:px-8 mt-10">
-                    <Outlet />
-                </main>
+            <div className="min-h-screen relative pb-10 overflow-hidden bg-[hsl(var(--b))]">
+                {/* Orbital Background System */}
+                <div className="fixed inset-0 z-0 pointer-events-none">
+                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-500/10 blur-[120px] rounded-full animate-slow-pulse"></div>
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-violet-500/10 blur-[120px] rounded-full animate-slow-pulse delay-700"></div>
+                    <div className="page-bg-mesh opacity-50"></div>
+                </div>
+
+                <div className="relative z-10">
+                    <AppNavbar />
+                    <main className="max-w-[1700px] mx-auto px-4 md:px-8 mt-6 animate-in fade-in zoom-in duration-700">
+                        <Outlet />
+                    </main>
+                </div>
             </div>
         </ProtectedRoute>
     );

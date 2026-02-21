@@ -10,7 +10,7 @@ const EmployeeDashboard = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
     const [requests, setRequests] = useState([]);
-    const [stats, setStats] = useState({ total: 0, pending: 0, approved: 0, rejected: 0 });
+    const [stats, setStats] = useState({ summary: { total: 0, pending: 0, approved: 0, rejected: 0 } });
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,22 +19,25 @@ const EmployeeDashboard = () => {
 
     const loadRequests = async () => {
         try {
-            const response = await requestService.getAll();
-            const requestsData = response.data || [];
+            const [requestsResponse, statsResponse] = await Promise.all([
+                requestService.getAll(),
+                requestService.getStats()
+            ]);
+
+            const requestsData = requestsResponse.data || [];
             setRequests(requestsData);
 
-            const total = requestsData.length;
-            const pending = requestsData.filter(r => r.status === 'Pending').length;
-            const approved = requestsData.filter(r => r.status === 'Approved').length;
-            const rejected = requestsData.filter(r => r.status === 'Rejected').length;
-
-            setStats({ total, pending, approved, rejected });
+            if (statsResponse.success && statsResponse.data) {
+                setStats(statsResponse.data);
+            }
         } catch (error) {
-            console.error('Failed to load requests:', error);
+            console.error('Failed to load dashboard data:', error);
         } finally {
             setLoading(false);
         }
     };
+
+    // ... existing getGreeting ...
 
     const getGreeting = () => {
         const hour = new Date().getHours();
@@ -43,20 +46,12 @@ const EmployeeDashboard = () => {
         return 'Good Evening';
     };
 
-    const trendData = [
-        { name: 'Mon', value: 4 },
-        { name: 'Tue', value: 7 },
-        { name: 'Wed', value: 5 },
-        { name: 'Thu', value: 9 },
-        { name: 'Fri', value: 12 },
-        { name: 'Sat', value: 3 },
-        { name: 'Sun', value: 6 },
-    ];
+    const trendData = stats?.trends?.map(t => ({ name: new Date(t.name).toLocaleDateString('en-US', { weekday: 'short' }), value: t.value })) || [];
 
     const statusData = [
-        { name: 'Approved', value: stats.approved },
-        { name: 'Pending', value: stats.pending },
-        { name: 'Rejected', value: stats.rejected },
+        { name: 'Approved', value: stats.summary?.approved || 0 },
+        { name: 'Pending', value: stats.summary?.pending || 0 },
+        { name: 'Rejected', value: stats.summary?.rejected || 0 },
     ];
 
     return (
@@ -65,7 +60,7 @@ const EmployeeDashboard = () => {
             <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 animate-fade-in">
                 <div>
                     <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
-                        {getGreeting()}, <span className="text-indigo-600 dark:text-indigo-400">{user?.name?.split(' ')[0]}</span>
+                        {getGreeting()}, <span className="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">{user?.name?.split(' ')[0]}</span>
                     </h1>
                     <p className="text-slate-500 dark:text-slate-400 mt-3 text-xl font-medium max-w-2xl">
                         Welcome to your workspace. Here's a snapshot of your current change requests.
@@ -94,7 +89,7 @@ const EmployeeDashboard = () => {
                 <div className="animate-slide-up delay-100">
                     <KPICard
                         title="Total Requests"
-                        value={stats.total}
+                        value={stats.summary?.total || 0}
                         trend="up"
                         trendValue="12%"
                         icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
@@ -105,7 +100,7 @@ const EmployeeDashboard = () => {
                 <div className="animate-slide-up delay-200">
                     <KPICard
                         title="Pending"
-                        value={stats.pending}
+                        value={stats.summary?.pending || 0}
                         icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
                         color="warning"
                         subtext="Requires attention"
@@ -114,7 +109,7 @@ const EmployeeDashboard = () => {
                 <div className="animate-slide-up delay-300">
                     <KPICard
                         title="Approved"
-                        value={stats.approved}
+                        value={stats.summary?.approved || 0}
                         trend="up"
                         trendValue="8.5%"
                         icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
@@ -125,7 +120,7 @@ const EmployeeDashboard = () => {
                 <div className="animate-slide-up delay-400">
                     <KPICard
                         title="Rejected"
-                        value={stats.rejected}
+                        value={stats.summary?.rejected || 0}
                         trend="down"
                         trendValue="2.1%"
                         icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
@@ -223,17 +218,17 @@ const EmployeeDashboard = () => {
                                             </p>
                                         </td>
                                         <td className="py-6 px-6">
-                                            <span className={`badge ${request.status === 'Approved' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-400/10 dark:text-emerald-400' :
-                                                request.status === 'Rejected' ? 'bg-rose-50 text-rose-600 dark:bg-rose-400/10 dark:text-rose-400' :
-                                                    'bg-amber-50 text-amber-600 dark:bg-amber-400/10 dark:text-amber-400'
+                                            <span className={`badge px-4 py-1.5 rounded-xl font-black border transition-all ${['Approved', 'Completed', 'Sent to Audit'].includes(request.status) ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/40' :
+                                                request.status === 'Rejected' ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/40' :
+                                                    'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/40'
                                                 }`}>
                                                 {request.status}
                                             </span>
                                         </td>
                                         <td className="py-6 px-6">
-                                            <span className={`badge ${request.riskLevel === 'Critical' ? 'bg-rose-100 text-rose-700 dark:bg-rose-500/20' :
-                                                request.riskLevel === 'High' ? 'bg-orange-100 text-orange-700 dark:bg-orange-500/20' :
-                                                    'bg-sky-100 text-sky-700 dark:bg-sky-500/20'
+                                            <span className={`badge px-4 py-1.5 rounded-xl font-black border transition-all ${request.riskLevel === 'Critical' ? 'bg-rose-500 text-white border-rose-600/50 shadow-lg shadow-rose-500/30' :
+                                                request.riskLevel === 'High' ? 'bg-amber-500 text-white border-amber-600/50 shadow-lg shadow-amber-500/30' :
+                                                    'bg-sky-500 text-white border-sky-600/50 shadow-lg shadow-sky-500/30'
                                                 }`}>
                                                 {request.riskLevel}
                                             </span>

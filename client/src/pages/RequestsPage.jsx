@@ -60,7 +60,7 @@ const RequestsPage = () => {
     const stats = {
         inProgress: requests.filter(r => r.status === 'In Progress').length || 0,
         pending: requests.filter(r => r.status === 'Pending').length || 0,
-        completed: requests.filter(r => r.status === 'Approved').length || 0,
+        completed: requests.filter(r => ['Approved', 'Completed', 'Sent to Audit'].includes(r.status)).length || 0,
         rejected: requests.filter(r => r.status === 'Rejected').length || 0,
         // Calculate needs approval count
         needsApproval: requests.filter(r => {
@@ -212,44 +212,76 @@ const RequestsPage = () => {
     };
 
     return (
-        <main className="content-container animate-fade-in">
-            <header className="mb-10">
-                {hasAnyRole(['Manager', 'Admin']) ? (
+        <main className="max-w-[1700px] mx-auto px-4 py-4 animate-fade-in text-tight">
+            <header className="mb-2">
+                {hasAnyRole(['Manager']) ? (
                     <>
-                        <h1 className="text-4xl font-display font-bold text-slate-900 dark:text-white tracking-tight">Pending Requests</h1>
-                        <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg font-medium">Overview of team requests awaiting your approval</p>
+                        <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">Pending <span className="text-indigo-600 dark:text-indigo-400">Requests</span></h1>
+                        <p className="text-xl text-slate-500 dark:text-slate-400 mt-3 font-medium">Overview of team requests awaiting your approval</p>
+                    </>
+                ) : hasAnyRole(['Admin']) ? (
+                    <>
+                        <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">All <span className="text-indigo-600 dark:text-indigo-400">Requests</span></h1>
+                        <p className="text-xl text-slate-500 dark:text-slate-400 mt-3 font-medium">Global governance and record management console</p>
                     </>
                 ) : (
                     <>
-                        <h1 className="text-4xl font-display font-bold text-slate-900 dark:text-white tracking-tight">My Requests</h1>
-                        <p className="text-slate-500 dark:text-slate-400 mt-2 text-lg font-medium">Manage and track all your submitted change requests</p>
+                        <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">My <span className="text-indigo-600 dark:text-indigo-400">Requests</span></h1>
+                        <p className="text-xl text-slate-500 dark:text-slate-400 mt-3 font-medium">Manage and track all your submitted change requests</p>
                     </>
                 )}
             </header>
 
+            {/* DEBUG BANNER FOR VERIFICATION */}
+            <div className="bg-slate-100 dark:bg-slate-900/40 p-2 rounded-xl mb-3 flex gap-4 text-[9px] font-black uppercase tracking-widest text-slate-400 items-center border-2 border-slate-300/30 dark:border-indigo-500/20">
+                <span>User: {user?.name} ({user?.role})</span>
+                <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span>Loaded: {requests.length}</span>
+                <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span>Filtered: {filteredRequests.length}</span>
+                <button
+                    onClick={async () => {
+                        try {
+                            const res = await fetch('/api/debug/force-seed');
+                            const data = await res.json();
+                            if (data.success) {
+                                toast.success(data.message);
+                                window.location.reload();
+                            }
+                        } catch (err) {
+                            toast.error('Seeding failed');
+                        }
+                    }}
+                    className="text-emerald-500 ml-2 border-l-2 pl-2 border-slate-200 dark:border-slate-800"
+                >
+                    Seed Data
+                </button>
+                <button onClick={() => window.location.reload()} className="text-indigo-500 ml-auto">Sync</button>
+            </div>
+
             {/* Filters and Search Bar */}
-            <div className="card mb-8">
-                <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-8">
+            <div className="section-card p-3 mb-3">
+                <div className="flex flex-col md:flex-row gap-2 justify-between items-center mb-3">
                     <div className="relative w-full md:w-1/3 group">
                         <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400 group-focus-within:text-indigo-500 transition-colors">
-                            <Search className="h-5 w-5" />
+                            <Search className="h-4 w-4" />
                         </span>
                         <input
                             type="text"
-                            placeholder="Search requests by title or description..."
+                            placeholder="Find records..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="input-field pl-12"
+                            className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-indigo-500 text-[11px] font-bold uppercase tracking-tight"
                         />
                     </div>
-                    <div className="flex gap-4 w-full md:w-auto">
+                    <div className="flex gap-2 w-full md:w-auto">
                         <select
-                            className="input-field md:w-40 font-bold text-sm"
+                            className="px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-[10px] font-black uppercase tracking-widest cursor-pointer"
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
                         >
                             <option value="All">All Status</option>
-                            <option value="Needs Approval">Needs My Approval</option>
+                            {hasAnyRole(['Manager']) && <option value="Needs Approval">Needs My Approval</option>}
                             <option value="Pending">Pending</option>
                             <option value="In Progress">In Progress</option>
                             <option value="Approved">Approved</option>
@@ -257,7 +289,7 @@ const RequestsPage = () => {
                             <option value="Sent to Audit">Sent to Audit</option>
                         </select>
                         <select
-                            className="input-field md:w-32 font-bold text-sm"
+                            className="px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-[10px] font-black uppercase tracking-widest cursor-pointer"
                             value={typeFilter}
                             onChange={(e) => setTypeFilter(e.target.value)}
                         >
@@ -267,91 +299,84 @@ const RequestsPage = () => {
                         {!hasAnyRole(['Manager', 'Admin']) && (
                             <button
                                 onClick={() => navigate('/requests/create')}
-                                className="btn btn-primary px-6 whitespace-nowrap"
+                                className="btn btn-primary px-5 py-2 text-[10px] uppercase font-black tracking-widest rounded-xl"
                             >
-                                + New Request
+                                + New Record
                             </button>
                         )}
                     </div>
                 </div>
 
                 {/* Status Tabs */}
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2">
                     {/* New 'Needs Approval' Tab for Managers */}
-                    {hasAnyRole(['Manager', 'Admin']) && (
+                    {hasAnyRole(['Manager']) && (
                         <button
                             onClick={() => setStatusFilter(statusFilter === 'Needs Approval' ? 'All' : 'Needs Approval')}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${statusFilter === 'Needs Approval' ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-none' : 'border-gray-100 hover:bg-gray-50 text-gray-500'}`}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 transition-all ${statusFilter === 'Needs Approval' ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg' : 'border-slate-200 dark:border-slate-800 text-slate-400'}`}
                         >
-                            <Check className="w-4 h-4" />
-                            {stats.needsApproval} Needs Approval
+                            <Check className="w-3.5 h-3.5" />
+                            {stats.needsApproval} Review
                         </button>
                     )}
 
                     <button
                         onClick={() => setStatusFilter(statusFilter === 'In Progress' ? 'All' : 'In Progress')}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${statusFilter === 'In Progress' ? 'bg-indigo-50 border-indigo-200 text-indigo-700 shadow-sm' : 'border-gray-100 hover:bg-gray-50 text-gray-500'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 transition-all ${statusFilter === 'In Progress' ? 'bg-indigo-50 border-indigo-200 text-indigo-700 shadow-sm' : 'border-slate-200 dark:border-slate-800 text-slate-400'}`}
                     >
-                        <span className="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-                        {stats.inProgress} In Progress
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        {stats.inProgress} Progress
                     </button>
                     <button
                         onClick={() => setStatusFilter(statusFilter === 'Pending' ? 'All' : 'Pending')}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${statusFilter === 'Pending' ? 'bg-amber-50 border-amber-200 text-amber-700 shadow-sm' : 'border-gray-100 hover:bg-gray-50 text-gray-500'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 transition-all ${statusFilter === 'Pending' ? 'bg-amber-50 border-amber-200 text-amber-700 shadow-sm' : 'border-slate-200 dark:border-slate-800 text-slate-400'}`}
                     >
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                        <span className="w-2 h-2 rounded-full bg-amber-500"></span>
                         {stats.pending} Pending
                     </button>
                     <button
                         onClick={() => setStatusFilter(statusFilter === 'Approved' ? 'All' : 'Approved')}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${statusFilter === 'Approved' ? 'bg-emerald-50 border-emerald-200 text-emerald-700 shadow-sm' : 'border-gray-100 hover:bg-gray-50 text-gray-500'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 transition-all ${statusFilter === 'Approved' ? 'bg-emerald-50 border-emerald-200 text-emerald-700 shadow-sm' : 'border-slate-200 dark:border-slate-800 text-slate-400'}`}
                     >
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                        {stats.completed} Completed
+                        <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        {stats.completed} Done
                     </button>
                     <button
                         onClick={() => setStatusFilter(statusFilter === 'Rejected' ? 'All' : 'Rejected')}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${statusFilter === 'Rejected' ? 'bg-rose-50 border-rose-200 text-rose-700 shadow-sm' : 'border-gray-100 hover:bg-gray-50 text-gray-500'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 transition-all ${statusFilter === 'Rejected' ? 'bg-rose-50 border-rose-200 text-rose-700 shadow-sm' : 'border-slate-200 dark:border-slate-800 text-slate-400'}`}
                     >
-                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                        {stats.rejected} Rejected
-                    </button>
-                    <button
-                        onClick={() => setStatusFilter(statusFilter === 'Sent to Audit' ? 'All' : 'Sent to Audit')}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${statusFilter === 'Sent to Audit' ? 'bg-blue-50 border-blue-200 text-blue-700 shadow-sm' : 'border-gray-100 hover:bg-gray-50 text-gray-500'}`}
-                    >
-                        <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-                        Sent to Audit
+                        <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+                        {stats.rejected} Out
                     </button>
                     <button
                         onClick={() => { setStatusFilter('All'); setTypeFilter('All'); setSearchTerm(''); }}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all border border-transparent text-gray-400 hover:text-gray-600`}
+                        className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600`}
                     >
-                        Reset All
+                        Clear
                     </button>
                 </div>
             </div>
 
-            <div className="card overflow-hidden p-0">
+            <div className="section-card p-0 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
-                        <thead>
-                            <tr className="bg-gray-50/50 dark:bg-gray-800/20">
-                                <th className="py-5 px-6 text-[11px] font-bold text-gray-400 uppercase tracking-widest">Request ID</th>
-                                <th className="py-5 px-6 text-[11px] font-bold text-gray-400 uppercase tracking-widest">Title</th>
-                                <th className="py-5 px-6 text-[11px] font-bold text-gray-400 uppercase tracking-widest">Type</th>
-                                <th className="py-5 px-6 text-[11px] font-bold text-gray-400 uppercase tracking-widest">Date Submitted</th>
-                                <th className="py-5 px-6 text-[11px] font-bold text-gray-400 uppercase tracking-widest">Status</th>
-                                <th className="py-5 px-6 text-[11px] font-bold text-gray-400 uppercase tracking-widest">Priority</th>
-                                <th className="py-5 px-6 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-right">Actions</th>
+                        <thead className="bg-slate-100/50 dark:bg-slate-950/50 border-b-2 border-slate-300 dark:border-indigo-500/40">
+                            <tr>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Record</th>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Title</th>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Type</th>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Submission</th>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">State</th>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Risk</th>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
+                        <tbody className="divide-y-2 divide-slate-200 dark:divide-slate-800">
                             {loading ? (
                                 Array(5).fill(0).map((_, i) => (
                                     <tr key={i} className="animate-pulse">
-                                        <td colSpan="7" className="py-6 px-6">
-                                            <div className="h-4 bg-gray-100 dark:bg-gray-800 rounded-full w-full"></div>
+                                        <td colSpan="7" className="py-4 px-6">
+                                            <div className="h-10 bg-slate-100 dark:bg-slate-800 rounded-xl w-full opacity-50 border-2 border-slate-200 dark:border-slate-700"></div>
                                         </td>
                                     </tr>
                                 ))
@@ -359,102 +384,116 @@ const RequestsPage = () => {
                                 <tr>
                                     <td colSpan="7" className="py-20 text-center">
                                         <div className="flex flex-col items-center">
-                                            <div className="w-20 h-20 bg-gray-50 dark:bg-gray-800 rounded-3xl flex items-center justify-center text-gray-300 mb-4 text-3xl font-light">
+                                            <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-300 mb-4 text-xl font-black border-2 border-slate-200 dark:border-slate-700">
                                                 ?
                                             </div>
-                                            <p className="text-gray-500 font-bold text-lg">No matching requests found</p>
-                                            <p className="text-gray-400 text-sm mt-1">Try adjusting your filters or search term</p>
+                                            <p className="text-slate-400 font-black text-[10px] uppercase tracking-widest">No synchronized records found</p>
                                         </div>
                                     </td>
                                 </tr>
                             ) : (
                                 filteredRequests.map((request) => (
-                                    <tr key={request._id} className="table-row group">
-                                        <td className="py-5 px-6">
-                                            <span className="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded-lg">
+                                    <tr key={request._id} className="hover:bg-slate-100/50 dark:hover:bg-indigo-500/10 transition-all group">
+                                        <td className="py-4 px-6">
+                                            <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-900/60 px-2 py-1 rounded-lg border-2 border-slate-200 dark:border-slate-800 tracking-tighter shadow-sm">
                                                 CHG-{request._id.slice(-4).toUpperCase()}
                                             </span>
                                         </td>
-                                        <td className="py-5 px-6">
+                                        <td className="py-4 px-6">
                                             <div>
-                                                <p className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 transition-colors">
+                                                <p className="text-sm font-black text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors uppercase tracking-tight">
                                                     {request.title}
                                                 </p>
-                                                {request.description && <p className="text-[11px] text-gray-400 mt-0.5 line-clamp-1">{request.description}</p>}
-                                                {/* Show 'My Request' tag if user is creator with more subtle styling */}
                                                 {isCreator(request) && (
-                                                    <span className="inline-block mt-1 text-[10px] font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/30 px-1.5 py-0.5 rounded">
-                                                        MY REQUEST
+                                                    <span className="inline-block mt-0.5 text-[8px] font-black text-indigo-500 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/20 px-1.5 py-0.5 rounded border border-indigo-500/30 uppercase tracking-widest">
+                                                        Origin Node
                                                     </span>
                                                 )}
                                             </div>
                                         </td>
-                                        <td className="py-5 px-6">
-                                            <span className={`badge ${request.changeType === 'Database' ? 'bg-indigo-50 text-indigo-600' :
-                                                request.changeType === 'Infrastructure' ? 'bg-rose-50 text-rose-600' : 'bg-sky-50 text-sky-600'}`}>
+                                        <td className="py-4 px-6">
+                                            <span className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] border-2 transition-all ${request.changeType === 'Database' ? 'bg-indigo-50 text-indigo-600 border-indigo-500/70 dark:bg-indigo-900/40 dark:border-indigo-500/70' :
+                                                request.changeType === 'Infrastructure' ? 'bg-rose-50 text-rose-600 border-rose-500/70 dark:bg-rose-900/40 dark:border-rose-500/70' :
+                                                    'bg-slate-100 text-slate-600 border-slate-300 dark:bg-slate-800 dark:border-slate-700'}`}>
                                                 {request.changeType || 'Type'}
                                             </span>
                                         </td>
-                                        <td className="py-5 px-6">
-                                            <div className="text-xs font-bold text-gray-600 dark:text-gray-400">
-                                                {new Date(request.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                                <p className="text-[10px] text-gray-400 mt-0.5">{new Date(request.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                                        <td className="py-4 px-6">
+                                            <div className="flex flex-col">
+                                                <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+                                                    {new Date(request.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                                </span>
+                                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                                                    {new Date(request.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                </span>
                                             </div>
                                         </td>
-                                        <td className="py-5 px-6">
-                                            <span className={`badge ${request.status === 'Approved' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
-                                                request.status === 'Rejected' ? 'bg-rose-50 text-rose-600 border border-rose-100' :
-                                                    request.status === 'Sent to Audit' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
-                                                        'bg-amber-50 text-amber-600 border border-amber-100'
+                                        <td className="py-4 px-6">
+                                            <span className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] border-2 transition-all shadow-sm ${request.status === 'Approved' || request.status === 'Completed' ? 'bg-emerald-50 text-emerald-600 border-emerald-500/80 dark:bg-emerald-900/40 dark:border-emerald-500/80' :
+                                                request.status === 'Rejected' ? 'bg-rose-50 text-rose-600 border-rose-500/80 dark:bg-rose-900/40 dark:border-rose-500/80' :
+                                                    request.status === 'Sent to Audit' ? 'bg-blue-50 text-blue-600 border-blue-500/80 dark:bg-blue-900/40 dark:border-blue-500/80' :
+                                                        'bg-amber-50 text-amber-600 border-amber-500/80 dark:bg-amber-900/40 dark:border-amber-500/80'
                                                 }`}>
                                                 {request.status}
                                             </span>
                                         </td>
-                                        <td className="py-5 px-6 text-sm">
-                                            <span className={`badge ${request.riskLevel === 'Critical' ? 'bg-rose-100 text-rose-700' :
-                                                request.riskLevel === 'High' ? 'bg-orange-100 text-orange-700' :
-                                                    'bg-blue-100 text-blue-700'
+                                        <td className="py-4 px-6">
+                                            <span className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] border-2 transition-all ${request.riskLevel === 'Critical' ? 'bg-rose-100 text-rose-700 border-rose-500 shadow-sm' :
+                                                request.riskLevel === 'High' ? 'bg-orange-50 text-orange-600 border-orange-500/50 shadow-sm' :
+                                                    'bg-blue-50 text-blue-600 border-blue-500/50 shadow-sm'
                                                 }`}>
                                                 {request.riskLevel}
                                             </span>
                                         </td>
-                                        <td className="py-5 px-6 text-right">
-                                            <div className="flex justify-end gap-2">
-                                                {/* Manager/Admin Approval Actions */}
-                                                {request.status === 'Pending' && hasAnyRole(['Manager', 'Admin']) && (
-                                                    <>
+                                        <td className="py-4 px-6 text-right">
+                                            <div className="flex items-center justify-end gap-2.5 transition-all">
+                                                {/* Manager Approval Actions */}
+                                                {request.status === 'Pending' && hasAnyRole(['Manager']) && (
+                                                    <div className="flex items-center gap-2 mr-2 border-r-2 border-slate-200 dark:border-slate-800 pr-2">
                                                         <button
                                                             onClick={() => handleApprove(request._id)}
-                                                            className="p-2 text-emerald-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition-all active:scale-90"
-                                                            title="Approve Request"
+                                                            className="p-2 bg-emerald-50 text-emerald-600 border-2 border-emerald-500/50 rounded-xl hover:bg-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-500/30 transition-all shadow-sm"
+                                                            title="Approve"
                                                         >
-                                                            <Check className="w-5 h-5" />
+                                                            <Check size={16} strokeWidth={2.5} />
                                                         </button>
                                                         <button
                                                             onClick={() => openRejectModal(request)}
-                                                            className="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all active:scale-90"
-                                                            title="Reject Request"
+                                                            className="p-2 bg-rose-50 text-rose-600 border-2 border-rose-500/50 rounded-xl hover:bg-rose-100 dark:bg-rose-900/20 dark:text-rose-400 dark:border-rose-500/30 transition-all shadow-sm"
+                                                            title="Reject"
                                                         >
-                                                            <X className="w-5 h-5" />
+                                                            <X size={16} strokeWidth={2.5} />
                                                         </button>
-                                                        <div className="w-px h-5 bg-gray-200 dark:bg-gray-700 mx-1 self-center"></div>
-                                                    </>
+                                                    </div>
                                                 )}
 
                                                 <button
                                                     onClick={() => openViewModal(request)}
-                                                    className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all active:scale-90"
+                                                    className="p-2 bg-indigo-50 text-indigo-600 border-2 border-indigo-500/50 rounded-xl hover:bg-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-500/30 transition-all shadow-sm"
                                                     title="View Details"
                                                 >
-                                                    <Eye className="w-5 h-5" />
+                                                    <Eye size={16} strokeWidth={2.5} />
                                                 </button>
-                                                <button
-                                                    onClick={() => openEditModal(request)}
-                                                    className="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all active:scale-90"
-                                                    title="Edit Request"
-                                                >
-                                                    <Edit className="w-5 h-5" />
-                                                </button>
+
+                                                {isCreator(request) && request.status === 'Pending' && (
+                                                    <button
+                                                        onClick={() => openEditModal(request)}
+                                                        className="p-2 bg-amber-50 text-amber-600 border-2 border-amber-500/50 rounded-xl hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-500/30 transition-all shadow-sm"
+                                                        title="Edit Change"
+                                                    >
+                                                        <Edit size={16} strokeWidth={2.5} />
+                                                    </button>
+                                                )}
+
+                                                {hasAnyRole(['Admin']) && (
+                                                    <button
+                                                        onClick={() => handleDelete(request._id)}
+                                                        className="p-2 bg-slate-50 text-slate-600 border-2 border-slate-300 dark:bg-slate-900/20 dark:text-slate-400 dark:border-slate-700 rounded-xl hover:bg-slate-100 transition-all shadow-sm"
+                                                        title="Purge Record"
+                                                    >
+                                                        <Trash2 size={16} strokeWidth={2.5} />
+                                                    </button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>

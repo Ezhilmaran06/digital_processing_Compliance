@@ -15,6 +15,7 @@ import AnalyticsPage from './pages/AnalyticsPage';
 import SettingsPage from './pages/SettingsPage';
 import LandingPage from './pages/LandingPage';
 import AuditorDashboard from './pages/AuditorDashboard';
+import UserManagement from './pages/UserManagement';
 
 import { Toaster } from 'sonner';
 
@@ -86,10 +87,7 @@ function App() {
                                     path="/admin/users"
                                     element={
                                         <ProtectedRoute allowedRoles={['Admin']}>
-                                            <div className="content-container">
-                                                <h1 className="text-3xl font-bold">User Management</h1>
-                                                <p className="mt-4 text-gray-500">Manage system users and their roles.</p>
-                                            </div>
+                                            <UserManagement />
                                         </ProtectedRoute>
                                     }
                                 />

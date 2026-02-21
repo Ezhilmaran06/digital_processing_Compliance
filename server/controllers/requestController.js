@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Request from '../models/Request.js';
 import User from '../models/User.js';
+import fs from 'fs';
 import { createAuditLog, getClientIp } from '../middleware/auditLogger.js';
 
 /**
@@ -57,16 +58,23 @@ export const getRequests = asyncHandler(async (req, res) => {
         // Employees see only their own requests
         query.createdBy = req.user._id;
     } else if (userRole === 'client') {
-        // Clients see only approved requests
-        query.status = 'Approved';
+        // Clients see approved, completed, and sent to audit requests
+        query.status = { $in: ['Approved', 'Completed', 'Sent to Audit'] };
     } else if (userRole === 'auditor') {
+
         // Auditors see approved, in progress, completed, and sent to audit requests
         query.status = { $in: ['Approved', 'In Progress', 'Completed', 'Sent to Audit'] };
     }
     // Managers and Admins see all requests
 
     // Additional filters
-    if (status) query.status = status;
+    if (status) {
+        if (status.includes(',')) {
+            query.status = { $in: status.split(',').map(s => s.trim()) };
+        } else {
+            query.status = status;
+        }
+    }
     if (changeType) query.changeType = changeType;
     if (riskLevel) query.riskLevel = riskLevel;
     if (search) {
@@ -243,6 +251,12 @@ export const approveRequest = asyncHandler(async (req, res) => {
         throw new Error(`Cannot approve request with status: ${request.status}`);
     }
 
+    // Role Enforcement: Only Managers can approve/reject
+    if (req.user.role !== 'Manager') {
+        res.status(403);
+        throw new Error('Not authorized. Only Managers can approve change requests.');
+    }
+
     request.status = 'Approved';
     request.approvedBy = req.user._id;
     request.approvalDate = new Date();
@@ -292,6 +306,12 @@ export const rejectRequest = asyncHandler(async (req, res) => {
     if (request.status !== 'Pending') {
         res.status(400);
         throw new Error(`Cannot reject request with status: ${request.status}`);
+    }
+
+    // Role Enforcement: Only Managers can approve/reject
+    if (req.user.role !== 'Manager') {
+        res.status(403);
+        throw new Error('Not authorized. Only Managers can reject change requests.');
     }
 
     request.status = 'Rejected';
@@ -380,7 +400,10 @@ export const getRequestStats = asyncHandler(async (req, res) => {
         query.createdBy = req.user._id;
     } else if (req.user.role === 'Auditor') {
         query.status = { $in: ['Approved', 'In Progress', 'Completed', 'Sent to Audit'] };
+    } else if (req.user.role === 'Client') {
+        query.status = { $in: ['Approved', 'Completed', 'Sent to Audit'] };
     }
+
 
     // Status counts
     const statusStats = await Request.aggregate([
@@ -426,23 +449,32 @@ export const getRequestStats = asyncHandler(async (req, res) => {
     // Active Changes (In Progress status)
     const activeChanges = await Request.countDocuments({ status: 'In Progress' });
 
+    const statsData = {
+        statusDistribution: statusStats.map(s => ({ name: s._id, value: s.count })),
+        typeDistribution: typeStats.map(s => ({ name: s._id, value: s.count })),
+        priorityDistribution: priorityStats.map(s => ({ name: s._id, value: s.count })),
+        trends: trendStats.map(s => ({ name: s._id, value: s.count })),
+        totalWorkforce,
+        activeChanges,
+        summary: {
+            total: statusStats.reduce((acc, s) => acc + s.count, 0),
+            pending: statusStats.find(s => String(s._id).trim() === 'Pending')?.count || 0,
+            approved: (function () {
+                const targets = ['approved', 'completed', 'sent to audit'];
+                const filtered = statusStats.filter(s => targets.includes(String(s._id).toLowerCase().trim()));
+                const sum = filtered.reduce((acc, s) => acc + s.count, 0);
+                // Persistent log
+                fs.appendFileSync('analytics_debug.log', `[${new Date().toISOString()}] DIAG: role=${req.user.role} user=${req.user.email} stats=${JSON.stringify(statusStats)} filtered=${JSON.stringify(filtered)} result=${sum}\n`);
+                return sum;
+            })(),
+            rejected: statusStats.find(s => String(s._id).trim() === 'Rejected')?.count || 0,
+            inProgress: statusStats.find(s => String(s._id).trim() === 'In Progress')?.count || 0,
+            completed: statusStats.find(s => String(s._id).trim() === 'Completed')?.count || 0
+        }
+    };
+
     res.json({
         success: true,
-        data: {
-            statusDistribution: statusStats.map(s => ({ name: s._id, value: s.count })),
-            typeDistribution: typeStats.map(s => ({ name: s._id, value: s.count })),
-            priorityDistribution: priorityStats.map(s => ({ name: s._id, value: s.count })),
-            trends: trendStats.map(s => ({ name: s._id, value: s.count })),
-            totalWorkforce,
-            activeChanges,
-            summary: {
-                total: statusStats.reduce((acc, s) => acc + s.count, 0),
-                pending: statusStats.find(s => s._id === 'Pending')?.count || 0,
-                approved: statusStats.find(s => s._id === 'Approved')?.count || 0,
-                rejected: statusStats.find(s => s._id === 'Rejected')?.count || 0,
-                inProgress: statusStats.find(s => s._id === 'In Progress')?.count || 0,
-                completed: statusStats.find(s => s._id === 'Completed')?.count || 0
-            }
-        }
+        data: statsData
     });
 });

@@ -156,6 +156,7 @@ export const getMe = asyncHandler(async (req, res) => {
             email: user.email,
             role: user.role,
             isActive: user.isActive,
+            avatar: user.avatar,
             createdAt: user.createdAt,
         },
     });
@@ -221,6 +222,7 @@ export const updateMe = asyncHandler(async (req, res) => {
             email: updatedUser.email,
             role: updatedUser.role,
             isActive: updatedUser.isActive,
+            avatar: updatedUser.avatar,
         },
     });
 });
@@ -253,5 +255,38 @@ export const updatePassword = asyncHandler(async (req, res) => {
     res.json({
         success: true,
         message: 'Password updated successfully',
+    });
+});
+
+/**
+ * @desc    Update user avatar
+ * @route   PATCH /api/auth/me/avatar
+ * @access  Private
+ */
+export const updateAvatar = asyncHandler(async (req, res) => {
+    console.log(`[AVATAR_UPDATE] Submitting update for user: ${req.user._id}, path: ${req.body.avatar}`);
+    const user = await User.findById(req.user._id);
+
+    if (!req.body.avatar) {
+        res.status(400);
+        throw new Error('Please provide an avatar path');
+    }
+
+    user.avatar = req.body.avatar;
+    await user.save();
+
+    // Create audit log
+    await createAuditLog({
+        userId: user._id,
+        action: 'AVATAR_UPDATED',
+        ipAddress: getClientIp(req),
+        userAgent: req.get('user-agent'),
+    });
+
+    res.json({
+        success: true,
+        data: {
+            avatar: user.avatar,
+        },
     });
 });

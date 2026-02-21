@@ -1,30 +1,28 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Request from './models/Request.js';
-import User from './models/User.js';
-import connectDB from './config/db.js';
 
 dotenv.config();
 
 const diag = async () => {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/changeflow');
-        console.log('✅ Connected to DB');
-        const requestCount = await Request.countDocuments();
-        const approvedCount = await Request.countDocuments({ status: 'Approved' });
-        const userCount = await User.countDocuments();
-        const clientCount = await User.countDocuments({ role: 'Client' });
+        console.log('⏳ Connecting to MongoDB...');
+        // Set a short timeout
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/changeflow', {
+            serverSelectionTimeoutMS: 5000,
+            connectTimeoutMS: 5000,
+        });
+        console.log('✅ Connected to MongoDB');
 
-        console.log('--- DATABASE DIAGNOSTICS ---');
-        console.log(`Total Requests: ${requestCount}`);
-        console.log(`Approved Requests: ${approvedCount}`);
-        console.log(`Total Users: ${userCount}`);
-        console.log(`Client Users: ${clientCount}`);
-        console.log('----------------------------');
+        const totalRequests = await Request.countDocuments();
+        const approvedRequests = await Request.countDocuments({ status: 'Approved' });
+
+        console.log('Total Requests:', totalRequests);
+        console.log('Approved Requests:', approvedRequests);
 
         process.exit(0);
     } catch (error) {
-        console.error('DIAG ERROR:', error.message);
+        console.error('❌ Connection error:', error.message);
         process.exit(1);
     }
 };

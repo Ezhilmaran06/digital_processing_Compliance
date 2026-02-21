@@ -27,16 +27,21 @@ const AnalyticsPage = () => {
 
     const COLORS = ['#8b5cf6', '#d946ef', '#0ea5e9', '#10b981', '#f59e0b', '#ef4444'];
 
-    const isManagerOrAdmin = user?.role === 'Manager' || user?.role === 'Admin';
+    const isManagerOrAdmin = ['manager', 'admin'].includes(user?.role?.toLowerCase());
 
     const fetchData = async () => {
         try {
             const [statsResponse, requestsResponse] = await Promise.all([
                 statsService.getRequestStats(),
-                isManagerOrAdmin ? requestService.getAll({ status: 'Approved', limit: 100 }) : Promise.resolve({ data: [] })
+                isManagerOrAdmin ? requestService.getAll({ status: 'Approved,Completed,Sent to Audit', limit: 100 }) : Promise.resolve({ data: [] })
             ]);
-            setStats(statsResponse);
-            setApprovedRequests(requestsResponse.data || []);
+
+            // Backend returns { success: true, data: { statusDistribution: [], ... } }
+            setStats(statsResponse?.data || statsResponse || null);
+
+            // Backend returns { success: true, data: [ ...reqs ], ... }
+            const requestsData = requestsResponse?.data || (Array.isArray(requestsResponse) ? requestsResponse : []);
+            setApprovedRequests(requestsData);
         } catch (error) {
             console.error('Failed to fetch analytics:', error);
             toast.error('Failed to load analytics data');
@@ -46,8 +51,10 @@ const AnalyticsPage = () => {
     };
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        if (user) {
+            fetchData();
+        }
+    }, [user]);
 
     const handleSendToAudit = async (requestId) => {
         setLoadingRequests(prev => ({ ...prev, [requestId]: true }));
@@ -88,7 +95,7 @@ const AnalyticsPage = () => {
 
     return (
         <>
-            <header className="mb-12 animate-fade-in">
+            <header className="mb-2 animate-fade-in">
                 <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight">
                     System <span className="text-indigo-600 dark:text-indigo-400">Intelligence</span>
                 </h1>
@@ -97,29 +104,56 @@ const AnalyticsPage = () => {
                 </p>
             </header>
 
+            {/* DEBUG BANNER FOR VERIFICATION */}
+            <div className="bg-slate-100 dark:bg-slate-900/40 p-2 rounded-xl mb-3 flex gap-4 text-[9px] font-black uppercase tracking-widest text-slate-400 items-center border-2 border-slate-300/30 dark:border-indigo-500/20">
+                <span>User: {user?.name} ({user?.role})</span>
+                <span className="w-1 h-1 rounded-full bg-slate-200 dark:bg-slate-800"></span>
+                <span>Stats: {stats ? 'LIVE' : 'OFFLINE'}</span>
+                <span className="w-1 h-1 rounded-full bg-slate-200 dark:bg-slate-800"></span>
+                <span>Approvals: {approvedRequests.length}</span>
+                <button
+                    onClick={async () => {
+                        try {
+                            const res = await fetch('/api/debug/force-seed');
+                            const data = await res.json();
+                            if (data.success) {
+                                toast.success(data.message);
+                                fetchData();
+                            }
+                        } catch (err) {
+                            toast.error('Seeding failed');
+                        }
+                    }}
+                    className="text-emerald-500 ml-4 border-l-2 pl-4 border-slate-200 dark:border-slate-800"
+                >
+                    Reinstate Data
+                </button>
+                <button onClick={fetchData} className="text-indigo-500 ml-auto">Sync</button>
+            </div>
+
             {/* Quick Stats Summary */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-3">
                 <div className="animate-slide-up delay-100">
                     <KPICard
                         title="Total Volume"
                         value={totalRequests}
-                        icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
+                        icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
                         color="primary"
                     />
                 </div>
                 <div className="animate-slide-up delay-200">
                     <KPICard
                         title="Verified Approved"
-                        value={stats?.statusDistribution?.find(s => s.name === 'Approved')?.value || 0}
-                        icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+                        value={stats?.summary?.approved || 0}
+                        icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
                         color="success"
                     />
                 </div>
                 <div className="animate-slide-up delay-300">
                     <KPICard
                         title="Process Yield"
-                        value={totalRequests > 0 ? `${Math.round(((stats?.statusDistribution?.find(s => s.name === 'Approved')?.value || 0) / totalRequests) * 100)}%` : '0%'}
-                        icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>}
+                        value={totalRequests > 0 ? `${Math.round(((stats?.summary?.approved || 0) / totalRequests) * 100)}%` : '0%'}
+                        icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>}
                         color="info"
                     />
                 </div>
@@ -127,40 +161,40 @@ const AnalyticsPage = () => {
                     <KPICard
                         title="Metric Streams"
                         value={stats?.trends?.length || 0}
-                        icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+                        icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
                         color="warning"
                     />
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-3">
                 {/* Request Trends */}
-                <div className="card h-[420px] animate-slide-up delay-500 overflow-hidden">
-                    <div className="mb-10">
-                        <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Demand Velocity</h2>
-                        <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">7-Day request distribution</p>
+                <div className="section-card h-[380px] p-4 animate-slide-up delay-500 overflow-hidden">
+                    <div className="mb-4">
+                        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Demand Velocity</h2>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">7-Day request distribution</p>
                     </div>
-                    <div className="h-[280px]">
+                    <div className="h-[260px]">
                         <TrendChart data={stats?.trends || []} />
                     </div>
                 </div>
 
                 {/* Status Distribution */}
-                <div className="card h-[420px] animate-slide-up delay-500 overflow-hidden">
-                    <div className="mb-10">
-                        <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Lifecycle Flow</h2>
-                        <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">Current state distribution</p>
+                <div className="section-card h-[380px] p-4 animate-slide-up delay-500 overflow-hidden">
+                    <div className="mb-4">
+                        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Lifecycle Flow</h2>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">Current state distribution</p>
                     </div>
-                    <div className="h-[280px]">
+                    <div className="h-[260px]">
                         <StatusChart data={stats?.statusDistribution || []} />
                     </div>
                 </div>
 
                 {/* Type Distribution */}
-                <div className="card lg:col-span-2 h-[450px] animate-slide-up delay-700 overflow-hidden">
-                    <div className="mb-10">
-                        <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Categorical Analysis</h2>
-                        <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">Distribution by change typology</p>
+                <div className="section-card lg:col-span-2 h-[400px] p-4 animate-slide-up delay-700 overflow-hidden">
+                    <div className="mb-4">
+                        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Categorical Analysis</h2>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">Distribution by change typology</p>
                     </div>
                     <div className="h-[280px]">
                         <ResponsiveContainer width="100%" height="100%">
@@ -170,28 +204,28 @@ const AnalyticsPage = () => {
                                     dataKey="name"
                                     axisLine={false}
                                     tickLine={false}
-                                    tick={{ fill: 'rgba(0,0,0,0.4)', fontSize: 10, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                                    tick={{ fill: 'rgba(100,116,139,0.6)', fontSize: 9, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}
                                     dy={10}
                                 />
                                 <YAxis
                                     axisLine={false}
                                     tickLine={false}
-                                    tick={{ fill: 'rgba(0,0,0,0.4)', fontSize: 10, fontWeight: 900 }}
+                                    tick={{ fill: 'rgba(100,116,139,0.6)', fontSize: 9, fontWeight: 900 }}
                                 />
                                 <Tooltip
                                     cursor={{ fill: 'rgba(0,0,0,0.02)' }}
                                     contentStyle={{
-                                        borderRadius: '24px',
-                                        border: 'none',
+                                        borderRadius: '16px',
+                                        border: '2px solid rgba(79, 70, 229, 0.2)',
                                         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)',
-                                        padding: '20px',
-                                        background: 'rgba(255,255,255,0.9)',
+                                        padding: '12px',
+                                        background: 'rgba(255,255,255,0.95)',
                                         backdropFilter: 'blur(10px)'
                                     }}
                                 />
-                                <Bar dataKey="value" radius={[12, 12, 0, 0]} barSize={50}>
+                                <Bar dataKey="value" radius={[8, 8, 0, 0]} barSize={40}>
                                     {(stats?.typeDistribution || []).map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} fillOpacity={0.8} />
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} fillOpacity={0.9} />
                                     ))}
                                 </Bar>
                             </BarChart>
@@ -202,89 +236,95 @@ const AnalyticsPage = () => {
 
             {/* Approved Requests Table - Only for Managers and Admins */}
             {isManagerOrAdmin && (
-                <div className="card animate-slide-up delay-900 mb-12">
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Approved Requests</h2>
-                        <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">
-                            Ready for audit submission • {approvedRequests.length} requests
+                <div className="section-card animate-slide-up delay-900 mb-8 p-0 overflow-hidden">
+                    <div className="p-4 border-b-2 border-slate-100 dark:border-slate-800">
+                        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Processed Compliance Records</h2>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">
+                            Verified and ready for audit • {approvedRequests.length} records
                         </p>
                     </div>
 
                     {approvedRequests.length === 0 ? (
                         <div className="text-center py-12">
-                            <svg className="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="mx-auto h-12 w-12 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                            <p className="mt-4 text-slate-500 font-medium">No approved requests available</p>
+                            <p className="mt-4 text-slate-400 font-black uppercase tracking-widest text-[10px]">No synchronized records available</p>
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="w-full">
-                                <thead>
-                                    <tr className="border-b border-slate-200 dark:border-slate-700">
-                                        <th className="text-left py-4 px-4 text-xs font-black text-slate-600 dark:text-slate-400 uppercase tracking-wider">Title</th>
-                                        <th className="text-left py-4 px-4 text-xs font-black text-slate-600 dark:text-slate-400 uppercase tracking-wider">Change Type</th>
-                                        <th className="text-left py-4 px-4 text-xs font-black text-slate-600 dark:text-slate-400 uppercase tracking-wider">Risk Level</th>
-                                        <th className="text-left py-4 px-4 text-xs font-black text-slate-600 dark:text-slate-400 uppercase tracking-wider">Environment</th>
-                                        <th className="text-left py-4 px-4 text-xs font-black text-slate-600 dark:text-slate-400 uppercase tracking-wider">Created</th>
-                                        <th className="text-left py-4 px-4 text-xs font-black text-slate-600 dark:text-slate-400 uppercase tracking-wider">Actions</th>
+                                <thead className="bg-slate-50/50 dark:bg-slate-950/20">
+                                    <tr className="border-b-2 border-slate-200 dark:border-slate-700">
+                                        <th className="text-left py-3 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Title</th>
+                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Type</th>
+                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Risk</th>
+                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Env</th>
+                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {approvedRequests.map((request, index) => (
                                         <tr
                                             key={request._id}
-                                            className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                                            className="border-b-2 border-slate-50 dark:border-slate-900/40 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/10 transition-colors group"
                                             style={{ animationDelay: `${index * 50}ms` }}
                                         >
-                                            <td className="py-4 px-4">
-                                                <p className="font-bold text-slate-900 dark:text-white">{request.title}</p>
-                                                <p className="text-sm text-slate-500 mt-1 line-clamp-1">{request.description}</p>
+                                            <td className="py-4 px-6">
+                                                <p className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight group-hover:text-indigo-600 transition-colors">{request.title}</p>
+                                                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter mt-0.5">{formatDate(request.createdAt)}</p>
                                             </td>
-                                            <td className="py-4 px-4">
-                                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">
+                                            <td className="py-3 px-4">
+                                                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 border-indigo-100 bg-indigo-50/50 text-indigo-600 dark:bg-indigo-900/20 dark:border-indigo-800 dark:text-indigo-400">
                                                     {request.changeType}
                                                 </span>
                                             </td>
-                                            <td className="py-4 px-4">
-                                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${request.riskLevel === 'Critical' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
-                                                    request.riskLevel === 'High' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400' :
-                                                        request.riskLevel === 'Medium' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' :
-                                                            'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                                            <td className="py-5 px-4">
+                                                <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 ${request.riskLevel === 'Critical' ? 'bg-rose-50 text-rose-600 border-rose-200 dark:bg-rose-900/20 dark:border-rose-800' :
+                                                    request.riskLevel === 'High' ? 'bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/20 dark:border-orange-810/30' :
+                                                        'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800'
                                                     }`}>
                                                     {request.riskLevel}
                                                 </span>
                                             </td>
-                                            <td className="py-4 px-4">
-                                                <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                                            <td className="py-5 px-4">
+                                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-tighter">
                                                     {request.environment}
                                                 </span>
                                             </td>
-                                            <td className="py-4 px-4">
-                                                <span className="text-sm text-slate-600 dark:text-slate-400">
-                                                    {formatDate(request.createdAt)}
-                                                </span>
-                                            </td>
-                                            <td className="py-4 px-4">
-                                                <button
-                                                    onClick={() => handleSendToAudit(request._id)}
-                                                    disabled={loadingRequests[request._id]}
-                                                    className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-400 text-white text-sm font-bold rounded-xl transition-colors disabled:cursor-not-allowed"
-                                                >
-                                                    {loadingRequests[request._id] ? (
-                                                        <>
-                                                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                                                            Sending...
-                                                        </>
+                                            <td className="py-4 px-6 text-right">
+                                                <div className="flex items-center justify-end gap-2.5">
+                                                    {user?.role === 'Admin' ? (
+                                                        /* Admin: Read-only status indicator or sent status */
+                                                        request.status === 'Sent to Audit' || request.status === 'Completed' ? (
+                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border-2 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                                                                SENT
+                                                            </span>
+                                                        ) : (
+                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-900/30 border-2 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></div>
+                                                                PENDING
+                                                            </span>
+                                                        )
                                                     ) : (
-                                                        <>
-                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                            </svg>
-                                                            Send to Audit
-                                                        </>
+                                                        /* Manager: Action button or sent status */
+                                                        request.status === 'Sent to Audit' || request.status === 'Completed' ? (
+                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border-2 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                                                                SENT
+                                                            </span>
+                                                        ) : (
+                                                            <button
+                                                                onClick={() => handleSendToAudit(request._id)}
+                                                                disabled={loadingRequests[request._id]}
+                                                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white text-[9px] font-black uppercase tracking-widest rounded-xl border-2 border-indigo-500 shadow-premium transition-all hover:scale-105 active:scale-95"
+                                                            >
+                                                                {loadingRequests[request._id] ? 'Syncing...' : 'Send to Audit'}
+                                                            </button>
+                                                        )
                                                     )}
-                                                </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}
@@ -292,7 +332,7 @@ const AnalyticsPage = () => {
                             </table>
                         </div>
                     )}
-                </div>
+                </div >
             )}
         </>
     );

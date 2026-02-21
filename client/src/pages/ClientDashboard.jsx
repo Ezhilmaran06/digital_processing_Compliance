@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import requestService from '../services/requestService';
+import statsService from '../services/statsService';
+
 import KPICard from '../components/KPICard';
 import { Shield, Clock, FileCheck, ExternalLink, Info, Activity } from 'lucide-react';
 import Modal from '../components/Modal';
@@ -9,10 +11,23 @@ const ClientDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [selectedRequest, setSelectedRequest] = useState(null);
     const [viewModalOpen, setViewModalOpen] = useState(false);
+    const [stats, setStats] = useState(null);
+
 
     useEffect(() => {
         loadRequests();
+        loadStats();
     }, []);
+
+    const loadStats = async () => {
+        try {
+            const response = await statsService.getRequestStats();
+            setStats(response.data);
+        } catch (error) {
+            console.error('Failed to load stats:', error);
+        }
+    };
+
 
     const loadRequests = async () => {
         try {
@@ -31,11 +46,22 @@ const ClientDashboard = () => {
         setViewModalOpen(true);
     };
 
-    const approvedThisMonth = requests.filter(r => {
-        const date = new Date(r.approvalDate || r.createdAt);
-        const now = new Date();
-        return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
-    }).length;
+    const approvedCount = stats?.summary?.approved || requests.length;
+    const velocity = stats?.summary?.approved || 0;
+
+    const getStatusConfig = (status) => {
+        switch (status) {
+            case 'Approved':
+                return { label: 'Verified', color: 'emerald' };
+            case 'Completed':
+                return { label: 'Implemented', color: 'indigo' };
+            case 'Sent to Audit':
+                return { label: 'Audit Ready', color: 'amber' };
+            default:
+                return { label: status, color: 'slate' };
+        }
+    };
+
 
     return (
         <div className="animate-fade-in pb-20">
@@ -53,7 +79,7 @@ const ClientDashboard = () => {
                 <div className="animate-slide-up delay-100">
                     <KPICard
                         title="Approved Changes"
-                        value={requests.length}
+                        value={approvedCount}
                         icon={<FileCheck className="w-6 h-6" />}
                         color="success"
                         subtext="Total system-wide"
@@ -62,14 +88,15 @@ const ClientDashboard = () => {
                 <div className="animate-slide-up delay-200">
                     <KPICard
                         title="Cycle Velocity"
-                        value={approvedThisMonth}
+                        value={velocity}
                         trend="up"
-                        trendValue="5.2%"
+                        trendValue="Live"
                         icon={<Activity className="w-6 h-6" />}
                         color="primary"
-                        subtext="Approved this month"
+                        subtext="Approved compliance records"
                     />
                 </div>
+
                 <div className="animate-slide-up delay-300">
                     <KPICard
                         title="System Integrity"
@@ -118,13 +145,25 @@ const ClientDashboard = () => {
                                 </div>
 
                                 <div className="flex items-center gap-3 mb-6">
-                                    <span className="text-[10px] font-black px-3 py-1 bg-emerald-50 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400 rounded-lg uppercase tracking-wider border border-emerald-100 dark:border-emerald-800/50">
-                                        Verified
-                                    </span>
+                                    {(() => {
+                                        const config = getStatusConfig(request.status);
+                                        const colorMap = {
+                                            emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-400 dark:border-emerald-800/50',
+                                            indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100 dark:bg-indigo-900/40 dark:text-indigo-400 dark:border-indigo-800/50',
+                                            amber: 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/40 dark:text-amber-400 dark:border-amber-800/50',
+                                            slate: 'bg-slate-50 text-slate-600 border-slate-100 dark:bg-slate-800/40 dark:text-slate-400 dark:border-slate-800/50'
+                                        };
+                                        return (
+                                            <span className={`text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-wider border ${colorMap[config.color]}`}>
+                                                {config.label}
+                                            </span>
+                                        );
+                                    })()}
                                     <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">
                                         {request.changeType}
                                     </span>
                                 </div>
+
 
                                 <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                                     {request.title}
@@ -169,9 +208,20 @@ const ClientDashboard = () => {
                 {selectedRequest && (
                     <div className="space-y-8 py-4">
                         <div className="flex flex-wrap gap-3">
-                            <span className="badge bg-emerald-50 text-emerald-600 border border-emerald-100">
-                                Status: Approved
-                            </span>
+                            {(() => {
+                                const config = getStatusConfig(selectedRequest.status);
+                                const colorMap = {
+                                    emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100',
+                                    indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100',
+                                    amber: 'bg-amber-50 text-amber-600 border-amber-100',
+                                    slate: 'bg-slate-50 text-slate-600 border-slate-100'
+                                };
+                                return (
+                                    <span className={`badge ${colorMap[config.color]}`}>
+                                        Status: {selectedRequest.status}
+                                    </span>
+                                );
+                            })()}
                             <span className="badge bg-indigo-50 text-indigo-600 border border-indigo-100">
                                 {selectedRequest.environment} Env
                             </span>
@@ -179,6 +229,7 @@ const ClientDashboard = () => {
                                 {selectedRequest.riskLevel} Risk
                             </span>
                         </div>
+
 
                         <div>
                             <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">

@@ -33,11 +33,22 @@ export const AuthProvider = ({ children }) => {
                     const response = await authService.getProfile();
                     if (response.success) {
                         setUser({ ...currentUser, ...response.data });
+                    } else {
+                        // If response is not successful, clear state
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('user');
+                        setUser(null);
                     }
                 } catch (error) {
                     console.error('Session verification failed:', error);
-                    // api.js interceptor will handle 401 and redirect if needed
+                    // Silently clear state on verification failure
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    setUser(null);
                 }
+            } else {
+                // No token or user, ensure user is null
+                setUser(null);
             }
             setLoading(false);
         };

@@ -37,7 +37,7 @@ const AuditorDashboard = () => {
 
     const stats = {
         pendingAudit: requests.filter(r => r.status === 'Sent to Audit').length,
-        approved: requests.filter(r => r.status === 'Approved').length,
+        approved: requests.filter(r => ['Approved', 'Completed', 'Sent to Audit'].includes(r.status)).length,
         criticalRisk: requests.filter(r => r.riskLevel === 'Critical').length,
         totalReviewed: requests.filter(r => ['Approved', 'Completed', 'Rejected'].includes(r.status)).length
     };
@@ -144,7 +144,9 @@ const AuditorDashboard = () => {
                                     <div key={request._id} className="p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-900 transition-all flex flex-col md:flex-row justify-between items-center gap-4">
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2 mb-2">
-                                                <span className={`text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider ${request.status === 'Sent to Audit' ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'
+                                                <span className={`text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider border ${['Approved', 'Completed', 'Sent to Audit'].includes(request.status) ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/40' :
+                                                    request.status === 'Pending' ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/40' :
+                                                        'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-700/50'
                                                     }`}>
                                                     {request.status}
                                                 </span>
@@ -189,8 +191,8 @@ const AuditorDashboard = () => {
                         <StatusChart data={statusData} />
                     </section>
 
-                    <section className="card p-8 bg-indigo-600 dark:bg-indigo-600 border-none relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                    <section className="card p-8 bg-gradient-to-br from-indigo-600 to-violet-700 dark:from-indigo-600 dark:to-violet-700 border-none relative overflow-hidden group/alert">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/alert:scale-125 transition-transform duration-500">
                             <ShieldCheck className="w-24 h-24 text-white" />
                         </div>
                         <div className="relative z-10">
@@ -198,7 +200,7 @@ const AuditorDashboard = () => {
                             <p className="text-indigo-100 text-sm font-medium mb-6">
                                 System audit logs indicate 100% policy adherence for the current cycle.
                             </p>
-                            <button className="w-full py-3 bg-white text-indigo-600 rounded-xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-700/20">
+                            <button className="w-full py-3 bg-white text-indigo-700 rounded-xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-900/30 hover:scale-[1.02] active:scale-95 transition-all">
                                 Run Diagnostics
                             </button>
                         </div>

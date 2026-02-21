@@ -4,7 +4,7 @@ import axios from 'axios';
  * Base Axios instance with default configuration
  */
 const api = axios.create({
-    baseURL: '/api',
+    baseURL: import.meta.env.VITE_API_URL || '/api',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -37,11 +37,15 @@ api.interceptors.response.use(
 
         // Handle 401 - Unauthorized (token expired or invalid)
         if (status === 401) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            // Avoid redirect loop if already on login
+            // Only clear and redirect if we're not on the login page
+            // and we had a token to begin with (to avoid loop on initial verifySession)
             if (!window.location.pathname.includes('/login')) {
-                window.location.href = '/login';
+                const token = localStorage.getItem('token');
+                if (token) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.href = '/login';
+                }
             }
         }
 

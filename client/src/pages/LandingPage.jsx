@@ -21,15 +21,26 @@ import {
     Lock,
     Globe,
     Check,
-    Play
+    Play,
+    Quote,
+    Star,
+    MessageSquare,
+    ExternalLink
 } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
 const LandingPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isDark, toggleTheme } = useTheme();
     const { scrollYProgress } = useScroll();
+
+    // Scroll progress scale
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     // Parallax effect for hero
     const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
@@ -114,7 +125,6 @@ const LandingPage = () => {
         }
     ];
 
-    // How It Works Steps
     const steps = [
         {
             num: "01",
@@ -130,6 +140,30 @@ const LandingPage = () => {
             num: "03",
             title: "Deploy & Track",
             desc: "Execute changes during scheduled windows and track status in real-time."
+        }
+    ];
+
+    const testimonials = [
+        {
+            name: "Sarah Chen",
+            role: "Director of IT Ops",
+            company: "TechScale Systems",
+            content: "ChangeFlow has completely transformed our compliance posture. The multi-stage approval logic is leagues ahead of traditional ITSM tools. Our audit prep time has dropped by 70%.",
+            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+        },
+        {
+            name: "Marcus Thorne",
+            role: "VP of Engineering",
+            company: "Vortex Software",
+            content: "The real-time visibility into scheduled changes has eliminated our coordination headaches. It's the rare enterprise tool that engineers actually enjoy using every day.",
+            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80"
+        },
+        {
+            name: "Elena Rodriguez",
+            role: "Security Compliance Officer",
+            company: "Global Finovate",
+            content: "Built-in risk assessment and immutable audit logs give us the confidence we need for financial industry standards. It's an essential part of our security stack.",
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"
         }
     ];
 
@@ -175,6 +209,12 @@ const LandingPage = () => {
 
     return (
         <div className={`min-h-screen ${isDark ? 'dark' : ''} bg-white dark:bg-slate-950 transition-colors duration-500 overflow-x-hidden font-sans selection:bg-indigo-500/30 selection:text-indigo-900 dark:selection:text-indigo-100`}>
+            {/* Scroll Progress Bar */}
+            <motion.div
+                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-sky-500 z-[60] origin-left"
+                style={{ scaleX }}
+            />
+
             {/* Improved Dynamic Background Mesh */}
             <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-400/30 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob"></div>
@@ -280,13 +320,14 @@ const LandingPage = () => {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 dark:bg-slate-800/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold mb-8 border border-indigo-100 dark:border-indigo-500/20 hover:border-indigo-300 dark:hover:border-indigo-500/40 transition-colors cursor-pointer shadow-sm hover:shadow-md"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-900/10 text-indigo-600 dark:text-indigo-400 text-xs font-black mb-8 border border-indigo-100/50 dark:border-indigo-500/20 hover:border-indigo-300 dark:hover:border-indigo-500/40 transition-all cursor-pointer shadow-sm hover:shadow-indigo-500/10 group"
                         >
-                            <span className="relative flex h-2 w-2">
+                            <span className="relative flex h-3 w-3">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
                             </span>
-                            Trusted by 500+ Engineering Teams
+                            <span className="tracking-widest uppercase">New: Compliance 2.0 Module is here</span>
+                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                         </motion.div>
 
                         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-slate-900 dark:text-white mb-8 leading-[1.1]">
@@ -341,9 +382,13 @@ const LandingPage = () => {
                         whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.2, ease: "easeOut" }}
-                        className="mt-24 relative mx-auto max-w-6xl perspective-1000"
+                        whileHover={{ y: -10 }}
+                        className="mt-24 relative mx-auto max-w-6xl perspective-2000 cursor-pointer"
                     >
-                        <div className="relative rounded-3xl border border-slate-200 dark:border-slate-700/50 shadow-2xl shadow-indigo-500/10 overflow-hidden bg-slate-900 dark:bg-slate-900 group">
+                        <motion.div
+                            className="relative rounded-3xl border border-slate-200 dark:border-slate-700/50 shadow-2xl shadow-indigo-500/10 overflow-hidden bg-slate-900 dark:bg-slate-900 group"
+                            whileHover={{ rotateY: 5, rotateX: 2 }}
+                        >
                             {/* Browser Header Bar */}
                             <div className="h-10 bg-slate-800 border-b border-slate-700 flex items-center px-4 gap-2">
                                 <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -356,7 +401,7 @@ const LandingPage = () => {
 
                             {/* Overlay Gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent pointer-events-none"></div>
-                        </div>
+                        </motion.div>
 
                         {/* Floating Metric Card 1 */}
                         <motion.div
@@ -453,13 +498,54 @@ const LandingPage = () => {
                                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-${feature.color}-50 dark:bg-${feature.color}-900/20 group-hover:scale-110 transition-transform duration-300 relative z-10`}>
                                     <feature.icon className={`w-7 h-7 text-${feature.color}-600 dark:text-${feature.color}-400`} />
                                 </div>
-                                <h3 className="text-xl font-bold mb-4 text-slate-900 dark:text-white relative z-10 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{feature.title}</h3>
-                                <p className="text-slate-600 dark:text-slate-400 leading-relaxed relative z-10">
+                                <h3 className="text-xl font-bold mb-4 text-slate-900 dark:text-white relative z-10 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors uppercase tracking-tight">{feature.title}</h3>
+                                <p className="text-slate-600 dark:text-slate-400 leading-relaxed relative z-10 mb-6">
                                     {feature.description}
                                 </p>
+                                <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 text-sm font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
+                                    Learn More <ArrowRight className="w-4 h-4" />
+                                </div>
                             </motion.div>
                         ))}
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="py-32 bg-slate-50 dark:bg-slate-950/30 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-20">
+                        <span className="text-indigo-600 dark:text-indigo-400 font-bold tracking-wider uppercase text-sm mb-4 block">Testimonials</span>
+                        <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Trusted by the best</h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {testimonials.map((t, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none hover:shadow-2xl transition-all group"
+                            >
+                                <div className="flex gap-1 mb-6">
+                                    {[...Array(5)].map((_, j) => (
+                                        <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                                    ))}
+                                </div>
+                                <Quote className="w-10 h-10 text-indigo-500/20 mb-4 group-hover:text-indigo-500/40 transition-colors" />
+                                <p className="text-lg text-slate-700 dark:text-slate-300 mb-8 italic leading-relaxed">"{t.content}"</p>
+                                <div className="flex items-center gap-4 border-t border-slate-50 dark:border-slate-800 pt-6">
+                                    <img src={t.avatar} alt={t.name} className="w-14 h-14 rounded-2xl object-cover ring-4 ring-indigo-500/10" />
+                                    <div>
+                                        <h4 className="font-black text-slate-900 dark:text-white">{t.name}</h4>
+                                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{t.role} • {t.company}</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -670,15 +756,15 @@ const FAQItem = ({ question, answer, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className={`border rounded-2xl bg-white dark:bg-slate-800 transition-all duration-300 ${isOpen ? 'border-indigo-500 shadow-lg shadow-indigo-500/10' : 'border-slate-200 dark:border-slate-700 hover:border-indigo-300'}`}
+            className={`border rounded-3xl bg-white dark:bg-slate-900 transition-all duration-300 ${isOpen ? 'border-indigo-500 shadow-2xl shadow-indigo-500/10' : 'border-slate-200 dark:border-slate-800 hover:border-indigo-300 group'}`}
         >
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                className="w-full flex items-center justify-between p-8 text-left focus:outline-none"
             >
-                <span className={`font-bold text-lg pr-8 transition-colors ${isOpen ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-900 dark:text-white'}`}>{question}</span>
-                <span className={`p-2 rounded-full transition-all duration-300 ${isOpen ? 'bg-indigo-100 dark:bg-indigo-900/30 rotate-180 text-indigo-600' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400'}`}>
-                    <ChevronDown className="w-5 h-5" />
+                <span className={`font-black text-xl pr-8 transition-colors ${isOpen ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400'}`}>{question}</span>
+                <span className={`p-3 rounded-2xl transition-all duration-300 ${isOpen ? 'bg-indigo-100 dark:bg-indigo-900/30 rotate-180 text-indigo-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
+                    <ChevronDown className="w-6 h-6" />
                 </span>
             </button>
             <AnimatePresence>
@@ -689,8 +775,11 @@ const FAQItem = ({ question, answer, index }) => {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                     >
-                        <div className="p-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-700/50 mt-2">
+                        <div className="p-8 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-800/50 mt-2 text-lg">
                             {answer}
+                            <div className="mt-6 flex items-center gap-2 text-sm font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest cursor-pointer hover:underline">
+                                Still have questions? Contact Support <ExternalLink size={14} />
+                            </div>
                         </div>
                     </motion.div>
                 )}

@@ -6,10 +6,9 @@ import mongoose from 'mongoose';
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      // Mongoose 6+ no longer needs these options, but keeping for compatibility
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of hanging
     });
+
 
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
