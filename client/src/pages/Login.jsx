@@ -160,18 +160,6 @@ const Login = () => {
                             )}
                         </button>
 
-                        {/* Register Link */}
-                        <div className="text-center pt-4">
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                                Don't have an account?{' '}
-                                <Link
-                                    to="/register"
-                                    className="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-                                >
-                                    Create an account
-                                </Link>
-                            </p>
-                        </div>
                     </form>
                 </div>
 

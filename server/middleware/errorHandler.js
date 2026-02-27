@@ -3,7 +3,6 @@
  * Handles all errors and sends consistent error responses
  */
 const errorHandler = (err, req, res, next) => {
-    console.error(' [Error Handler] ', err);
     let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
     let message = err.message;
 
@@ -14,8 +13,8 @@ const errorHandler = (err, req, res, next) => {
     }
 
     // Mongoose duplicate key
-    if (err.code === 11000) {
-        message = 'Duplicate field value entered';
+    if (err.code === 11000 || (err.name === 'MongoError' && err.code === 11000) || (err.name === 'MongoServerError' && err.code === 11000)) {
+        message = 'An account with this email address already exists.';
         statusCode = 400;
     }
 

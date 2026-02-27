@@ -29,10 +29,13 @@ export const AuthProvider = ({ children }) => {
 
             if (token && currentUser) {
                 try {
-                    // Verify token with backend
+                    // Verify token with backend — DB data is the source of truth
                     const response = await authService.getProfile();
                     if (response.success) {
-                        setUser({ ...currentUser, ...response.data });
+                        // DB data wins over stale localStorage (avatar, name, etc.)
+                        const merged = { ...currentUser, ...response.data };
+                        setUser(merged);
+                        localStorage.setItem('user', JSON.stringify(merged));
                     } else {
                         // If response is not successful, clear state
                         localStorage.removeItem('token');
@@ -104,7 +107,9 @@ export const AuthProvider = ({ children }) => {
      * Update user state
      */
     const updateUser = (userData) => {
-        setUser(userData);
+        const merged = { ...user, ...userData };
+        setUser(merged);
+        localStorage.setItem('user', JSON.stringify(merged));
     };
 
     const value = {

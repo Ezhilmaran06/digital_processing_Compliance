@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import adminService from '../services/adminService';
 import requestService from '../services/requestService';
 import KPICard from '../components/KPICard';
@@ -6,6 +7,7 @@ import StatusChart from '../components/StatusChart';
 import { toast } from 'sonner';
 
 const AdminDashboard = () => {
+    const navigate = useNavigate();
     const [analytics, setAnalytics] = useState(null);
     const [auditLogs, setAuditLogs] = useState([]);
     const [users, setUsers] = useState([]);
@@ -243,6 +245,13 @@ const AdminDashboard = () => {
                                         <td className="py-5 px-10 text-right">
                                             <div className="flex items-center justify-end gap-3 transition-all duration-300">
                                                 <button
+                                                    onClick={() => navigate(`/user-management`)}
+                                                    className="p-2 bg-indigo-50 text-indigo-600 border-2 border-indigo-500/50 rounded-xl hover:bg-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-500/30 transition-all shadow-sm"
+                                                    title="Edit Identity"
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                                                </button>
+                                                <button
                                                     onClick={() => handleToggleUserStatus(user)}
                                                     className={`px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-sm border-2 ${user.isActive
                                                         ? 'bg-amber-50 text-amber-600 border-amber-500/50 hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-500/30'
@@ -271,6 +280,7 @@ const AdminDashboard = () => {
                             <thead className="bg-slate-100/50 dark:bg-slate-950/50 border-b-2 border-slate-300 dark:border-indigo-500/40">
                                 <tr>
                                     <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Record</th>
+                                    <th className="py-4 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Requester</th>
                                     <th className="py-4 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Node</th>
                                     <th className="py-4 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">State</th>
                                     <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
@@ -283,14 +293,19 @@ const AdminDashboard = () => {
                                             <p className="text-base font-black text-slate-900 dark:text-white leading-tight mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{req.title}</p>
                                             <div className="flex items-center gap-3">
                                                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter transition-opacity group-hover:opacity-100 opacity-70">NODE ID: {req._id.slice(-6).toUpperCase()}</span>
-                                                <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                                                <p className="text-[10px] text-indigo-500 dark:text-indigo-400 font-black uppercase tracking-widest">BY {req.createdBy?.name || 'SYSTEM CORE'}</p>
+                                            </div>
+                                        </td>
+                                        <td className="py-8 px-4">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-6 h-6 rounded-lg bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-[10px] font-black border border-indigo-100/50 dark:border-indigo-800/50">
+                                                    {req.createdBy?.name?.charAt(0) || 'S'}
+                                                </div>
+                                                <p className="text-[10px] text-slate-700 dark:text-slate-300 font-black uppercase tracking-widest">{req.createdBy?.name || 'SYSTEM CORE'}</p>
                                             </div>
                                         </td>
                                         <td className="py-8 px-8">
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] font-black text-slate-600 dark:text-slate-300 uppercase tracking-[0.15em]">{req.changeType}</span>
-                                                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase mt-1">{req.environment}</span>
                                             </div>
                                         </td>
                                         <td className="py-8 px-8">
@@ -302,12 +317,22 @@ const AdminDashboard = () => {
                                             </span>
                                         </td>
                                         <td className="py-5 px-10 text-right">
-                                            <button
-                                                onClick={() => handleDeleteRequest(req._id)}
-                                                className="px-5 py-2 bg-rose-50 text-rose-600 border-2 border-rose-500/50 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-rose-100 hover:shadow-lg hover:shadow-rose-200/50 dark:bg-rose-900/20 dark:text-rose-400 dark:border-rose-500/30 transition-all shadow-sm"
-                                            >
-                                                Purge Record
-                                            </button>
+                                            <div className="flex items-center justify-end gap-2">
+                                                <button
+                                                    onClick={() => navigate(`/requests`)}
+                                                    className="p-2 bg-indigo-50 text-indigo-600 border-2 border-indigo-500/50 rounded-xl hover:bg-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-500/30 transition-all shadow-sm"
+                                                    title="Edit Record"
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteRequest(req._id)}
+                                                    className="p-2 bg-rose-50 text-rose-600 border-2 border-rose-500/50 rounded-xl hover:bg-rose-100 hover:shadow-lg hover:shadow-rose-200/50 dark:bg-rose-900/20 dark:text-rose-400 dark:border-rose-500/30 transition-all shadow-sm"
+                                                    title="Purge Record"
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}

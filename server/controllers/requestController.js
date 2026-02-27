@@ -60,10 +60,6 @@ export const getRequests = asyncHandler(async (req, res) => {
     } else if (userRole === 'client') {
         // Clients see approved, completed, and sent to audit requests
         query.status = { $in: ['Approved', 'Completed', 'Sent to Audit'] };
-    } else if (userRole === 'auditor') {
-
-        // Auditors see approved, in progress, completed, and sent to audit requests
-        query.status = { $in: ['Approved', 'In Progress', 'Completed', 'Sent to Audit'] };
     }
     // Managers and Admins see all requests
 
@@ -137,10 +133,6 @@ export const getRequest = asyncHandler(async (req, res) => {
         throw new Error('Not authorized to view this request');
     }
 
-    if (req.user.role === 'Auditor' && !['Approved', 'In Progress', 'Completed', 'Sent to Audit'].includes(request.status)) {
-        res.status(403);
-        throw new Error('Not authorized to view this request');
-    }
 
     res.json({
         success: true,
@@ -171,11 +163,11 @@ export const updateRequest = asyncHandler(async (req, res) => {
         throw new Error('Not authorized to update this request');
     }
 
-    // Employees can only update their own pending requests
+    // Employees can only update their own pending or sent-to-audit requests
     // Managers and Admins can update any request regardless of status
-    if (!isAdmin && !isManager && request.status !== 'Pending') {
+    if (!isAdmin && !isManager && !['Pending', 'Sent to Audit'].includes(request.status)) {
         res.status(400);
-        throw new Error('You can only update pending requests. Approved/rejected requests cannot be modified.');
+        throw new Error('You can only update pending or sent to audit requests. Approved/completed requests cannot be modified.');
     }
 
     // Update fields
@@ -184,16 +176,13 @@ export const updateRequest = asyncHandler(async (req, res) => {
         description,
         changeType,
         riskLevel,
-        environment,
         justification,
         plannedStartDate,
         plannedEndDate,
         implementationPlan,
         rollbackPlan,
-        testingPlan,
         impactAssessment,
-        affectedDepartments,
-        attachments
+        affectedDepartments
     } = req.body;
 
     // Update only provided fields
@@ -201,16 +190,13 @@ export const updateRequest = asyncHandler(async (req, res) => {
     if (description) request.description = description;
     if (changeType) request.changeType = changeType;
     if (riskLevel) request.riskLevel = riskLevel;
-    if (environment) request.environment = environment;
     if (justification) request.justification = justification;
     if (plannedStartDate) request.plannedStartDate = plannedStartDate;
     if (plannedEndDate) request.plannedEndDate = plannedEndDate;
     if (implementationPlan) request.implementationPlan = implementationPlan;
     if (rollbackPlan) request.rollbackPlan = rollbackPlan;
-    if (testingPlan) request.testingPlan = testingPlan;
     if (impactAssessment) request.impactAssessment = impactAssessment;
     if (affectedDepartments) request.affectedDepartments = affectedDepartments;
-    if (attachments) request.attachments = attachments;
 
     await request.save();
     await request.populate('createdBy', 'name email role');
@@ -398,9 +384,6 @@ export const getRequestStats = asyncHandler(async (req, res) => {
     const query = {};
     if (req.user.role === 'Employee') {
         query.createdBy = req.user._id;
-    } else if (req.user.role === 'Auditor') {
-        query.status = { $in: ['Approved', 'In Progress', 'Completed', 'Sent to Audit'] };
-    } else if (req.user.role === 'Client') {
         query.status = { $in: ['Approved', 'Completed', 'Sent to Audit'] };
     }
 

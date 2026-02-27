@@ -3,6 +3,11 @@ import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema(
     {
+        employeeId: {
+            type: String,
+            unique: true,
+            sparse: true,
+        },
         name: {
             type: String,
             required: [true, 'Please provide a name'],
@@ -29,10 +34,15 @@ const userSchema = new mongoose.Schema(
         role: {
             type: String,
             enum: {
-                values: ['Employee', 'Manager', 'Admin', 'Client', 'Auditor'],
+                values: ['Employee', 'Manager', 'Admin', 'Client'],
                 message: '{VALUE} is not a valid role',
             },
             required: [true, 'Please specify a role'],
+        },
+        department: {
+            type: String,
+            trim: true,
+            default: '',
         },
         isActive: {
             type: Boolean,
@@ -42,14 +52,48 @@ const userSchema = new mongoose.Schema(
             type: String,
             default: '',
         },
+        twoFactorEnabled: {
+            type: Boolean,
+            default: false,
+        },
+        lastLogin: {
+            type: Date,
+            default: null,
+        },
+        notificationEmail: {
+            type: String,
+            trim: true,
+            lowercase: true,
+            match: [
+                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                'Please provide a valid notification email',
+            ],
+            default: '',
+        },
     },
     {
         timestamps: true,
     }
 );
 
-// Hash password before saving
+// Auto-generate employeeId before first save
 userSchema.pre('save', async function (next) {
+    if (this.isNew && !this.employeeId) {
+        // Find the user with the highest employeeId
+        const lastUser = await mongoose.model('User').findOne({}, {}, { sort: { 'employeeId': -1 } });
+        let nextNumber = 1;
+
+        if (lastUser && lastUser.employeeId) {
+            const lastIdStr = lastUser.employeeId.replace('EMP-', '');
+            const lastNumber = parseInt(lastIdStr, 10);
+            if (!isNaN(lastNumber)) {
+                nextNumber = lastNumber + 1;
+            }
+        }
+
+        this.employeeId = `EMP-${String(nextNumber).padStart(4, '0')}`;
+    }
+    // Hash password before saving
     if (!this.isModified('password')) {
         return next();
     }

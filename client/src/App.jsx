@@ -4,7 +4,6 @@ import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/DashboardLayout';
 import Login from './pages/Login';
-import Register from './pages/Register';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import ManagerDashboard from './pages/ManagerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -14,8 +13,8 @@ import RequestsPage from './pages/RequestsPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import SettingsPage from './pages/SettingsPage';
 import LandingPage from './pages/LandingPage';
-import AuditorDashboard from './pages/AuditorDashboard';
 import UserManagement from './pages/UserManagement';
+import ProfilePage from './pages/ProfilePage';
 
 import { Toaster } from 'sonner';
 
@@ -29,16 +28,16 @@ function App() {
                             {/* Public Routes */}
                             <Route path="/" element={<AuthRedirect />} />
                             <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
 
                             {/* Protected Routes with Shared Layout */}
-                            <Route element={<DashboardLayout allowedRoles={['Employee', 'Manager', 'Admin', 'Client', 'Auditor']} />}>
+                            <Route element={<DashboardLayout allowedRoles={['Employee', 'Manager', 'Admin', 'Client']} />}>
                                 {/* General Protected Routes */}
                                 <Route path="/requests" element={<RequestsPage />} />
                                 <Route path="/requests/create" element={<CreateRequestPage />} />
                                 <Route path="/requests/edit/:id" element={<CreateRequestPage />} />
                                 <Route path="/analytics" element={<AnalyticsPage />} />
                                 <Route path="/settings" element={<SettingsPage />} />
+                                <Route path="/profile" element={<ProfilePage />} />
 
                                 {/* Role-Specific Dashboards */}
                                 <Route
@@ -70,14 +69,6 @@ function App() {
                                     element={
                                         <ProtectedRoute allowedRoles={['Client']}>
                                             <ClientDashboard />
-                                        </ProtectedRoute>
-                                    }
-                                />
-                                <Route
-                                    path="/auditor"
-                                    element={
-                                        <ProtectedRoute allowedRoles={['Auditor']}>
-                                            <AuditorDashboard />
                                         </ProtectedRoute>
                                     }
                                 />

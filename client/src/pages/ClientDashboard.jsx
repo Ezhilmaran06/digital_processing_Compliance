@@ -64,139 +64,136 @@ const ClientDashboard = () => {
 
 
     return (
-        <div className="animate-fade-in pb-20">
-            <header className="mb-12">
-                <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-                    External <span className="text-indigo-600 dark:text-indigo-400">Portal</span>
-                </h1>
-                <p className="text-xl text-slate-500 dark:text-slate-400 mt-3 font-medium max-w-2xl leading-relaxed">
-                    Verified compliance record and approved system changelog
-                </p>
+        <div className="max-w-[1700px] mx-auto px-4 py-4">
+            {/* Header */}
+            <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-2 mb-2 animate-fade-in text-tight">
+                <div>
+                    <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                        External <span className="text-indigo-600 dark:text-indigo-400">Portal</span>
+                    </h1>
+                    <p className="text-xl text-slate-500 dark:text-slate-400 mt-3 font-medium max-w-2xl leading-relaxed">
+                        Verified compliance record and approved system changelog
+                    </p>
+                </div>
             </header>
 
-            {/* Stats Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                <div className="animate-slide-up delay-100">
-                    <KPICard
-                        title="Approved Changes"
-                        value={approvedCount}
-                        icon={<FileCheck className="w-6 h-6" />}
-                        color="success"
-                        subtext="Total system-wide"
-                    />
-                </div>
-                <div className="animate-slide-up delay-200">
-                    <KPICard
-                        title="Cycle Velocity"
-                        value={velocity}
-                        trend="up"
-                        trendValue="Live"
-                        icon={<Activity className="w-6 h-6" />}
-                        color="primary"
-                        subtext="Approved compliance records"
-                    />
-                </div>
-
-                <div className="animate-slide-up delay-300">
-                    <KPICard
-                        title="System Integrity"
-                        value="100%"
-                        icon={<Shield className="w-6 h-6" />}
-                        color="info"
-                        subtext="Compliance validated"
-                    />
-                </div>
-            </div>
-
-            {/* Approved Requests Section */}
-            <div className="animate-slide-up delay-500">
-                <div className="flex justify-between items-center mb-10">
-                    <div>
-                        <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Verified Changelog</h2>
-                        <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-2 opacity-70">
-                            Authenticated compliance records
-                        </p>
+            <main className="animate-slide-up delay-200">
+                <div className="space-y-3">
+                    {/* Stats Row */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        <KPICard
+                            title="Approved Changes"
+                            value={approvedCount}
+                            icon={<FileCheck className="w-5 h-5" />}
+                            color="success"
+                            subtext="Total system-wide"
+                        />
+                        <KPICard
+                            title="Cycle Velocity"
+                            value={velocity}
+                            trend="up"
+                            trendValue="Live"
+                            icon={<Activity className="w-5 h-5" />}
+                            color="primary"
+                            subtext="Approved compliance records"
+                        />
+                        <KPICard
+                            title="System Integrity"
+                            value="100%"
+                            icon={<Shield className="w-5 h-5" />}
+                            color="info"
+                            subtext="Compliance validated"
+                        />
                     </div>
-                </div>
 
-                {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {Array(4).fill(0).map((_, i) => (
-                            <div key={i} className="card h-64 animate-pulse bg-slate-50/50 dark:bg-slate-800/30"></div>
-                        ))}
-                    </div>
-                ) : requests.length === 0 ? (
-                    <div className="card py-32 text-center border-2 border-dashed border-slate-100 dark:border-slate-800 rounded-[3rem]">
-                        <div className="w-24 h-24 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] flex items-center justify-center text-slate-200 mx-auto mb-8 text-4xl">
-                            ∅
+                    {/* Approved Requests Section */}
+                    <div className="section-card p-4 bg-white dark:bg-slate-900/50 border-2 border-slate-300 dark:border-indigo-500/40 shadow-premium">
+                        <div className="p-0 pb-4 border-b-2 border-slate-200 dark:border-indigo-500/40 mb-4">
+                            <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Verified Changelog</h2>
+                            <p className="text-[9px] font-black text-slate-500/70 uppercase tracking-widest mt-1">
+                                Authenticated compliance records
+                            </p>
                         </div>
-                        <p className="text-slate-400 font-black uppercase tracking-widest text-sm">No Compliance Records Found</p>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {requests.map((request) => (
-                            <div
-                                key={request._id}
-                                onClick={() => openViewModal(request)}
-                                className="p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800/50 hover:border-indigo-100 dark:hover:border-indigo-900/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl bg-white dark:bg-white/5 group cursor-pointer relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <ExternalLink className="w-5 h-5 text-indigo-500" />
-                                </div>
 
-                                <div className="flex items-center gap-3 mb-6">
-                                    {(() => {
-                                        const config = getStatusConfig(request.status);
-                                        const colorMap = {
-                                            emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-400 dark:border-emerald-800/50',
-                                            indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100 dark:bg-indigo-900/40 dark:text-indigo-400 dark:border-indigo-800/50',
-                                            amber: 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/40 dark:text-amber-400 dark:border-amber-800/50',
-                                            slate: 'bg-slate-50 text-slate-600 border-slate-100 dark:bg-slate-800/40 dark:text-slate-400 dark:border-slate-800/50'
-                                        };
-                                        return (
-                                            <span className={`text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-wider border ${colorMap[config.color]}`}>
-                                                {config.label}
-                                            </span>
-                                        );
-                                    })()}
-                                    <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">
-                                        {request.changeType}
-                                    </span>
-                                </div>
-
-
-                                <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                                    {request.title}
-                                </h3>
-
-                                <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed font-medium mb-8">
-                                    {request.description}
-                                </p>
-
-                                <div className="flex items-center justify-between pt-6 border-t border-slate-50 dark:border-slate-800/50">
-                                    <div className="flex items-center gap-2.5">
-                                        <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-black text-slate-600 dark:text-slate-400">
-                                            {request.approvedBy?.name?.slice(0, 1).toUpperCase() || 'L'}
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter leading-none mb-1">Lead Auditor</span>
-                                            <span className="text-xs font-black text-slate-600 dark:text-slate-300 uppercase tracking-tight">
-                                                {request.approvedBy?.name || 'Authorized Official'}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col items-end">
-                                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter leading-none mb-1">Approval Date</span>
-                                        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">
-                                            {request.approvalDate ? new Date(request.approvalDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Pending'}
-                                        </span>
-                                    </div>
-                                </div>
+                        {loading ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {Array(4).fill(0).map((_, i) => (
+                                    <div key={i} className="h-48 rounded-[1.5rem] animate-pulse bg-slate-50/50 dark:bg-slate-800/30 border-2 border-slate-200 dark:border-slate-800"></div>
+                                ))}
                             </div>
-                        ))}
+                        ) : requests.length === 0 ? (
+                            <div className="py-24 text-center">
+                                <div className="w-20 h-20 bg-slate-50 dark:bg-slate-900/50 rounded-[2rem] flex items-center justify-center text-slate-300 mx-auto mb-6 text-3xl">
+                                    ∅
+                                </div>
+                                <p className="text-slate-400 font-black uppercase tracking-widest text-sm">No Compliance Records Found</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {requests.map((request) => (
+                                    <div
+                                        key={request._id}
+                                        onClick={() => openViewModal(request)}
+                                        className="p-5 rounded-[1.5rem] border border-slate-100 dark:border-slate-800/50 hover:border-indigo-200 dark:hover:border-indigo-900/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-xl bg-white dark:bg-white/5 group cursor-pointer relative overflow-hidden"
+                                    >
+                                        <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <ExternalLink className="w-4 h-4 text-indigo-500" />
+                                        </div>
+
+                                        <div className="flex items-center gap-3 mb-4">
+                                            {(() => {
+                                                const config = getStatusConfig(request.status);
+                                                const colorMap = {
+                                                    emerald: 'bg-emerald-50 text-emerald-600 border-emerald-500/80 dark:bg-emerald-900/40 dark:text-emerald-400 dark:border-emerald-500/80',
+                                                    indigo: 'bg-indigo-50 text-indigo-600 border-indigo-500/80 dark:bg-indigo-900/40 dark:text-indigo-400 dark:border-indigo-500/80',
+                                                    amber: 'bg-amber-50 text-amber-600 border-amber-500/80 dark:bg-amber-900/40 dark:text-amber-400 dark:border-amber-500/80',
+                                                    slate: 'bg-slate-50 text-slate-600 border-slate-400 dark:bg-slate-800 dark:border-slate-700'
+                                                };
+                                                return (
+                                                    <span className={`text-[10px] font-black px-3 py-1.5 rounded-xl uppercase tracking-widest border shadow-sm ${colorMap[config.color]}`}>
+                                                        {config.label}
+                                                    </span>
+                                                );
+                                            })()}
+                                            <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">
+                                                {request.changeType}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-base font-black text-slate-900 dark:text-white mb-2 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                            {request.title}
+                                        </h3>
+
+                                        <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed font-medium mb-5">
+                                            {request.description}
+                                        </p>
+
+                                        <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800/50">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-900/40 dark:to-slate-900 flex items-center justify-center text-[10px] font-black text-indigo-600 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-800/50">
+                                                    {request.approvedBy?.name?.slice(0, 1).toUpperCase() || 'L'}
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-tighter leading-none mb-0.5">Lead Reviewer</span>
+                                                    <span className="text-[10px] font-black text-slate-600 dark:text-slate-300 uppercase tracking-tight">
+                                                        {request.approvedBy?.name || 'Authorized Official'}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-col items-end">
+                                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-tighter leading-none mb-0.5">Approval Date</span>
+                                                <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">
+                                                    {request.approvalDate ? new Date(request.approvalDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Pending'}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
+                </div>
+            </main>
 
             {/* View Request Modal */}
             <Modal
@@ -222,9 +219,6 @@ const ClientDashboard = () => {
                                     </span>
                                 );
                             })()}
-                            <span className="badge bg-indigo-50 text-indigo-600 border border-indigo-100">
-                                {selectedRequest.environment} Env
-                            </span>
                             <span className="badge bg-slate-50 text-slate-600 border border-slate-100">
                                 {selectedRequest.riskLevel} Risk
                             </span>
@@ -246,7 +240,7 @@ const ClientDashboard = () => {
                                 <p className="text-sm font-bold text-slate-900 dark:text-white">{selectedRequest.createdBy?.name || 'N/A'}</p>
                             </div>
                             <div>
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Lead Auditor</p>
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Lead Reviewer</p>
                                 <p className="text-sm font-bold text-slate-900 dark:text-white">{selectedRequest.approvedBy?.name || 'Authorized Official'}</p>
                             </div>
                             <div>
@@ -291,14 +285,6 @@ const ClientDashboard = () => {
                                         </div>
                                     </div>
                                 )}
-                                {selectedRequest.testingPlan && (
-                                    <div className="space-y-2">
-                                        <h4 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] border-l-4 border-emerald-500 pl-4 mb-3">Validation Strategy</h4>
-                                        <div className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed bg-emerald-50/10 dark:bg-emerald-900/10 p-5 rounded-2xl border border-emerald-100/50 dark:border-emerald-900/30">
-                                            {selectedRequest.testingPlan}
-                                        </div>
-                                    </div>
-                                )}
                             </div>
 
                             {selectedRequest.impactAssessment && (
@@ -325,7 +311,7 @@ const ClientDashboard = () => {
 
                             <div className="pt-6 border-t border-slate-50 dark:border-slate-800/50">
                                 <p className="text-[10px] text-slate-400 dark:text-slate-500 italic font-medium leading-relaxed">
-                                    * This document is a protected compliance record. All implementation details have been verified by the authorized lead auditor and passed final validation protocols.
+                                    * This document is a protected compliance record. All implementation details have been verified by the authorized lead reviewer and passed final validation protocols.
                                 </p>
                             </div>
                         </div>
@@ -339,9 +325,10 @@ const ClientDashboard = () => {
                             </button>
                         </div>
                     </div>
-                )}
-            </Modal>
-        </div>
+                )
+                }
+            </Modal >
+        </div >
     );
 };
 

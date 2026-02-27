@@ -259,7 +259,6 @@ const AnalyticsPage = () => {
                                         <th className="text-left py-3 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Title</th>
                                         <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Type</th>
                                         <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Risk</th>
-                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Env</th>
                                         <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
                                     </tr>
                                 </thead>
@@ -285,11 +284,6 @@ const AnalyticsPage = () => {
                                                         'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800'
                                                     }`}>
                                                     {request.riskLevel}
-                                                </span>
-                                            </td>
-                                            <td className="py-5 px-4">
-                                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-tighter">
-                                                    {request.environment}
                                                 </span>
                                             </td>
                                             <td className="py-4 px-6 text-right">

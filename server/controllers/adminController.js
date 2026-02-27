@@ -51,7 +51,7 @@ export const getUsers = asyncHandler(async (req, res) => {
  * @access  Private (Admin only)
  */
 export const createUser = asyncHandler(async (req, res) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, notificationEmail } = req.body;
 
     const userExists = await User.findOne({ email });
 
@@ -65,7 +65,14 @@ export const createUser = asyncHandler(async (req, res) => {
         email,
         password,
         role,
+        notificationEmail: notificationEmail || '',
     });
+
+    // Mock email notification trigger
+    if (notificationEmail) {
+        console.log(`[IDENTITY_PROVISIONED] Sending credentials for ${user.email} to notification recipient: ${notificationEmail}`);
+        console.log(`[IDENTITY_PROVISIONED] Credential Payload: { User: ${user.name}, Role: ${user.role}, Login: ${user.email}, TempPass: ${password} }`);
+    }
 
     // Create audit log
     await createAuditLog({

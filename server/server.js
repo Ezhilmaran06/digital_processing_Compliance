@@ -16,6 +16,7 @@ import requestRoutes from './routes/requests.js';
 import adminRoutes from './routes/admin.js';
 import managerRoutes from './routes/manager.js';
 import uploadRoutes from './routes/upload.js';
+import profileRoutes from './routes/profileRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -55,10 +56,11 @@ app.use(express.urlencoded({ extended: true }));
 // Rate limiting - Prevent abuse
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Limit each IP to 100 requests per windowMs
+    max: 500, // Raised limit for development (was 100)
     message: 'Too many requests from this IP, please try again later',
     standardHeaders: true,
     legacyHeaders: false,
+    skip: (req) => req.path.startsWith('/profile'), // never rate-limit profile
 });
 
 app.use('/api', limiter);
@@ -75,9 +77,6 @@ if (process.env.NODE_ENV === 'development') {
  */
 // Serve uploaded files
 app.use('/uploads', (req, res, next) => {
-    try {
-        fs.appendFileSync(path.join(__dirname, 'static_debug.log'), `[${new Date().toISOString()}] Request: ${req.url}\n`);
-    } catch (e) { }
     next();
 }, express.static(path.join(__dirname, 'uploads')));
 
@@ -106,6 +105,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/manager', managerRoutes);
+app.use('/api/profile', profileRoutes);
 app.use('/api', uploadRoutes);
 
 // TEMPORARY DEBUG SEED ROUTE
@@ -140,12 +140,9 @@ app.get('/api/debug/force-seed', async (req, res) => {
                 description: `Comprehensive upgrade of the ${types[i % types.length].toLowerCase()} component to improve compliance.`,
                 changeType: types[i % types.length],
                 riskLevel: risks[i % risks.length],
-                environment: 'Production',
-                plannedStartDate: new Date(),
-                plannedEndDate: new Date(Date.now() + 86400000),
-                implementationPlan: 'Step 1: Backup\nStep 2: Deploy\nStep 3: Verify',
-                rollbackPlan: 'Restore from backup',
-                testingPlan: 'End-to-end integration tests',
+                justification: `Business necessity for the ${types[i % types.length]} upgrade.`,
+                impactAssessment: `Potential impact analysis for the ${types[i % types.length]} system update.`,
+                affectedDepartments: ['IT', 'Engineering'],
                 status: status,
                 priority: status === 'Approved' ? 'High' : 'Medium',
                 createdBy: admin._id,

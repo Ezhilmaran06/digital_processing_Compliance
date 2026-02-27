@@ -40,7 +40,7 @@ const AppNavbar = () => {
     };
 
     return (
-        <nav className="glass-navbar sticky top-4 mx-4 md:mx-8 px-6 py-2.5 rounded-[2rem] shadow-premium z-[100] transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(99,102,241,0.15)] ring-1 ring-white/10">
+        <nav className="glass-navbar fixed top-4 left-0 right-0 mx-4 md:mx-8 px-6 py-2.5 rounded-[2rem] shadow-premium z-[100] transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(99,102,241,0.15)] ring-1 ring-white/10">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 <div className="flex items-center gap-10">
                     <Link to="/" className="flex items-center gap-3.5 group">
@@ -86,21 +86,26 @@ const AppNavbar = () => {
                     <div className="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1 hidden md:block"></div>
 
                     <div className="hidden md:flex items-center gap-4 bg-white/30 dark:bg-white/5 p-1 pr-4 rounded-3xl border border-white/20">
-                        <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden">
-                            {user?.avatar ? (
-                                <img
-                                    src={getAvatarUrl(user.avatar)}
-                                    alt={user.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                user?.name?.charAt(0)
-                            )}
-                        </div>
-                        <div className="text-left hidden lg:block">
-                            <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">{user?.name}</p>
-                            <p className="text-[9px] uppercase tracking-[0.2em] font-black text-slate-400/80 mt-1">{user?.role}</p>
-                        </div>
+                        <Link
+                            to="/profile"
+                            className="flex items-center gap-4 hover:opacity-80 transition-opacity"
+                        >
+                            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden">
+                                {user?.avatar ? (
+                                    <img
+                                        src={getAvatarUrl(user.avatar)}
+                                        alt={user.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    user?.name?.charAt(0)
+                                )}
+                            </div>
+                            <div className="text-left hidden lg:block">
+                                <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">{user?.name}</p>
+                                <p className="text-[9px] uppercase tracking-[0.2em] font-black text-slate-400/80 mt-1">{user?.role}</p>
+                            </div>
+                        </Link>
                         <button onClick={logout} className="ml-2 p-2 text-slate-400 hover:text-rose-500 transition-all hover:scale-110">
                             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

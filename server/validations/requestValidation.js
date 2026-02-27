@@ -9,9 +9,9 @@ export const createRequestSchema = Joi.object({
         'string.min': 'Title must be at least 5 characters',
         'string.max': 'Title cannot exceed 200 characters',
     }),
-    description: Joi.string().trim().min(5).max(2000).required().messages({
+    description: Joi.string().trim().min(10).max(2000).required().messages({
         'string.empty': 'Description is required',
-        'string.min': 'Description must be at least 5 characters',
+        'string.min': 'Description must be at least 10 characters',
         'string.max': 'Description cannot exceed 2000 characters',
     }),
     changeType: Joi.string()
@@ -28,13 +28,7 @@ export const createRequestSchema = Joi.object({
             'any.only': 'Invalid risk level',
             'string.empty': 'Risk level is required',
         }),
-    environment: Joi.string()
-        .valid('Development', 'Staging', 'Production', 'All')
-        .required()
-        .messages({
-            'any.only': 'Invalid environment',
-            'string.empty': 'Environment is required',
-        }),
+
     plannedStartDate: Joi.date().iso().required().messages({
         'date.base': 'Planned start date must be a valid date',
         'any.required': 'Planned start date is required',
@@ -52,15 +46,20 @@ export const createRequestSchema = Joi.object({
         'string.empty': 'Rollback plan is required',
         'string.min': 'Rollback plan must be at least 5 characters',
     }),
-    testingPlan: Joi.string().trim().min(5).max(5000).required().messages({
-        'string.empty': 'Testing plan is required',
-        'string.min': 'Testing plan must be at least 5 characters',
+    justification: Joi.string().trim().min(5).max(2000).required().messages({
+        'string.empty': 'Business justification is required',
+        'string.min': 'Business justification must be at least 5 characters',
     }),
-    justification: Joi.string().trim().max(2000).allow('').optional(),
-    impactAssessment: Joi.string().trim().max(2000).allow('').optional(),
-    affectedDepartments: Joi.array().items(Joi.string().trim()).optional(),
+    impactAssessment: Joi.string().trim().min(5).max(2000).required().messages({
+        'string.empty': 'Impact assessment is required',
+        'string.min': 'Impact assessment must be at least 5 characters',
+    }),
+    affectedDepartments: Joi.array().items(Joi.string().trim()).min(1).required().messages({
+        'array.min': 'Please specify at least one affected department',
+        'any.required': 'Affected users/departments are required',
+    }),
     priority: Joi.string().valid('Low', 'Medium', 'High').optional(),
-    attachments: Joi.array().items(Joi.object()).optional(),
+
 }).unknown(true);
 
 /**
@@ -71,8 +70,8 @@ export const updateRequestSchema = Joi.object({
         'string.min': 'Title must be at least 5 characters',
         'string.max': 'Title cannot exceed 200 characters',
     }),
-    description: Joi.string().trim().min(5).max(2000).optional().messages({
-        'string.min': 'Description must be at least 5 characters',
+    description: Joi.string().trim().min(10).max(2000).optional().messages({
+        'string.min': 'Description must be at least 10 characters',
         'string.max': 'Description cannot exceed 2000 characters',
     }),
     changeType: Joi.string()
@@ -87,12 +86,7 @@ export const updateRequestSchema = Joi.object({
         .messages({
             'any.only': 'Invalid risk level',
         }),
-    environment: Joi.string()
-        .valid('Development', 'Staging', 'Production', 'All')
-        .optional()
-        .messages({
-            'any.only': 'Invalid environment',
-        }),
+
     plannedStartDate: Joi.date().iso().optional().messages({
         'date.base': 'Planned start date must be a valid date',
     }),
@@ -105,14 +99,12 @@ export const updateRequestSchema = Joi.object({
     rollbackPlan: Joi.string().trim().min(5).max(5000).optional().messages({
         'string.min': 'Rollback plan must be at least 5 characters',
     }),
-    testingPlan: Joi.string().trim().min(5).max(5000).optional().messages({
-        'string.min': 'Testing plan must be at least 5 characters',
-    }),
-    justification: Joi.string().trim().max(2000).allow('').optional(),
-    impactAssessment: Joi.string().trim().max(2000).allow('').optional(),
+
+    justification: Joi.string().trim().max(2000).optional(),
+    impactAssessment: Joi.string().trim().max(2000).optional(),
     affectedDepartments: Joi.array().items(Joi.string().trim()).optional(),
     priority: Joi.string().valid('Low', 'Medium', 'High').optional(),
-    attachments: Joi.array().items(Joi.object()).optional(),
+
 }).min(1).messages({
     'object.min': 'At least one field must be provided for update'
 });

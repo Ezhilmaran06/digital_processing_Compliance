@@ -11,10 +11,12 @@ const requestSchema = new mongoose.Schema(
         description: {
             type: String,
             required: [true, 'Please provide a description'],
+            minlength: [10, 'Description must be at least 10 characters'],
             maxlength: [2000, 'Description cannot exceed 2000 characters'],
         },
         justification: {
             type: String,
+            required: [true, 'Please provide a business justification'],
             maxlength: [2000, 'Justification cannot exceed 2000 characters'],
         },
         changeType: {
@@ -33,14 +35,7 @@ const requestSchema = new mongoose.Schema(
                 message: '{VALUE} is not a valid risk level',
             },
         },
-        environment: {
-            type: String,
-            required: [true, 'Please specify environment'],
-            enum: {
-                values: ['Development', 'Staging', 'Production', 'All'],
-                message: '{VALUE} is not a valid environment',
-            },
-        },
+
         plannedStartDate: {
             type: Date,
             required: [true, 'Please provide planned start date'],
@@ -59,30 +54,18 @@ const requestSchema = new mongoose.Schema(
             required: [true, 'Please provide rollback plan'],
             maxlength: [5000, 'Rollback plan cannot exceed 5000 characters'],
         },
-        testingPlan: {
-            type: String,
-            required: [true, 'Please provide testing plan'],
-            maxlength: [5000, 'Testing plan cannot exceed 5000 characters'],
-        },
+
         impactAssessment: {
             type: String,
+            required: [true, 'Please provide an impact assessment'],
             maxlength: [2000, 'Impact assessment cannot exceed 2000 characters'],
         },
-        affectedDepartments: [{
-            type: String,
-            trim: true,
-        }],
-        attachments: [{
-            filename: String,
-            originalName: String,
-            path: String,
-            size: Number,
-            mimetype: String,
-            uploadedAt: {
-                type: Date,
-                default: Date.now,
-            },
-        }],
+        affectedDepartments: {
+            type: [String],
+            required: [true, 'Please specify affected users or departments'],
+            validate: [v => Array.isArray(v) && v.length > 0, 'Please specify at least one affected department']
+        },
+
         status: {
             type: String,
             enum: ['Pending', 'Approved', 'Rejected', 'In Progress', 'Completed', 'Cancelled', 'Sent to Audit'],

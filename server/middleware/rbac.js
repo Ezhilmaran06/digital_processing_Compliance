@@ -30,4 +30,3 @@ export const isEmployee = authorize('Employee', 'Manager', 'Admin');
 export const isManager = authorize('Manager', 'Admin');
 export const isAdmin = authorize('Admin');
 export const isClient = authorize('Client', 'Admin');
-export const isAuditor = authorize('Auditor', 'Admin');

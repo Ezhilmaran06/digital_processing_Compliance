@@ -135,7 +135,6 @@ const RequestsPage = () => {
             description: request.description || '',
             changeType: request.changeType || '',
             riskLevel: request.riskLevel || '',
-            environment: request.environment || '',
             justification: request.justification || '',
             plannedStartDate: startDate.toISOString().split('T')[0],
             plannedEndDate: endDate.toISOString().split('T')[0],
@@ -143,7 +142,6 @@ const RequestsPage = () => {
             impactAssessment: request.impactAssessment || '',
             implementationPlan: request.implementationPlan || '',
             rollbackPlan: request.rollbackPlan || '',
-            testingPlan: request.testingPlan || '',
         });
         setEditModalOpen(true);
     };
@@ -173,13 +171,11 @@ const RequestsPage = () => {
                 description: editFormData.description,
                 changeType: editFormData.changeType,
                 riskLevel: editFormData.riskLevel,
-                environment: editFormData.environment,
                 justification: editFormData.justification,
                 plannedStartDate: new Date(editFormData.plannedStartDate).toISOString(),
                 plannedEndDate: new Date(editFormData.plannedEndDate).toISOString(),
                 implementationPlan: editFormData.implementationPlan,
                 rollbackPlan: editFormData.rollbackPlan,
-                testingPlan: editFormData.testingPlan,
                 impactAssessment: editFormData.impactAssessment,
                 affectedDepartments: editFormData.affectedDepartments ? editFormData.affectedDepartments.split(',').map(d => d.trim()) : [],
             };
@@ -366,6 +362,7 @@ const RequestsPage = () => {
                                 <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Title</th>
                                 <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Type</th>
                                 <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Submission</th>
+                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Requester</th>
                                 <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">State</th>
                                 <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Risk</th>
                                 <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
@@ -429,6 +426,16 @@ const RequestsPage = () => {
                                             </div>
                                         </td>
                                         <td className="py-4 px-6">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-[10px] font-black border border-indigo-200 dark:border-indigo-500/30">
+                                                    {request.createdBy?.name?.charAt(0) || '?'}
+                                                </div>
+                                                <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+                                                    {request.createdBy?.name || 'Unknown'}
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td className="py-4 px-6">
                                             <span className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] border-2 transition-all shadow-sm ${request.status === 'Approved' || request.status === 'Completed' ? 'bg-emerald-50 text-emerald-600 border-emerald-500/80 dark:bg-emerald-900/40 dark:border-emerald-500/80' :
                                                 request.status === 'Rejected' ? 'bg-rose-50 text-rose-600 border-rose-500/80 dark:bg-rose-900/40 dark:border-rose-500/80' :
                                                     request.status === 'Sent to Audit' ? 'bg-blue-50 text-blue-600 border-blue-500/80 dark:bg-blue-900/40 dark:border-blue-500/80' :
@@ -468,22 +475,20 @@ const RequestsPage = () => {
                                                 )}
 
                                                 <button
+                                                    onClick={() => openEditModal(request)}
+                                                    className="p-2 bg-amber-50 text-amber-600 border-2 border-amber-500/50 rounded-xl hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-500/30 transition-all shadow-sm"
+                                                    title="Edit Change"
+                                                >
+                                                    <Edit size={16} strokeWidth={2.5} />
+                                                </button>
+
+                                                <button
                                                     onClick={() => openViewModal(request)}
                                                     className="p-2 bg-indigo-50 text-indigo-600 border-2 border-indigo-500/50 rounded-xl hover:bg-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-500/30 transition-all shadow-sm"
                                                     title="View Details"
                                                 >
                                                     <Eye size={16} strokeWidth={2.5} />
                                                 </button>
-
-                                                {isCreator(request) && request.status === 'Pending' && (
-                                                    <button
-                                                        onClick={() => openEditModal(request)}
-                                                        className="p-2 bg-amber-50 text-amber-600 border-2 border-amber-500/50 rounded-xl hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-500/30 transition-all shadow-sm"
-                                                        title="Edit Change"
-                                                    >
-                                                        <Edit size={16} strokeWidth={2.5} />
-                                                    </button>
-                                                )}
 
                                                 {hasAnyRole(['Admin']) && (
                                                     <button
@@ -578,10 +583,7 @@ const RequestsPage = () => {
 
                         {/* Environment & Dates */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="p-4 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-gray-800">
-                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Environment</p>
-                                <p className="font-bold text-gray-900 dark:text-white">{selectedRequest.environment || 'N/A'}</p>
-                            </div>
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Planned Start</p>
                             <div className="p-4 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-gray-800">
                                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Planned Start</p>
                                 <p className="font-bold text-gray-900 dark:text-white">
@@ -622,19 +624,6 @@ const RequestsPage = () => {
                             </div>
                         )}
 
-                        {/* Testing Plan */}
-                        {selectedRequest.testingPlan && (
-                            <div>
-                                <p className="text-sm font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                                    <FileText className="w-4 h-4" />
-                                    Testing Plan
-                                </p>
-                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-white/5 p-4 rounded-2xl text-sm whitespace-pre-wrap">
-                                    {selectedRequest.testingPlan}
-                                </p>
-                            </div>
-                        )}
-
                         {/* Impact Assessment */}
                         {selectedRequest.impactAssessment && (
                             <div>
@@ -654,24 +643,6 @@ const RequestsPage = () => {
                                         <span key={idx} className="badge bg-indigo-50 text-indigo-600 border border-indigo-100">
                                             {dept}
                                         </span>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Attachments */}
-                        {selectedRequest.attachments && selectedRequest.attachments.length > 0 && (
-                            <div>
-                                <p className="text-sm font-bold text-gray-900 dark:text-white mb-2">Attachments</p>
-                                <div className="space-y-2">
-                                    {selectedRequest.attachments.map((file, idx) => (
-                                        <div key={idx} className="flex items-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-gray-800">
-                                            <FileText className="w-4 h-4 text-gray-400" />
-                                            <span className="text-sm text-gray-700 dark:text-gray-300">{file.originalName || file.filename}</span>
-                                            <span className="text-xs text-gray-400 ml-auto">
-                                                {file.size ? `${(file.size / 1024).toFixed(2)} KB` : ''}
-                                            </span>
-                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -837,23 +808,7 @@ const RequestsPage = () => {
                         </div>
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
-                            Environment <span className="text-rose-500">*</span>
-                        </label>
-                        <select
-                            name="environment"
-                            value={editFormData.environment || ''}
-                            onChange={handleEditChange}
-                            className="input-field"
-                        >
-                            <option value="">Select environment</option>
-                            <option value="Production">Production</option>
-                            <option value="Staging">Staging</option>
-                            <option value="Development">Development</option>
-                            <option value="All">All Environment</option>
-                        </select>
-                    </div>
+
 
                     <div>
                         <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
@@ -954,20 +909,7 @@ const RequestsPage = () => {
                         />
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                            <FileText className="w-4 h-4" />
-                            Testing Plan
-                        </label>
-                        <textarea
-                            name="testingPlan"
-                            value={editFormData.testingPlan || ''}
-                            onChange={handleEditChange}
-                            rows="3"
-                            className="input-field"
-                            placeholder="Describe testing procedures and validation criteria"
-                        />
-                    </div>
+
 
                     <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-800 sticky bottom-0 bg-white dark:bg-gray-900">
                         <button
