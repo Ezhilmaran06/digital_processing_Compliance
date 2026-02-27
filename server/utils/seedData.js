@@ -47,10 +47,10 @@ const seedData = async () => {
                 role: 'Employee',
             },
             {
-                name: 'Client Partner',
+                name: 'Auditor Partner',
                 email: 'client@partner.com',
-                password: 'client123',
-                role: 'Client',
+                password: 'auditor123',
+                role: 'Auditor',
             },
         ]);
 
@@ -184,7 +184,7 @@ const seedData = async () => {
         console.log('Manager:  sarah.mitchell@company.com / manager123');
         console.log('Employee: john.davis@company.com / employee123');
         console.log('Employee: emily.rodriguez@company.com / employee123');
-        console.log('Client:   client@partner.com / client123');
+        console.log('Auditor:  client@partner.com / auditor123');
         console.log('─'.repeat(50));
 
         process.exit(0);

@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import ManagerDashboard from './pages/ManagerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
-import ClientDashboard from './pages/ClientDashboard';
+import AuditorDashboard from './pages/AuditorDashboard';
 import CreateRequestPage from './pages/CreateRequestPage';
 import RequestsPage from './pages/RequestsPage';
 import AnalyticsPage from './pages/AnalyticsPage';
@@ -30,7 +30,7 @@ function App() {
                             <Route path="/login" element={<Login />} />
 
                             {/* Protected Routes with Shared Layout */}
-                            <Route element={<DashboardLayout allowedRoles={['Employee', 'Manager', 'Admin', 'Client']} />}>
+                            <Route element={<DashboardLayout allowedRoles={['Employee', 'Manager', 'Admin', 'Auditor']} />}>
                                 {/* General Protected Routes */}
                                 <Route path="/requests" element={<RequestsPage />} />
                                 <Route path="/requests/create" element={<CreateRequestPage />} />
@@ -65,10 +65,10 @@ function App() {
                                     }
                                 />
                                 <Route
-                                    path="/client"
+                                    path="/auditor"
                                     element={
-                                        <ProtectedRoute allowedRoles={['Client']}>
-                                            <ClientDashboard />
+                                        <ProtectedRoute allowedRoles={['Auditor']}>
+                                            <AuditorDashboard />
                                         </ProtectedRoute>
                                     }
                                 />

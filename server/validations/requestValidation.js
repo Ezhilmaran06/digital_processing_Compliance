@@ -104,6 +104,12 @@ export const updateRequestSchema = Joi.object({
     impactAssessment: Joi.string().trim().max(2000).optional(),
     affectedDepartments: Joi.array().items(Joi.string().trim()).optional(),
     priority: Joi.string().valid('Low', 'Medium', 'High').optional(),
+    status: Joi.string()
+        .valid('Pending', 'Approved', 'Rejected', 'In Progress', 'Completed', 'Cancelled', 'Sent to Audit', 'Solved')
+        .optional()
+        .messages({
+            'any.only': 'Invalid status',
+        }),
 
 }).min(1).messages({
     'object.min': 'At least one field must be provided for update'
@@ -114,7 +120,7 @@ export const updateRequestSchema = Joi.object({
  */
 export const updateStatusSchema = Joi.object({
     status: Joi.string()
-        .valid('Approved', 'Rejected', 'In Progress', 'Completed', 'Cancelled')
+        .valid('Approved', 'Rejected', 'In Progress', 'Completed', 'Cancelled', 'Sent to Audit', 'Solved')
         .required()
         .messages({
             'any.only': 'Invalid status',

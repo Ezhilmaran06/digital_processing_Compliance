@@ -169,7 +169,7 @@ const Register = () => {
                                     { value: 'Employee', desc: 'Access to personal tasks and projects' },
                                     { value: 'Manager', desc: 'Manage team members and assign tasks' },
                                     { value: 'Admin', desc: 'Full system access and user management' },
-                                    { value: 'Client', desc: 'View approved changes' },
+                                    { value: 'Auditor', desc: 'View approved changes' },
                                 ].map((role) => (
                                     <label
                                         key={role.value}

@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import StatusChart from '../components/StatusChart';
 import TrendChart from '../components/TrendChart';
 import KPICard from '../components/KPICard';
+import Modal from '../components/Modal';
 import {
     BarChart,
     Bar,
@@ -23,6 +24,7 @@ const AnalyticsPage = () => {
     const [approvedRequests, setApprovedRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingRequests, setLoadingRequests] = useState({});
+    const [isFullRecordsModalOpen, setIsFullRecordsModalOpen] = useState(false);
     const { user } = useAuth();
 
     const COLORS = ['#8b5cf6', '#d946ef', '#0ea5e9', '#10b981', '#f59e0b', '#ef4444'];
@@ -33,7 +35,7 @@ const AnalyticsPage = () => {
         try {
             const [statsResponse, requestsResponse] = await Promise.all([
                 statsService.getRequestStats(),
-                isManagerOrAdmin ? requestService.getAll({ status: 'Approved,Completed,Sent to Audit', limit: 100 }) : Promise.resolve({ data: [] })
+                isManagerOrAdmin ? requestService.getAll({ limit: 100 }) : Promise.resolve({ data: [] })
             ]);
 
             // Backend returns { success: true, data: { statusDistribution: [], ... } }
@@ -68,6 +70,21 @@ const AnalyticsPage = () => {
         } catch (error) {
             console.error('Failed to send request to audit:', error);
             toast.error(error.message || 'Failed to send request to audit');
+        } finally {
+            setLoadingRequests(prev => ({ ...prev, [requestId]: false }));
+        }
+    };
+
+    const handleSolved = async (requestId) => {
+        setLoadingRequests(prev => ({ ...prev, [requestId]: true }));
+
+        try {
+            await requestService.update(requestId, { status: 'Solved' });
+            toast.success('Request marked as Solved');
+            await fetchData();
+        } catch (error) {
+            console.error('Failed to mark as solved:', error);
+            toast.error('Failed to mark as solved');
         } finally {
             setLoadingRequests(prev => ({ ...prev, [requestId]: false }));
         }
@@ -167,6 +184,186 @@ const AnalyticsPage = () => {
                 </div>
             </div>
 
+            {/* Approved Requests Table - Only for Managers and Admins */}
+            {isManagerOrAdmin && (
+                <div className="section-card animate-slide-up delay-200 mb-3 p-0 overflow-hidden">
+                    <div className="px-6 py-4 border-b-2 border-slate-100 dark:border-slate-800">
+                        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Processed Compliance Records</h2>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">
+                            Comprehensive compliance lifecycle records • {approvedRequests.length} records
+                        </p>
+                    </div>
+
+                    {approvedRequests.length === 0 ? (
+                        <div className="text-center py-12">
+                            <svg className="mx-auto h-12 w-12 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <p className="mt-4 text-slate-400 font-black uppercase tracking-widest text-[10px]">No synchronized records available</p>
+                        </div>
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead className="bg-slate-100/50 dark:bg-slate-950/50 border-b-2 border-slate-300 dark:border-indigo-500/40">
+                                    <tr>
+                                        <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest text-left">Title</th>
+                                        <th className="py-4 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest text-left">Type</th>
+                                        <th className="py-4 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest text-left">Risk</th>
+                                        <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {approvedRequests.slice(0, 4).map((request, index) => (
+                                        <tr
+                                            key={request._id}
+                                            className="border-b-2 border-slate-50 dark:border-slate-900/40 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/10 transition-colors group"
+                                            style={{ animationDelay: `${index * 50}ms` }}
+                                        >
+                                            <td className="py-4 px-6">
+                                                <p className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight group-hover:text-indigo-600 transition-colors">{request.title}</p>
+                                                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter mt-0.5">{formatDate(request.createdAt)}</p>
+                                            </td>
+                                            <td className="py-3 px-4">
+                                                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 border-indigo-100 bg-indigo-50/50 text-indigo-600 dark:bg-indigo-900/20 dark:border-indigo-800 dark:text-indigo-400">
+                                                    {request.changeType}
+                                                </span>
+                                            </td>
+                                            <td className="py-5 px-4">
+                                                <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 ${request.riskLevel === 'Critical' ? 'bg-rose-50 text-rose-600 border-rose-200 dark:bg-rose-900/20 dark:border-rose-800' :
+                                                    request.riskLevel === 'High' ? 'bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/20 dark:border-orange-810/30' :
+                                                        'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800'
+                                                    }`}>
+                                                    {request.riskLevel}
+                                                </span>
+                                            </td>
+                                            <td className="py-4 px-6 text-right">
+                                                <div className="flex items-center justify-end gap-2.5">
+                                                    {user?.role === 'Admin' ? (
+                                                        /* Admin: Read-only status indicator or sent status */
+                                                        request.status === 'Sent to Audit' || request.status === 'Completed' ? (
+                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border-2 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                                                                SENT
+                                                            </span>
+                                                        ) : (
+                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-900/30 border-2 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></div>
+                                                                PENDING
+                                                            </span>
+                                                        )
+                                                    ) : (
+                                                        /* Manager: Action button or sent status */
+                                                        <div className="flex items-center gap-2">
+                                                            {request.status === 'Sent to Audit' || request.status === 'Completed' ? (
+                                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border-2 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                                                                    SENT
+                                                                </span>
+                                                            ) : request.status === 'Approved' ? (
+                                                                <button
+                                                                    onClick={() => handleSendToAudit(request._id)}
+                                                                    disabled={loadingRequests[request._id]}
+                                                                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white text-[9px] font-black uppercase tracking-widest rounded-xl border-2 border-indigo-500 shadow-premium transition-all hover:scale-105 active:scale-95"
+                                                                >
+                                                                    {loadingRequests[request._id] ? 'Syncing...' : 'Send to Audit'}
+                                                                </button>
+                                                            ) : (
+                                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-900/30 border-2 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[9px] font-black uppercase tracking-widest rounded-lg opacity-60">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                                                                    PENDING
+                                                                </span>
+                                                            )}
+                                                            <div
+                                                                className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest rounded-xl border-2 transition-all ${request.status === 'Completed'
+                                                                    ? 'bg-emerald-600 text-white border-emerald-500 shadow-premium'
+                                                                    : 'bg-rose-600 text-white border-rose-500 shadow-premium'
+                                                                    }`}
+                                                            >
+                                                                Solved
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div >
+            )}
+
+            {/* View Full Records Button */}
+            {isManagerOrAdmin && approvedRequests.length > 4 && (
+                <div className="flex justify-center mb-6 animate-slide-up delay-300">
+                    <button
+                        onClick={() => setIsFullRecordsModalOpen(true)}
+                        className="px-8 py-3 bg-white dark:bg-slate-900 border-2 border-indigo-500/30 dark:border-indigo-400/30 text-indigo-600 dark:text-indigo-400 text-xs font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-all shadow-xl shadow-indigo-500/10 active:scale-95 group"
+                    >
+                        View Full Records
+                        <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
+                    </button>
+                </div>
+            )}
+
+            {/* Full Records Modal */}
+            <Modal
+                isOpen={isFullRecordsModalOpen}
+                onClose={() => setIsFullRecordsModalOpen(false)}
+                title="Complete Compliance Records"
+                size="xl"
+            >
+                <div className="overflow-x-auto custom-scrollbar">
+                    <table className="w-full">
+                        <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
+                            <tr>
+                                <th className="py-4 px-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-left">Title</th>
+                                <th className="py-4 px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-left">Type</th>
+                                <th className="py-4 px-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-left">Risk</th>
+                                <th className="py-4 px-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
+                            {approvedRequests.map((request) => (
+                                <tr key={request._id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                                    <td className="py-4 px-6">
+                                        <p className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">{request.title}</p>
+                                        <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter mt-0.5">{formatDate(request.createdAt)}</p>
+                                    </td>
+                                    <td className="py-3 px-4">
+                                        <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border border-indigo-100 bg-indigo-50/50 text-indigo-600 dark:bg-indigo-900/20 dark:border-indigo-800 dark:text-indigo-400">
+                                            {request.changeType}
+                                        </span>
+                                    </td>
+                                    <td className="py-3 px-4">
+                                        <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border ${request.riskLevel === 'Critical' ? 'bg-rose-50 text-rose-600 border-rose-200 dark:bg-rose-900/20 dark:border-rose-800' :
+                                            request.riskLevel === 'High' ? 'bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/20 dark:border-orange-810/30' :
+                                                'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800'
+                                            }`}>
+                                            {request.riskLevel}
+                                        </span>
+                                    </td>
+                                    <td className="py-4 px-6 text-right">
+                                        <div className="flex items-center justify-end gap-2.5">
+                                            {request.status === 'Sent to Audit' || request.status === 'Completed' ? (
+                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                    SENT
+                                                </span>
+                                            ) : (
+                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                                                    PENDING
+                                                </span>
+                                            )}
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </Modal>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-3">
                 {/* Request Trends */}
                 <div className="section-card h-[380px] p-4 animate-slide-up delay-500 overflow-hidden">
@@ -234,100 +431,6 @@ const AnalyticsPage = () => {
                 </div>
             </div>
 
-            {/* Approved Requests Table - Only for Managers and Admins */}
-            {isManagerOrAdmin && (
-                <div className="section-card animate-slide-up delay-900 mb-8 p-0 overflow-hidden">
-                    <div className="p-4 border-b-2 border-slate-100 dark:border-slate-800">
-                        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Processed Compliance Records</h2>
-                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 opacity-70">
-                            Verified and ready for audit • {approvedRequests.length} records
-                        </p>
-                    </div>
-
-                    {approvedRequests.length === 0 ? (
-                        <div className="text-center py-12">
-                            <svg className="mx-auto h-12 w-12 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            <p className="mt-4 text-slate-400 font-black uppercase tracking-widest text-[10px]">No synchronized records available</p>
-                        </div>
-                    ) : (
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead className="bg-slate-50/50 dark:bg-slate-950/20">
-                                    <tr className="border-b-2 border-slate-200 dark:border-slate-700">
-                                        <th className="text-left py-3 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Title</th>
-                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Type</th>
-                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Risk</th>
-                                        <th className="text-left py-3 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {approvedRequests.map((request, index) => (
-                                        <tr
-                                            key={request._id}
-                                            className="border-b-2 border-slate-50 dark:border-slate-900/40 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/10 transition-colors group"
-                                            style={{ animationDelay: `${index * 50}ms` }}
-                                        >
-                                            <td className="py-4 px-6">
-                                                <p className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight group-hover:text-indigo-600 transition-colors">{request.title}</p>
-                                                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter mt-0.5">{formatDate(request.createdAt)}</p>
-                                            </td>
-                                            <td className="py-3 px-4">
-                                                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 border-indigo-100 bg-indigo-50/50 text-indigo-600 dark:bg-indigo-900/20 dark:border-indigo-800 dark:text-indigo-400">
-                                                    {request.changeType}
-                                                </span>
-                                            </td>
-                                            <td className="py-5 px-4">
-                                                <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 ${request.riskLevel === 'Critical' ? 'bg-rose-50 text-rose-600 border-rose-200 dark:bg-rose-900/20 dark:border-rose-800' :
-                                                    request.riskLevel === 'High' ? 'bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/20 dark:border-orange-810/30' :
-                                                        'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800'
-                                                    }`}>
-                                                    {request.riskLevel}
-                                                </span>
-                                            </td>
-                                            <td className="py-4 px-6 text-right">
-                                                <div className="flex items-center justify-end gap-2.5">
-                                                    {user?.role === 'Admin' ? (
-                                                        /* Admin: Read-only status indicator or sent status */
-                                                        request.status === 'Sent to Audit' || request.status === 'Completed' ? (
-                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border-2 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
-                                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-                                                                SENT
-                                                            </span>
-                                                        ) : (
-                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-900/30 border-2 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
-                                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></div>
-                                                                PENDING
-                                                            </span>
-                                                        )
-                                                    ) : (
-                                                        /* Manager: Action button or sent status */
-                                                        request.status === 'Sent to Audit' || request.status === 'Completed' ? (
-                                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border-2 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-lg">
-                                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-                                                                SENT
-                                                            </span>
-                                                        ) : (
-                                                            <button
-                                                                onClick={() => handleSendToAudit(request._id)}
-                                                                disabled={loadingRequests[request._id]}
-                                                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white text-[9px] font-black uppercase tracking-widest rounded-xl border-2 border-indigo-500 shadow-premium transition-all hover:scale-105 active:scale-95"
-                                                            >
-                                                                {loadingRequests[request._id] ? 'Syncing...' : 'Send to Audit'}
-                                                            </button>
-                                                        )
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
-                </div >
-            )}
         </>
     );
 };

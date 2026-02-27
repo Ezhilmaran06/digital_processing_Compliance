@@ -129,15 +129,18 @@ const AdminDashboard = () => {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`flex items-center gap-1.5 px-4 py-2 rounded-[0.75rem] text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${activeTab === tab.id
-                            ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-lg shadow-indigo-500/10 border-2 border-slate-300 dark:border-indigo-500/40'
-                            : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-white/50 dark:hover:bg-slate-800/50'
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all duration-300 relative ${activeTab === tab.id
+                            ? 'text-indigo-600 dark:text-indigo-400'
+                            : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
                             }`}
                     >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d={tab.icon} />
                         </svg>
                         {tab.label}
+                        {activeTab === tab.id && (
+                            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full shadow-lg shadow-indigo-500/50"></span>
+                        )}
                     </button>
                 ))}
             </nav>

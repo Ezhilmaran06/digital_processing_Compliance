@@ -39,7 +39,7 @@ async function seed() {
         await Request.deleteMany({});
 
         const admin = await User.create({ name: 'Admin', email: 'admin@cf.com', role: 'Admin', password: 'password' });
-        const client = await User.create({ name: 'Vignesh', email: 'client@partner.com', role: 'Client', password: 'password' });
+        const client = await User.create({ name: 'Vignesh', email: 'client@partner.com', role: 'Auditor', password: 'password' });
         const emp = await User.create({ name: 'Emp', email: 'emp@cf.com', role: 'Employee', password: 'password' });
         const mgr = await User.create({ name: 'Mgr', email: 'mgr@cf.com', role: 'Manager', password: 'password' });
 

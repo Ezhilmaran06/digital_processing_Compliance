@@ -5,9 +5,9 @@ A complete, production-ready MERN stack application for managing change requests
 ## 🚀 Features
 
 ### Core Functionality
-- **Role-Based Authentication**: Secure login with role validation (Employee, Manager, Admin, Client)
+- **Role-Based Authentication**: Secure login with role validation (Employee, Manager, Admin, Auditor)
 - **Change Request Management**: Create, track, and manage change requests with approval workflows
-- **Approval Lifecycle**: Employee creates → Manager approves/rejects → Client views
+- **Approval Lifecycle**: Employee creates → Manager approves/rejects → Auditor views
 - **Audit Logging**: Immutable security audit trail for compliance tracking
 - **Analytics Dashboard**: Real-time system insights and metrics
 
@@ -32,7 +32,7 @@ A complete, production-ready MERN stack application for managing change requests
 - Request governance and oversight
 - Security controls
 
-#### Client Dashboard
+#### Auditor Dashboard
 - Read-only view of approved changes
 - Compliance reporting
 - Change history tracking
@@ -172,7 +172,7 @@ After running the seed script, you can log in with these test accounts:
 | Manager | sarah.mitchell@company.com | manager123 |
 | Employee | john.davis@company.com | employee123 |
 | Employee | emily.rodriguez@company.com | employee123 |
-| Client | client@partner.com | client123 |
+| Auditor | client@partner.com | client123 |
 
 ⚠️ **Important**: Remember to select the correct role when logging in!
 
@@ -252,7 +252,7 @@ After running the seed script, you can log in with these test accounts:
 - [x] Employee Dashboard
 - [x] Manager Dashboard with approval queue
 - [x] Admin Dashboard with analytics
-- [x] Client Dashboard (read-only)
+- [x] Auditor Dashboard (read-only)
 - [x] Audit Logging System
 - [x] Request CRUD operations
 - [x] Approval/Rejection workflow

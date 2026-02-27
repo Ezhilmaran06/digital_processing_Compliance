@@ -219,7 +219,7 @@ const ProfilePage = () => {
         Employee: ['from-indigo-500', 'to-violet-600'],
         Manager: ['from-blue-500', 'to-cyan-500'],
         Admin: ['from-rose-500', 'to-pink-600'],
-        Client: ['from-emerald-500', 'to-teal-500'],
+        Auditor: ['from-emerald-500', 'to-teal-500'],
     };
     const grad = roleGradient[profile?.role] || ['from-slate-500', 'to-slate-700'];
 

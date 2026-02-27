@@ -4,9 +4,9 @@ const StatusChart = ({ data, label = 'Requests' }) => {
     const COLORS = [
         '#6366f1', // Indigo Vibrant
         '#10b981', // Emerald Solid
+        '#8b5cf6', // Violet Deep
         '#f59e0b', // Amber Vivid
         '#f43f5e', // Rose Bright
-        '#8b5cf6', // Violet Deep
         '#0ea5e9', // Sky Clear
     ];
     const total = data.reduce((acc, curr) => acc + curr.value, 0);
@@ -33,13 +33,14 @@ const StatusChart = ({ data, label = 'Requests' }) => {
                         data={data}
                         cx="50%"
                         cy="50%"
-                        innerRadius={85}
-                        outerRadius={110}
-                        paddingAngle={4}
+                        innerRadius={90}
+                        outerRadius={120}
+                        paddingAngle={5}
                         dataKey="value"
                         stroke="none"
                         animationBegin={0}
                         animationDuration={1500}
+                        cornerRadius={10}
                     >
                         {data.map((entry, index) => (
                             <Cell
@@ -91,13 +92,16 @@ const StatusChart = ({ data, label = 'Requests' }) => {
                             const item = data.find(d => d.name === value);
                             const percentage = total > 0 ? ((item.value / total) * 100).toFixed(1) : 0;
                             return (
-                                <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-3 hover:text-slate-900 dark:hover:text-white transition-colors">
-                                    {value} <span className="text-slate-300 dark:text-slate-600 ml-4 border-l-2 border-slate-200 dark:border-slate-800 pl-4">{percentage}%</span>
+                                <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest ml-3 hover:text-slate-900 dark:hover:text-white transition-colors flex items-center gap-2">
+                                    {value}
+                                    <span className="text-slate-300 dark:text-slate-600 border-l border-slate-200 dark:border-slate-800 pl-2 font-bold tracking-tight">
+                                        {percentage}%
+                                    </span>
                                 </span>
                             );
                         }}
                         wrapperStyle={{
-                            paddingLeft: '30px'
+                            paddingLeft: '20px'
                         }}
                     />
                 </PieChart>

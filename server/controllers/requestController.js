@@ -57,7 +57,7 @@ export const getRequests = asyncHandler(async (req, res) => {
     if (userRole === 'employee') {
         // Employees see only their own requests
         query.createdBy = req.user._id;
-    } else if (userRole === 'client') {
+    } else if (userRole === 'auditor') {
         // Clients see approved, completed, and sent to audit requests
         query.status = { $in: ['Approved', 'Completed', 'Sent to Audit'] };
     }
@@ -92,7 +92,7 @@ export const getRequests = asyncHandler(async (req, res) => {
 
     let total = await Request.countDocuments(query);
 
-    // Let empty results be returned for Client if no approved requests exist
+    // Let empty results be returned for Auditor if no approved requests exist
     // This allows the frontend to show its own 'empty' state naturally
 
     res.json({
@@ -128,7 +128,7 @@ export const getRequest = asyncHandler(async (req, res) => {
         throw new Error('Not authorized to view this request');
     }
 
-    if (req.user.role === 'Client' && request.status !== 'Approved') {
+    if (req.user.role === 'Auditor' && request.status !== 'Approved') {
         res.status(403);
         throw new Error('Not authorized to view this request');
     }
@@ -157,17 +157,22 @@ export const updateRequest = asyncHandler(async (req, res) => {
     const isOwner = request.createdBy.toString() === req.user._id.toString();
     const isAdmin = req.user.role === 'Admin';
     const isManager = req.user.role === 'Manager';
+    const isAuditor = req.user.role === 'Auditor';
 
-    if (!isAdmin && !isManager && !isOwner) {
+    if (!isAdmin && !isManager && !isOwner && !isAuditor) {
         res.status(403);
         throw new Error('Not authorized to update this request');
     }
 
-    // Employees can only update their own pending or sent-to-audit requests
-    // Managers and Admins can update any request regardless of status
-    if (!isAdmin && !isManager && !['Pending', 'Sent to Audit'].includes(request.status)) {
+    // Role-specific constraints
+    if (isOwner && !isAdmin && !isManager && !['Pending', 'Sent to Audit'].includes(request.status)) {
         res.status(400);
         throw new Error('You can only update pending or sent to audit requests. Approved/completed requests cannot be modified.');
+    }
+
+    if (isAuditor && !isAdmin && !isManager && request.status !== 'Sent to Audit') {
+        res.status(403);
+        throw new Error('Auditors can only update requests that are sent to audit.');
     }
 
     // Update fields
@@ -182,7 +187,8 @@ export const updateRequest = asyncHandler(async (req, res) => {
         implementationPlan,
         rollbackPlan,
         impactAssessment,
-        affectedDepartments
+        affectedDepartments,
+        status
     } = req.body;
 
     // Update only provided fields
@@ -198,6 +204,18 @@ export const updateRequest = asyncHandler(async (req, res) => {
     if (impactAssessment) request.impactAssessment = impactAssessment;
     if (affectedDepartments) request.affectedDepartments = affectedDepartments;
 
+    // Status transition logic
+    if (status) {
+        // Auditors can only move 'Sent to Audit' -> 'Completed'
+        if (isAuditor && !isAdmin && !isManager) {
+            if (status !== 'Completed') {
+                res.status(400);
+                throw new Error('Auditors can only mark requests as Completed.');
+            }
+        }
+        request.status = status;
+    }
+
     await request.save();
     await request.populate('createdBy', 'name email role');
 
@@ -210,6 +228,7 @@ export const updateRequest = asyncHandler(async (req, res) => {
         userAgent: req.get('user-agent'),
         details: {
             title: request.title,
+            updatedFields: Object.keys(req.body),
         },
     });
 

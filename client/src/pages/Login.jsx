@@ -37,7 +37,7 @@ const Login = () => {
                 Employee: '/employee',
                 Manager: '/manager',
                 Admin: '/admin',
-                Client: '/client',
+                Auditor: '/auditor',
             };
 
             navigate(roleRoutes[userData.role] || '/');
@@ -122,7 +122,7 @@ const Login = () => {
                                 Select Your Role
                             </label>
                             <div className="grid grid-cols-2 gap-3">
-                                {['Employee', 'Manager', 'Admin', 'Client'].map((role) => (
+                                {['Employee', 'Manager', 'Admin', 'Auditor'].map((role) => (
                                     <label
                                         key={role}
                                         className={`flex items-center justify-center px-4 py-3 rounded-lg border-2 cursor-pointer transition-all ${formData.role === role

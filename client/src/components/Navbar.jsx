@@ -17,7 +17,7 @@ const AppNavbar = () => {
     ];
 
     // Role-based Nav Filtering
-    if (user?.role === 'Client') {
+    if (user?.role === 'Auditor') {
         navLinks = navLinks.filter(link =>
             link.name !== 'Requests' && link.name !== 'Analytics'
         );
@@ -28,7 +28,11 @@ const AppNavbar = () => {
         navLinks.splice(dashboardIdx + 1, 0, { name: 'Users', path: '/admin/users' });
     }
 
-    const isActive = (path) => location.pathname === path;
+    const isActive = (path) => {
+        const cleanCurrent = location.pathname.replace(/\/$/, '');
+        const cleanTarget = path.replace(/\/$/, '');
+        return cleanCurrent === cleanTarget;
+    };
 
     const getAvatarUrl = (path) => {
         if (!path) return null;
@@ -40,7 +44,7 @@ const AppNavbar = () => {
     };
 
     return (
-        <nav className="glass-navbar fixed top-4 left-0 right-0 mx-4 md:mx-8 px-6 py-2.5 rounded-[2rem] shadow-premium z-[100] transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(99,102,241,0.15)] ring-1 ring-white/10">
+        <nav className="glass-navbar fixed top-4 left-0 right-0 mx-4 md:mx-8 px-6 py-2.5 rounded-[2rem] shadow-premium z-[100] transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(99,102,241,0.2)] ring-1 ring-white/20 border-2 border-indigo-500/20 dark:border-indigo-400/20">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 <div className="flex items-center gap-10">
                     <Link to="/" className="flex items-center gap-3.5 group">
@@ -58,7 +62,7 @@ const AppNavbar = () => {
                                 key={link.name}
                                 to={link.path}
                                 className={`px-5 py-2.5 rounded-2xl text-[13px] font-bold tracking-wide transition-all duration-300 relative group ${isActive(link.path)
-                                    ? 'text-indigo-600 dark:text-indigo-400 bg-white/50 dark:bg-white/5'
+                                    ? 'text-indigo-600 dark:text-indigo-400'
                                     : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                                     }`}
                             >
@@ -130,7 +134,7 @@ const AppNavbar = () => {
 
             {/* Mobile menu */}
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-full inset-x-0 mt-4 mx-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-[2rem] border border-white/20 shadow-2xl p-6 animate-slide-up">
+                <div className="lg:hidden absolute top-full inset-x-0 mx-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-[2rem] border border-white/20 shadow-2xl p-6 animate-slide-up">
                     <div className="space-y-2">
                         {navLinks.map((link) => (
                             <Link

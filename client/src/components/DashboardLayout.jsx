@@ -33,7 +33,7 @@ const DashboardLayout = ({ allowedRoles = [] }) => {
                     <div className="page-bg-mesh opacity-50"></div>
                 </div>
 
-                <div className="relative z-10">
+                <div className="relative">
                     <AppNavbar />
                     <main className="max-w-[1700px] mx-auto px-4 md:px-8 pt-20 mt-6 animate-in fade-in zoom-in duration-700">
                         <Outlet />

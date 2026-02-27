@@ -22,7 +22,7 @@ export const registerSchema = Joi.object({
         'any.only': 'Passwords do not match',
         'string.empty': 'Please confirm your password',
     }),
-    role: Joi.string().valid('Employee', 'Manager', 'Admin', 'Client').required().messages({
+    role: Joi.string().valid('Employee', 'Manager', 'Admin', 'Auditor').required().messages({
         'any.only': 'Invalid role selected',
         'string.empty': 'Role is required',
     }),
@@ -60,7 +60,7 @@ export const loginSchema = Joi.object({
     password: Joi.string().required().messages({
         'string.empty': 'Password is required',
     }),
-    role: Joi.string().valid('Employee', 'Manager', 'Admin', 'Client').required().messages({
+    role: Joi.string().valid('Employee', 'Manager', 'Admin', 'Auditor').required().messages({
         'any.only': 'Invalid role selected',
         'string.empty': 'Role is required',
     }),

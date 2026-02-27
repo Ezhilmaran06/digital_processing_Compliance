@@ -5,7 +5,7 @@ import requestService from '../services/requestService';
 import statsService from '../services/statsService';
 import KPICard from '../components/KPICard';
 import StatusChart from '../components/StatusChart';
-import { Clock, CheckCircle, XCircle, AlertTriangle, ArrowRight, Activity, Calendar } from 'lucide-react';
+import { Clock, CheckCircle, CheckCircle2, XCircle, AlertTriangle, ArrowRight, Activity, Calendar } from 'lucide-react';
 import Modal from '../components/Modal';
 import { toast } from 'sonner';
 
@@ -57,6 +57,29 @@ const ManagerDashboard = () => {
         } catch (error) {
             console.error('Approve failed:', error);
             toast.error('Failed to approve request');
+        }
+    };
+
+    const handleSendToAudit = async (id) => {
+        try {
+            // Using update service to change status to 'Sent to Audit'
+            await requestService.update(id, { status: 'Sent to Audit' });
+            setRequests(prev => prev.map(r => r._id === id ? { ...r, status: 'Sent to Audit' } : r));
+            toast.success('Request successfully dispatched to Audit');
+        } catch (error) {
+            console.error('Dispatch to audit failed:', error);
+            toast.error('Failed to dispatch request to audit');
+        }
+    };
+
+    const handleSolved = async (id) => {
+        try {
+            await requestService.update(id, { status: 'Solved' });
+            setRequests(prev => prev.map(r => r._id === id ? { ...r, status: 'Solved' } : r));
+            toast.success('Request finalized as Solved');
+        } catch (error) {
+            console.error('Solved failed:', error);
+            toast.error('Failed to mark as solved');
         }
     };
 
@@ -222,6 +245,55 @@ const ManagerDashboard = () => {
                                             </div>
                                         </div>
                                     ))}
+                                </div>
+                            )}
+
+                            {/* Distribution of Approved but not yet audited */}
+                            {requests.filter(r => r.status === 'Approved').length > 0 && (
+                                <div className="mt-6">
+                                    <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Pending Audit Dispatch</h3>
+                                    <div className="space-y-2">
+                                        {requests.filter(r => r.status === 'Approved').map(request => (
+                                            <div key={request._id} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 flex justify-between items-center group">
+                                                <div>
+                                                    <p className="text-[11px] font-black text-slate-900 dark:text-white mb-1 group-hover:text-indigo-600 transition-colors uppercase">{request.title}</p>
+                                                    <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">{request._id.slice(-6).toUpperCase()} • {request.riskLevel} RISK</p>
+                                                </div>
+                                                <button
+                                                    onClick={() => handleSendToAudit(request._id)}
+                                                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg shadow-indigo-200 dark:shadow-none"
+                                                >
+                                                    Send to Audit
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Audit Completed - Final Solve */}
+                            {requests.filter(r => r.status === 'Completed').length > 0 && (
+                                <div className="mt-6 border-t border-slate-100 dark:border-slate-800 pt-6">
+                                    <h3 className="text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4" />
+                                        Audit Validated & Ready
+                                    </h3>
+                                    <div className="space-y-2">
+                                        {requests.filter(r => r.status === 'Completed').map(request => (
+                                            <div key={request._id} className="p-4 rounded-2xl bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 flex justify-between items-center group">
+                                                <div>
+                                                    <p className="text-[11px] font-black text-slate-900 dark:text-white mb-1 group-hover:text-emerald-600 transition-colors uppercase">{request.title}</p>
+                                                    <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">{request._id.slice(-6).toUpperCase()} • AUDIT PASSED</p>
+                                                </div>
+                                                <div
+                                                    className="px-4 py-2 bg-emerald-600 text-white rounded-lg text-[9px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-emerald-200 dark:shadow-none"
+                                                >
+                                                    <CheckCircle2 size={12} />
+                                                    Solved
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>

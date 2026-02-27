@@ -23,10 +23,10 @@ const simpleSeed = async () => {
         });
 
         const client = await User.create({
-            name: 'Client Partner',
+            name: 'Auditor Partner',
             email: 'client@partner.com',
-            password: 'client123',
-            role: 'Client'
+            password: 'auditor123',
+            role: 'Auditor'
         });
 
         const employee = await User.create({
