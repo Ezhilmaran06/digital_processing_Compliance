@@ -108,6 +108,9 @@ const AppNavbar = () => {
                             <div className="text-left hidden lg:block">
                                 <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">{user?.name}</p>
                                 <p className="text-[9px] uppercase tracking-[0.2em] font-black text-slate-400/80 mt-1">{user?.role}</p>
+                                {user?.role === 'Auditor' && user?.auditorType && (
+                                    <p className="text-[10px] uppercase tracking-[0.1em] font-bold text-indigo-500 dark:text-indigo-400 mt-0.5">{user.auditorType}</p>
+                                )}
                             </div>
                         </Link>
                         <button onClick={logout} className="ml-2 p-2 text-slate-400 hover:text-rose-500 transition-all hover:scale-110">
@@ -165,6 +168,9 @@ const AppNavbar = () => {
                                 <div>
                                     <p className="text-sm font-bold dark:text-white">{user?.name}</p>
                                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{user?.role}</p>
+                                    {user?.role === 'Auditor' && user?.auditorType && (
+                                        <p className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 mt-0.5">{user.auditorType}</p>
+                                    )}
                                 </div>
                             </div>
                             <button onClick={logout} className="btn-secondary p-3 rounded-xl text-rose-500">

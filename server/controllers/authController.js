@@ -70,6 +70,7 @@ export const login = asyncHandler(async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                auditorType: user.auditorType,
                 isActive: user.isActive,
                 avatar: user.avatar || null,
                 token,
@@ -112,6 +113,7 @@ export const getMe = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             role: user.role,
+            auditorType: user.auditorType,
             isActive: user.isActive,
             avatar: user.avatar,
             createdAt: user.createdAt,
@@ -148,6 +150,7 @@ export const updateMe = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (req.body.name) user.name = req.body.name;
+    if (req.body.auditorType !== undefined) user.auditorType = req.body.auditorType;
     if (req.body.email) {
         // Check if email is already taken by another user
         const emailExists = await User.findOne({ email: req.body.email, _id: { $ne: user._id } });
@@ -178,6 +181,7 @@ export const updateMe = asyncHandler(async (req, res) => {
             name: updatedUser.name,
             email: updatedUser.email,
             role: updatedUser.role,
+            auditorType: updatedUser.auditorType,
             isActive: updatedUser.isActive,
             avatar: updatedUser.avatar,
         },

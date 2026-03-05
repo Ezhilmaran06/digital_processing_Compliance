@@ -39,6 +39,11 @@ const userSchema = new mongoose.Schema(
             },
             required: [true, 'Please specify a role'],
         },
+        auditorType: {
+            type: String,
+            enum: ['Application', 'Infrastructure', 'Database', 'Network', 'Security', 'Other', ''],
+            default: '',
+        },
         department: {
             type: String,
             trim: true,

@@ -36,6 +36,7 @@ export const updateProfileSchema = Joi.object({
     email: Joi.string().email().trim().lowercase().messages({
         'string.email': 'Please provide a valid email',
     }),
+    auditorType: Joi.string().valid('Application', 'Infrastructure', 'Database', 'Network', 'Security', 'Other', '').allow(''),
 }).min(1);
 
 export const updatePasswordSchema = Joi.object({

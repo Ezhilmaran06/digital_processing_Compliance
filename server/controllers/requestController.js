@@ -58,8 +58,12 @@ export const getRequests = asyncHandler(async (req, res) => {
         // Employees see only their own requests
         query.createdBy = req.user._id;
     } else if (userRole === 'auditor') {
-        // Clients see approved, completed, and sent to audit requests
+        // Auditors see approved, completed, and sent to audit requests
         query.status = { $in: ['Approved', 'Completed', 'Sent to Audit'] };
+        // Furthermore, they only see requests matching their auditorType domain
+        if (req.user.auditorType) {
+            query.changeType = req.user.auditorType;
+        }
     }
     // Managers and Admins see all requests
 

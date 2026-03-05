@@ -13,6 +13,7 @@ const SettingsPage = () => {
         firstName: user?.name?.split(' ')[0] || '',
         lastName: user?.name?.split(' ')[1] || '',
         email: user?.email || '',
+        auditorType: user?.auditorType || '',
     });
 
     // Password State
@@ -68,7 +69,8 @@ const SettingsPage = () => {
             const name = `${profileData.firstName} ${profileData.lastName}`.trim();
             const updatedUser = await authService.updateProfile({
                 name,
-                email: profileData.email
+                email: profileData.email,
+                auditorType: profileData.auditorType,
             });
             updateUser(updatedUser);
             alert('Profile updated successfully!');
@@ -190,6 +192,30 @@ const SettingsPage = () => {
                                     required
                                 />
                             </div>
+                            {user?.role === 'Auditor' && (
+                                <div className="md:col-span-2">
+                                    <label className="block text-[10px] font-black text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-widest">Auditor Type</label>
+                                    <div className="relative">
+                                        <select
+                                            name="auditorType"
+                                            className="w-full px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-indigo-500 text-[11px] font-bold uppercase tracking-tight appearance-none cursor-pointer"
+                                            value={profileData.auditorType}
+                                            onChange={handleProfileChange}
+                                        >
+                                            <option value="">SELECT TYPE</option>
+                                            <option value="Application">APPLICATION</option>
+                                            <option value="Infrastructure">INFRASTRUCTURE</option>
+                                            <option value="Database">DATABASE</option>
+                                            <option value="Network">NETWORK</option>
+                                            <option value="Security">SECURITY</option>
+                                            <option value="Other">OTHER</option>
+                                        </select>
+                                        <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                             <div className="md:col-span-2">
                                 <label className="block text-[10px] font-black text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-widest">Email Identity</label>
                                 <input
@@ -221,6 +247,7 @@ const SettingsPage = () => {
                                         firstName: user?.name?.split(' ')[0] || '',
                                         lastName: user?.name?.split(' ')[1] || '',
                                         email: user?.email || '',
+                                        auditorType: user?.auditorType || '',
                                     });
                                 }}>Revert</button>
                                 <button
