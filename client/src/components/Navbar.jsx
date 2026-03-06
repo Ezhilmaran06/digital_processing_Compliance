@@ -2,12 +2,39 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { MessageCircle } from 'lucide-react';
+import MessagePanel from './MessagePanel';
+import messageService from '../services/messageService';
 
 const AppNavbar = () => {
     const { user, logout } = useAuth();
     const { isDark, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMessagePanelOpen, setIsMessagePanelOpen] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
     const location = useLocation();
+
+    // Poll for unread messages
+    import('react').then(({ useEffect }) => {
+        useEffect(() => {
+            if (!user) return;
+
+            const fetchUnread = async () => {
+                try {
+                    const res = await messageService.getUnreadCount();
+                    setUnreadCount(res.data.data.count);
+                } catch (error) {
+                    console.error("Failed to fetch unread count", error);
+                }
+            };
+
+            fetchUnread();
+
+            // Poll every 30 seconds
+            const interval = setInterval(fetchUnread, 30000);
+            return () => clearInterval(interval);
+        }, [user, isMessagePanelOpen]); // re-fetch when panel closes to update badge
+    });
 
     let navLinks = [
         { name: 'Dashboard', path: `/${user?.role?.toLowerCase() || ''}` },
@@ -84,6 +111,18 @@ const AppNavbar = () => {
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 3v1m0 18v1m9-9h1M4 12H3m15.364-6.364l.707-.707M6.343 17.657l-.707.707M16.243 16.243l.707.707M7.757 7.757l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" /></svg>
                         ) : (
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                        )}
+                    </button>
+
+                    <button
+                        onClick={() => setIsMessagePanelOpen(true)}
+                        className="p-3 text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-white/5 rounded-2xl transition-all relative"
+                    >
+                        <MessageCircle className="w-5 h-5" />
+                        {unreadCount > 0 && (
+                            <span className="absolute top-1.5 right-1.5 flex h-4 min-w-4 p-1 items-center justify-center rounded-full bg-rose-500 text-[9px] font-black text-white shadow-sm ring-2 ring-white dark:ring-slate-900 border border-rose-600">
+                                {unreadCount > 99 ? '99+' : unreadCount}
+                            </span>
                         )}
                     </button>
 
@@ -182,6 +221,12 @@ const AppNavbar = () => {
                     </div>
                 </div>
             )}
+
+            {/* Message Panel */}
+            <MessagePanel
+                isOpen={isMessagePanelOpen}
+                onClose={() => setIsMessagePanelOpen(false)}
+            />
         </nav>
     );
 };

@@ -17,6 +17,7 @@ import adminRoutes from './routes/admin.js';
 import managerRoutes from './routes/manager.js';
 import uploadRoutes from './routes/upload.js';
 import profileRoutes from './routes/profileRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -106,6 +107,7 @@ app.use('/api/requests', requestRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/manager', managerRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/messages', messageRoutes);
 app.use('/api', uploadRoutes);
 
 // TEMPORARY DEBUG SEED ROUTE
