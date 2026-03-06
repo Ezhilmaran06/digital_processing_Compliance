@@ -68,11 +68,11 @@ export const getProfile = asyncHandler(async (req, res) => {
  * @access  Private
  */
 export const updateProfile = asyncHandler(async (req, res) => {
-    const { name, department } = req.body;
+    const { name, department, avatar } = req.body;
 
-    if (!name && !department) {
+    if (!name && !department && !avatar) {
         res.status(400);
-        throw new Error('Please provide at least one field to update (name or department)');
+        throw new Error('Please provide at least one field to update (name, department, or avatar)');
     }
 
     const user = await User.findById(req.user._id);
@@ -84,6 +84,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
 
     if (name) user.name = name.trim();
     if (department !== undefined) user.department = department.trim();
+    if (avatar) user.avatar = avatar;
 
     await user.save();
 

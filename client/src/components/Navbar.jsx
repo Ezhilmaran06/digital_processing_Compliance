@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { MessageCircle } from 'lucide-react';
-import MessagePanel from './MessagePanel';
+import { MessagePanel } from './MessagePanel';
 import messageService from '../services/messageService';
 
 const AppNavbar = () => {
@@ -15,26 +15,24 @@ const AppNavbar = () => {
     const location = useLocation();
 
     // Poll for unread messages
-    import('react').then(({ useEffect }) => {
-        useEffect(() => {
-            if (!user) return;
+    useEffect(() => {
+        if (!user) return;
 
-            const fetchUnread = async () => {
-                try {
-                    const res = await messageService.getUnreadCount();
-                    setUnreadCount(res.data.data.count);
-                } catch (error) {
-                    console.error("Failed to fetch unread count", error);
-                }
-            };
+        const fetchUnread = async () => {
+            try {
+                const res = await messageService.getUnreadCount();
+                setUnreadCount(res.data?.count || 0);
+            } catch (error) {
+                console.error("Failed to fetch unread count", error);
+            }
+        };
 
-            fetchUnread();
+        fetchUnread();
 
-            // Poll every 30 seconds
-            const interval = setInterval(fetchUnread, 30000);
-            return () => clearInterval(interval);
-        }, [user, isMessagePanelOpen]); // re-fetch when panel closes to update badge
-    });
+        // Poll every 30 seconds
+        const interval = setInterval(fetchUnread, 30000);
+        return () => clearInterval(interval);
+    }, [user, isMessagePanelOpen]); // re-fetch when panel closes to update badge
 
     let navLinks = [
         { name: 'Dashboard', path: `/${user?.role?.toLowerCase() || ''}` },

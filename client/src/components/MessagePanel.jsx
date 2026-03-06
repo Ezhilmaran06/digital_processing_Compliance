@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import messageService from '../services/messageService';
-import { X, Send, ChevronLeft, MessageSquare, Check, RefreshCw, MessageCircle, Minus, Smile, Paperclip } from 'lucide-react';
+import { X, Send, ChevronLeft, MessageSquare, Check, RefreshCw, MessageCircle, Minus, Smile, Paperclip, Search, Camera } from 'lucide-react';
+import profileService from '../services/profileService';
 import { toast } from 'sonner';
 
 /**
  * MessagePanel - Compact Floating Chat Widget (Instagram/Messenger Style)
  */
-const MessagePanel = ({ isOpen, onClose }) => {
-    const { user } = useAuth();
+export const MessagePanel = ({ isOpen, onClose }) => {
+    const { user, updateUser } = useAuth();
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -21,6 +22,9 @@ const MessagePanel = ({ isOpen, onClose }) => {
     const [activeChatUser, setActiveChatUser] = useState(null);
     const [newMessageText, setNewMessageText] = useState('');
 
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const fileInputRef = useRef(null);
     const messagesEndRef = useRef(null);
 
     // Fetch dependencies when opened
@@ -122,9 +126,43 @@ const MessagePanel = ({ isOpen, onClose }) => {
         }
     };
 
+    const handleAvatarUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+            setLoading(true);
+            const uploadRes = await profileService.uploadFile(file);
+            const filename = uploadRes.data.filename;
+
+            const updateRes = await profileService.updateProfile({ avatar: filename });
+            if (updateRes.success) {
+                updateUser({ avatar: filename });
+                toast.success("Profile photo updated");
+                fetchMessages(); // Refresh messages to show new avatar
+            }
+        } catch (error) {
+            console.error("Failed to upload avatar:", error);
+            toast.error("Failed to update profile photo");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getAvatarUrl = (path) => {
+        if (!path) return null;
+        if (path.startsWith('http')) return path;
+        const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '').replace(/\/$/, '') || '';
+        const cleanPath = path.startsWith('/') ? path : `/${path}`;
+        const timestamp = new Date().getTime();
+        return `${baseUrl}${cleanPath}?t=${timestamp}`;
+    };
+
     if (!isOpen) return null;
 
-    const contacts = getContactList();
+    const contacts = getContactList().filter(u =>
+        u.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     // Filter messages for the currently selected chat user
     const activeChatHistory = activeChatUser
@@ -152,11 +190,28 @@ const MessagePanel = ({ isOpen, onClose }) => {
                             <ChevronLeft className="w-5 h-5" />
                         </button>
                     ) : (
-                        <div className="relative">
-                            <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold">
-                                <MessageCircle className="w-4 h-4" />
+                        <div className="relative group/avatar">
+                            <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold overflow-hidden">
+                                {user?.avatar ? (
+                                    <img
+                                        src={getAvatarUrl(user.avatar)}
+                                        alt={user.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <MessageCircle className="w-4 h-4" />
+                                )}
                             </div>
                             <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+
+                            {/* Avatar Edit Overlay */}
+                            <button
+                                onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
+                                className="absolute inset-0 bg-black/40 rounded-xl opacity-0 group-hover/avatar:opacity-100 transition-opacity flex items-center justify-center text-white"
+                                title="Change profile photo"
+                            >
+                                <Camera className="w-4 h-4" />
+                            </button>
                         </div>
                     )}
 
@@ -176,6 +231,14 @@ const MessagePanel = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="flex items-center gap-1">
+                    {!activeChatUser && !isMinimized && (
+                        <button
+                            onClick={(e) => { e.stopPropagation(); setIsSearchOpen(!isSearchOpen); if (isSearchOpen) setSearchQuery(''); }}
+                            className={`p-2 rounded-xl transition-colors ${isSearchOpen ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400'}`}
+                        >
+                            <Search className="w-4 h-4" />
+                        </button>
+                    )}
                     {!isMinimized && (
                         <button onClick={(e) => { e.stopPropagation(); setIsMinimized(true); }} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-400 transition-colors">
                             <Minus className="w-4 h-4 stroke-[2.5]" />
@@ -190,6 +253,31 @@ const MessagePanel = ({ isOpen, onClose }) => {
             {/* -------------------- BODY (Contacts vs Chat) -------------------- */}
             {!isMinimized && (
                 <div className="flex flex-col flex-1 overflow-hidden relative bg-slate-50/50 dark:bg-slate-900/50">
+
+                    {/* Search Bar Overlay */}
+                    {isSearchOpen && !activeChatUser && (
+                        <div className="px-4 py-2 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 animate-in slide-in-from-top duration-300">
+                            <div className="relative">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Search contacts..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    autoFocus
+                                    className="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-xl text-xs focus:ring-2 focus:ring-indigo-500/20 dark:text-white placeholder-slate-400 font-medium"
+                                />
+                                {searchQuery && (
+                                    <button
+                                        onClick={() => setSearchQuery('')}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors"
+                                    >
+                                        <X className="w-3 h-3 text-slate-400" />
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    )}
 
                     {!activeChatUser ? (
                         /* --- CONTACT LIST VIEW --- */
@@ -233,8 +321,16 @@ const MessagePanel = ({ isOpen, onClose }) => {
                                             >
                                                 <div className="flex items-center gap-3 overflow-hidden">
                                                     <div className="relative shrink-0">
-                                                        <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-black text-sm">
-                                                            {contact.name.charAt(0)}
+                                                        <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-black text-sm overflow-hidden border border-indigo-100 dark:border-indigo-500/20">
+                                                            {contact.avatar ? (
+                                                                <img
+                                                                    src={getAvatarUrl(contact.avatar)}
+                                                                    alt={contact.name}
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                            ) : (
+                                                                contact.name.charAt(0)
+                                                            )}
                                                         </div>
                                                         {unreadCount > 0 && (
                                                             <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 border-2 border-white dark:border-slate-900 rounded-full flex items-center justify-center text-[8px] font-black text-white">
@@ -344,6 +440,15 @@ const MessagePanel = ({ isOpen, onClose }) => {
                     )}
                 </div>
             )}
+
+            {/* Hidden File Input for Avatar */}
+            <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept="image/*"
+                onChange={handleAvatarUpload}
+            />
         </div>
     );
 };
