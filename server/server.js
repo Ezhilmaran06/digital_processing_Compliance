@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -82,13 +83,8 @@ app.use('/uploads', (req, res, next) => {
 }, express.static(path.join(__dirname, 'uploads')));
 
 /**
- * Global Request Logger (Diagnostic)
+ * API Routes
  */
-app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
-    next();
-});
-
 // Infrastructure Verification Route
 app.get('/api/verify-server', (req, res) => res.json({
     success: true,
@@ -96,9 +92,6 @@ app.get('/api/verify-server', (req, res) => res.json({
     timestamp: new Date().toISOString()
 }));
 
-/**
- * API Routes
- */
 // Diagnostic Route
 app.get('/api/auth/ping', (req, res) => res.json({ success: true, message: 'Auth ping ok' }));
 
@@ -109,6 +102,16 @@ app.use('/api/manager', managerRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api', uploadRoutes);
+
+import Message from './models/ChatMessage.js';
+app.get('/api/schema-check', (req, res) => {
+    res.json({
+        activeModel: Message.modelName,
+        paths: Object.keys(Message.schema.paths),
+        env: process.env.NODE_ENV,
+        db: mongoose.connection.name
+    });
+});
 
 // TEMPORARY DEBUG SEED ROUTE
 app.get('/api/debug/force-seed', async (req, res) => {
@@ -228,4 +231,4 @@ process.on('unhandledRejection', (err) => {
 
 
 
-// Server updated for avatar debugging: 2026-02-21 11:55:00
+// Server updated for ChatMessage collection switch: 2026-03-13 10:05:00

@@ -1,21 +1,16 @@
 import asyncHandler from 'express-async-handler';
-import Message from '../models/Message.js';
+import Message from '../models/ChatMessage.js';
 import User from '../models/User.js';
+import fs from 'fs';
 
 /**
  * @desc    Send a new message
  * @route   POST /api/messages
- * @access  Private (Manager, Auditor)
+ * @access  Private (Manager, Auditor, Admin)
  */
 export const sendMessage = asyncHandler(async (req, res) => {
     const { receiverId, message } = req.body;
     const sender = req.user;
-
-    // Reject employees completely
-    if (sender.role === 'Employee') {
-        res.status(403);
-        throw new Error('Employees cannot send messages.');
-    }
 
     // Verify Receiver
     const receiver = await User.findById(receiverId);
@@ -24,28 +19,42 @@ export const sendMessage = asyncHandler(async (req, res) => {
         throw new Error('Message recipient not found.');
     }
 
-    // Auditor checks: can ONLY send to Manager
-    if (sender.role === 'Auditor' && receiver.role !== 'Manager') {
+    // Auditors can send to Managers and Admins
+    if (sender.role === 'Auditor' && !['Manager', 'Admin'].includes(receiver.role)) {
         res.status(403);
-        throw new Error('Auditors can only send messages to Managers.');
+        throw new Error('Auditors can only send messages to Managers or Admins.');
     }
 
-    // Manager checks: can send to Auditor or Employee (or other managers technically, but prompt specified employee/auditor)
-    // No specific block needed for manager sending.
+    // Admins can send to anyone
+    // No explicit restriction needed for Admin unless specified otherwise.
 
-    // Create message
-    const newMessage = await Message.create({
-        senderRole: sender.role,
-        receiverRole: receiver.role,
-        senderId: sender._id,
-        receiverId: receiver._id,
-        message,
-    });
 
-    res.status(201).json({
-        success: true,
-        data: newMessage,
-    });
+    const s_role = sender.role.charAt(0).toUpperCase() + sender.role.slice(1).toLowerCase();
+    const r_role = receiver.role.charAt(0).toUpperCase() + receiver.role.slice(1).toLowerCase();
+
+    console.log(`[CHAT] SENDING MESSAGE: ${s_role} -> ${r_role}`);
+
+    try {
+        const newMessage = await Message.create({
+            senderRole: s_role,
+            receiverRole: r_role,
+            senderId: sender._id,
+            receiverId: receiver._id,
+            message,
+        });
+
+        res.status(201).json({
+            success: true,
+            data: newMessage,
+        });
+    } catch (error) {
+        console.error('❌ MESSAGE CREATE ERROR:', error.message);
+        if (error.name === 'ValidationError') {
+            console.error('Validation Details:', JSON.stringify(error.errors, null, 2));
+        }
+        res.status(400);
+        throw new Error(`Message delivery failed: ${error.message}`);
+    }
 });
 
 /**
@@ -55,7 +64,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
  */
 export const getMessages = asyncHandler(async (req, res) => {
     // If user is Employee: only show messages WHERE receiverId = currentUser
-    // If user is Auditor: show messages WHERE receiverId = currentUser OR senderId = currentUser
+    // If user is Auditor/Admin: show messages WHERE receiverId = currentUser OR senderId = currentUser
     // If user is Manager: show all messages WHERE receiverId = currentUser OR senderId = currentUser, OR just show all messages for oversight.
 
     let query = {};
@@ -88,16 +97,25 @@ export const getMessages = asyncHandler(async (req, res) => {
  * @access  Private
  */
 export const getMessageRecipients = asyncHandler(async (req, res) => {
-    // Only Managers need to list users to send to (Employees & Auditors)
-    if (req.user.role !== 'Manager') {
+    // Only Managers and Admins can bulk query recipients
+    if (req.user.role !== 'Manager' && req.user.role !== 'Admin') {
         res.status(403);
-        throw new Error('Only managers can bulk query recipients');
+        throw new Error('Not authorized to query recipients');
+    }
+
+    let roles = [];
+    if (req.user.role === 'Manager') {
+        roles = ['Employee', 'Auditor', 'Admin'];
+    } else if (req.user.role === 'Admin') {
+        roles = ['Manager'];
     }
 
     const users = await User.find({
-        role: { $in: ['Employee', 'Auditor'] },
-        isActive: true
+        role: { $in: roles },
+        _id: { $ne: req.user._id }
     }).select('name role email avatar auditorType department');
+
+    console.log(`Found ${users.length} potential recipients for ${req.user.name} (${req.user.role})`);
 
     res.status(200).json({
         success: true,

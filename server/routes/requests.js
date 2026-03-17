@@ -8,6 +8,7 @@ import {
     rejectRequest,
     deleteRequest,
     getRequestStats,
+    submitFeedback,
 } from '../controllers/requestController.js';
 import { createRequestSchema, updateRequestSchema, validate } from '../validations/requestValidation.js';
 import { protect } from '../middleware/auth.js';
@@ -27,6 +28,9 @@ router.get('/', protect, getRequests);
 
 // Create new request (Employee, Manager, Admin can create)
 router.post('/', protect, isEmployee, validate(createRequestSchema), createRequest);
+
+// Submit feedback (Creator of the request only)
+router.post('/:id/feedback', protect, submitFeedback);
 
 // Update request (Users can update their own pending requests)
 router.put('/:id', protect, validate(updateRequestSchema), updateRequest);

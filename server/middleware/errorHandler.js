@@ -37,6 +37,11 @@ const errorHandler = (err, req, res, next) => {
         statusCode = 401;
     }
 
+    process.stdout.write(`\n[ERROR HANDLER] Status: ${statusCode} | Message: ${message}\n`);
+    if (statusCode === 400) {
+        console.error('[DEBUG 400 ERROR DETAILS]', err);
+    }
+
     res.status(statusCode).json({
         success: false,
         message,

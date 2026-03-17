@@ -38,6 +38,14 @@ const CreateRequestPage = () => {
             const response = await requestService.getById(id);
             const request = response.data;
 
+            // Block editing if finalized or in audit
+            const status = request.status?.toLowerCase();
+            if (['completed', 'sent to audit', 'approved'].includes(status)) {
+                toast.error('This request is finalized and cannot be edited.');
+                navigate('/requests');
+                return;
+            }
+
             // Parse dates
             const startDate = new Date(request.plannedStartDate);
             const endDate = new Date(request.plannedEndDate);

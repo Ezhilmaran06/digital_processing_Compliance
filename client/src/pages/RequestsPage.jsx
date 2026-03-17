@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, Edit, Trash2, Check, X, Search, Filter, AlertTriangle, Calendar, FileText } from 'lucide-react';
+import { Eye, Edit, Trash2, Check, X, Search, Filter, AlertTriangle, Calendar, FileText, Star, MessageSquare } from 'lucide-react';
 import requestService from '../services/requestService';
 import { useAuth } from '../context/AuthContext';
 import Modal from '../components/Modal';
+import FeedbackModal from '../components/FeedbackModal';
 import { toast } from 'sonner';
 
 const RequestsPage = () => {
@@ -23,18 +24,20 @@ const RequestsPage = () => {
     const [rejectionReason, setRejectionReason] = useState('');
     const [editFormData, setEditFormData] = useState({});
     const [editLoading, setEditLoading] = useState(false);
+    const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+
+    const loadRequests = async () => {
+        try {
+            const response = await requestService.getAll();
+            setRequests(response.data || []);
+        } catch (error) {
+            console.error('Failed to load requests:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const loadRequests = async () => {
-            try {
-                const response = await requestService.getAll();
-                setRequests(response.data || []);
-            } catch (error) {
-                console.error('Failed to load requests:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
         loadRequests();
     }, []);
 
@@ -474,13 +477,38 @@ const RequestsPage = () => {
                                                     </div>
                                                 )}
 
-                                                <button
-                                                    onClick={() => openEditModal(request)}
-                                                    className="p-2 bg-amber-50 text-amber-600 border-2 border-amber-500/50 rounded-xl hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-500/30 transition-all shadow-sm"
-                                                    title="Edit Change"
-                                                >
-                                                    <Edit size={16} strokeWidth={2.5} />
-                                                </button>
+                                                {((user?.role === 'Employee' || hasAnyRole(['Manager', 'Auditor'])) && request.status?.toLowerCase() === 'completed') && (
+                                                    <button
+                                                        onClick={() => {
+                                                            setSelectedRequest(request);
+                                                            setFeedbackModalOpen(true);
+                                                        }}
+                                                        className={`p-2 bg-amber-50 text-amber-600 border-2 border-amber-400/50 rounded-xl hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-400/30 transition-all shadow-sm ${user?.role === 'Employee' ? 'animate-pulse' : ''}`}
+                                                        title={user?.role === 'Employee' ? "Submit Feedback" : "View Feedback"}
+                                                    >
+                                                        <Star size={16} strokeWidth={2.5} className={user?.role === 'Employee' ? "fill-amber-600/20" : ""} />
+                                                    </button>
+                                                )}
+
+                                                {((hasAnyRole(['Manager'])) || (user?.role === 'Employee' && isCreator(request))) && (
+                                                    <button
+                                                        onClick={() => {
+                                                            const finalized = ['completed', 'approved', 'sent to audit'].includes(request.status?.toLowerCase());
+                                                            if (finalized) {
+                                                                toast.error('This request is finalized and cannot be edited.');
+                                                                return;
+                                                            }
+                                                            openEditModal(request);
+                                                        }}
+                                                        className={`p-2 rounded-xl transition-all shadow-sm border-2 ${['completed', 'approved', 'sent to audit'].includes(request.status?.toLowerCase())
+                                                            ? 'bg-slate-100/50 text-slate-500 border-slate-200 cursor-not-allowed dark:bg-slate-900/40 dark:text-slate-500 dark:border-slate-800'
+                                                            : 'bg-amber-50 text-amber-600 border-amber-500/50 hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-500/30'
+                                                            }`}
+                                                        title={['completed', 'approved', 'sent to audit'].includes(request.status?.toLowerCase()) ? "Status Finalized" : "Edit Change"}
+                                                    >
+                                                        <Edit size={16} strokeWidth={2.5} />
+                                                    </button>
+                                                )}
 
                                                 <button
                                                     onClick={() => openViewModal(request)}
@@ -597,6 +625,44 @@ const RequestsPage = () => {
                                 </p>
                             </div>
                         </div>
+
+                        {/* Feedback Section */}
+                        {selectedRequest.feedback && selectedRequest.feedback.rating && (
+                            <div className="p-5 rounded-3xl bg-amber-50 dark:bg-amber-900/10 border-2 border-amber-500/20 shadow-sm relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-8 bg-amber-500/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+                                <div className="relative z-10 space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <p className="text-[10px] font-black text-amber-600 dark:text-amber-400 uppercase tracking-widest flex items-center gap-2">
+                                            <Star className="w-3.5 h-3.5 fill-amber-500/20" />
+                                            User Review & Feedback
+                                        </p>
+                                        <div className="flex items-center gap-1 bg-white dark:bg-slate-800 px-2 py-1 rounded-lg border border-amber-200 dark:border-amber-800 shadow-sm">
+                                            <span className="text-xs font-black text-amber-600 dark:text-amber-400">{selectedRequest.feedback.rating} / 5</span>
+                                            <Star size={12} className="text-amber-500 fill-amber-500" />
+                                        </div>
+                                    </div>
+
+                                    {selectedRequest.feedback.note && (
+                                        <div className="bg-white/80 dark:bg-black/20 backdrop-blur-sm p-4 rounded-2xl border border-white dark:border-slate-800">
+                                            <p className="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2 border-b border-slate-100 dark:border-slate-800 pb-2 flex items-center gap-1.5 uppercase tracking-tight">
+                                                <MessageSquare className="w-3 h-3" />
+                                                Reviewer Comments
+                                            </p>
+                                            <p className="text-sm font-bold text-slate-700 dark:text-slate-300 leading-relaxed italic">
+                                                "{selectedRequest.feedback.note}"
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    {selectedRequest.feedback.submittedAt && (
+                                        <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 flex items-center gap-1 mt-1">
+                                            <Calendar className="w-3 h-3" />
+                                            Submitted on {new Date(selectedRequest.feedback.submittedAt).toLocaleString()}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Implementation Plan */}
                         {selectedRequest.implementationPlan && (
@@ -929,6 +995,16 @@ const RequestsPage = () => {
                     </div>
                 </div>
             </Modal>
+
+            <FeedbackModal
+                isOpen={feedbackModalOpen}
+                onClose={() => setFeedbackModalOpen(false)}
+                requestId={selectedRequest?._id}
+                requestTitle={selectedRequest?.title}
+                existingFeedback={selectedRequest?.feedback}
+                readOnly={user?.role !== 'Employee'}
+                onSubmitSuccess={loadRequests}
+            />
         </main>
     );
 };

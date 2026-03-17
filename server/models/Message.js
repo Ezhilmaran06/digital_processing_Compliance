@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
 
+console.log('🚀 [MESSAGE MODEL] RELOADING FILE - NO ENUMS MODE');
+
 const messageSchema = new mongoose.Schema(
     {
-        senderRole: {
+        sender_role: {
             type: String,
             required: true,
-            enum: ['Manager', 'Employee', 'Auditor'],
         },
-        receiverRole: {
+        receiver_role: {
             type: String,
             required: true,
-            enum: ['Manager', 'Employee', 'Auditor'],
         },
         senderId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -42,6 +42,14 @@ const messageSchema = new mongoose.Schema(
 messageSchema.index({ receiverId: 1, read: 1 });
 messageSchema.index({ senderId: 1, receiverId: 1 });
 
-const Message = mongoose.model('Message', messageSchema);
+// Force clear the model from cache to ensure schema updates take effect
+if (mongoose.models.Message) {
+    console.log('🔄 Deleting existing Message model from cache...');
+    delete mongoose.models.Message;
+}
+
+console.log('📦 Initializing Message model with roles: Employee, Manager, Auditor, Admin');
+console.log('📦 Initializing ChatMessage model (Fresh Schema)');
+const Message = mongoose.model('ChatMessage', messageSchema);
 
 export default Message;

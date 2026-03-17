@@ -92,6 +92,27 @@ const requestSchema = new mongoose.Schema(
             type: String,
             maxlength: [1000, 'Rejection reason cannot exceed 1000 characters'],
         },
+        feedback: {
+            rating: {
+                type: Number,
+                min: 1,
+                max: 5,
+            },
+            note: {
+                type: String,
+                maxlength: [500, 'Feedback note cannot exceed 500 characters'],
+            },
+            submittedAt: {
+                type: Date,
+            },
+            submittedBy: {
+                type: String,
+            },
+            submittedByUserId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        },
     },
     {
         timestamps: true,

@@ -82,6 +82,13 @@ const requestService = {
         });
         return response;
     },
+    /**
+     * Submit feedback for a completed request
+     */
+    submitFeedback: async (id, rating, note) => {
+        const response = await api.post(`/requests/${id}/feedback`, { rating, note });
+        return response;
+    },
 };
 
 export default requestService;

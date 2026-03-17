@@ -484,3 +484,59 @@ export const getRequestStats = asyncHandler(async (req, res) => {
         data: statsData
     });
 });
+
+/**
+ * @desc    Submit feedback for a completed request
+ * @route   POST /api/requests/:id/feedback
+ * @access  Private (Creator of the request only)
+ */
+export const submitFeedback = asyncHandler(async (req, res) => {
+    const { rating, note } = req.body;
+
+    if (!rating) {
+        res.status(400);
+        throw new Error('Please provide a rating');
+    }
+
+    const request = await Request.findById(req.params.id);
+
+    if (!request) {
+        res.status(404);
+        throw new Error('Request not found');
+    }
+
+    // Role Enforcement: Only the creator (Employee) can submit feedback
+    if (request.createdBy.toString() !== req.user._id.toString()) {
+        res.status(403);
+        throw new Error('Not authorized. Only the creator of the request can submit feedback.');
+    }
+
+    // Status Enforcement: Only Completed requests can have feedback
+    if (request.status?.toLowerCase() !== 'completed') {
+        res.status(400);
+        throw new Error('Feedback can only be submitted for completed requests.');
+    }
+
+    // Prevent duplicate feedback
+    if (request.feedback && request.feedback.rating) {
+        res.status(400);
+        throw new Error('Feedback has already been submitted for this request.');
+    }
+
+    request.feedback = {
+        rating,
+        note,
+        submittedAt: new Date(),
+        submittedBy: req.user.name,
+        submittedByUserId: req.user._id,
+    };
+
+    await request.save();
+
+    res.json({
+        success: true,
+        message: 'Feedback submitted successfully',
+        data: request.feedback,
+    });
+});
+
