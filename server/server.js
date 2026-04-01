@@ -11,6 +11,9 @@ import { fileURLToPath } from 'url';
 import connectDB from './config/db.js';
 import errorHandler, { notFound } from './middleware/errorHandler.js';
 
+import http from 'http';
+import { initIo } from './socket.js';
+
 // Import routes
 import authRoutes from './routes/auth.js';
 import requestRoutes from './routes/requests.js';
@@ -32,6 +35,14 @@ await connectDB();
 
 // Initialize Express app
 const app = express();
+
+const server = http.createServer(app);
+
+// Initialize Socket.io
+initIo(server, {
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    credentials: true,
+});
 
 /**
  * Security Middleware
@@ -214,8 +225,8 @@ app.use(errorHandler);
  */
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+server.listen(PORT, () => {
+    console.log(`🚀 Server & Socket.IO running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
 
 // Handle unhandled promise rejections

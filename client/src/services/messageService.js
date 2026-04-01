@@ -34,10 +34,13 @@ const messageService = {
     },
 
     /**
-     * Send a new message to a specific user
+     * Send a new message to a specific user or group
      */
-    sendMessage: async (receiverId, message) => {
-        const response = await api.post('/messages', { receiverId, message });
+    sendMessage: async (receiverId, groupId, message) => {
+        const payload = { message };
+        if (receiverId) payload.receiverId = receiverId;
+        if (groupId) payload.groupId = groupId;
+        const response = await api.post('/messages', payload);
         return response;
     },
 };

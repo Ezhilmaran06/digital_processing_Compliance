@@ -4,13 +4,11 @@ const chatMessageSchema = new mongoose.Schema(
     {
         senderRole: {
             type: String,
-            required: true,
-            // NO ENUM HERE
+            required: false,
         },
         receiverRole: {
             type: String,
-            required: true,
-            // NO ENUM HERE
+            required: false,
         },
         senderId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -20,7 +18,14 @@ const chatMessageSchema = new mongoose.Schema(
         receiverId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: true,
+            default: null,
+            required: false,
+        },
+        groupId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Group',
+            default: null,
+            required: false,
         },
         message: {
             type: String,

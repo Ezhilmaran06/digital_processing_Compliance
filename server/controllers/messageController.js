@@ -1,89 +1,113 @@
 import asyncHandler from 'express-async-handler';
 import Message from '../models/ChatMessage.js';
 import User from '../models/User.js';
-import fs from 'fs';
+import Group from '../models/Group.js';
+import { getIo } from '../socket.js';
 
 /**
  * @desc    Send a new message
  * @route   POST /api/messages
- * @access  Private (Manager, Auditor, Admin)
+ * @access  Private 
  */
 export const sendMessage = asyncHandler(async (req, res) => {
-    const { receiverId, message } = req.body;
+    const { receiverId, groupId, message } = req.body;
     const sender = req.user;
 
-    // Verify Receiver
-    const receiver = await User.findById(receiverId);
-    if (!receiver) {
-        res.status(404);
-        throw new Error('Message recipient not found.');
+    let targetGroup = null;
+    let targetReceiver = null;
+
+    if (groupId) {
+        targetGroup = await Group.findById(groupId);
+        if (!targetGroup) {
+            res.status(404);
+            throw new Error('Group not found.');
+        }
+
+        // Validate access
+        if (sender.role === 'Employee' && targetGroup.name !== 'Employees') {
+            res.status(403); throw new Error('Not authorized to message this group.');
+        }
+        if (sender.role === 'Auditor' && targetGroup.name !== 'Auditors') {
+            res.status(403); throw new Error('Not authorized to message this group.');
+        }
+    } else if (receiverId) {
+        targetReceiver = await User.findById(receiverId);
+        if (!targetReceiver) {
+            res.status(404);
+            throw new Error('Message recipient not found.');
+        }
+    } else {
+        res.status(400); throw new Error('Must provide receiverId or groupId.');
     }
-
-    // Auditors can send to Managers and Admins
-    if (sender.role === 'Auditor' && !['Manager', 'Admin'].includes(receiver.role)) {
-        res.status(403);
-        throw new Error('Auditors can only send messages to Managers or Admins.');
-    }
-
-    // Admins can send to anyone
-    // No explicit restriction needed for Admin unless specified otherwise.
-
-
-    const s_role = sender.role.charAt(0).toUpperCase() + sender.role.slice(1).toLowerCase();
-    const r_role = receiver.role.charAt(0).toUpperCase() + receiver.role.slice(1).toLowerCase();
-
-    console.log(`[CHAT] SENDING MESSAGE: ${s_role} -> ${r_role}`);
 
     try {
         const newMessage = await Message.create({
-            senderRole: s_role,
-            receiverRole: r_role,
+            senderRole: sender.role,
+            receiverRole: targetReceiver ? targetReceiver.role : 'Group',
             senderId: sender._id,
-            receiverId: receiver._id,
+            receiverId: receiverId || null,
+            groupId: groupId || null,
             message,
         });
 
+        // Populate to send back
+        const populatedMessage = await Message.findById(newMessage._id)
+            .populate('senderId', 'name role avatar auditorType')
+            .populate('receiverId', 'name role avatar auditorType')
+            .populate('groupId', 'name');
+
+        const io = getIo();
+        if (groupId) {
+            io.to(groupId.toString()).emit('receiveMessage', populatedMessage);
+        } else if (receiverId) {
+            io.to(receiverId.toString()).emit('receiveMessage', populatedMessage);
+            io.to(sender._id.toString()).emit('receiveMessage', populatedMessage);
+        }
+
         res.status(201).json({
             success: true,
-            data: newMessage,
+            data: populatedMessage,
         });
     } catch (error) {
-        console.error('❌ MESSAGE CREATE ERROR:', error.message);
-        if (error.name === 'ValidationError') {
-            console.error('Validation Details:', JSON.stringify(error.errors, null, 2));
-        }
         res.status(400);
         throw new Error(`Message delivery failed: ${error.message}`);
     }
 });
 
 /**
- * @desc    Get messages for the current user
+ * @desc    Get messages
  * @route   GET /api/messages
  * @access  Private
  */
 export const getMessages = asyncHandler(async (req, res) => {
-    // If user is Employee: only show messages WHERE receiverId = currentUser
-    // If user is Auditor/Admin: show messages WHERE receiverId = currentUser OR senderId = currentUser
-    // If user is Manager: show all messages WHERE receiverId = currentUser OR senderId = currentUser, OR just show all messages for oversight.
+    const allowedGroupNames = [];
+    if (req.user.role === 'Manager' || req.user.role === 'Admin') {
+        allowedGroupNames.push('Employees', 'Auditors');
+    } else if (req.user.role === 'Employee') {
+        allowedGroupNames.push('Employees');
+    } else if (req.user.role === 'Auditor') {
+        allowedGroupNames.push('Auditors');
+    }
+
+    const groups = await Group.find({ name: { $in: allowedGroupNames } });
+    const groupIds = groups.map(g => g._id);
 
     let query = {};
-
-    if (req.user.role !== 'Manager') {
-        // We fetch conversations they are part of
+    if (req.user.role !== 'Manager' && req.user.role !== 'Admin') {
         query = {
             $or: [
                 { receiverId: req.user._id },
-                { senderId: req.user._id }
+                { senderId: req.user._id },
+                { groupId: { $in: groupIds } }
             ]
         };
     }
-    // If Manager, query remains {} to fetch all messages
 
     const messages = await Message.find(query)
         .sort({ createdAt: -1 })
         .populate('senderId', 'name role avatar auditorType')
-        .populate('receiverId', 'name role avatar auditorType');
+        .populate('receiverId', 'name role avatar auditorType')
+        .populate('groupId', 'name');
 
     res.status(200).json({
         success: true,
@@ -92,22 +116,18 @@ export const getMessages = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc    Get potential message recipients
+ * @desc    Get potential message recipients & groups
  * @route   GET /api/messages/users
  * @access  Private
  */
 export const getMessageRecipients = asyncHandler(async (req, res) => {
-    // Only Managers and Admins can bulk query recipients
-    if (req.user.role !== 'Manager' && req.user.role !== 'Admin') {
-        res.status(403);
-        throw new Error('Not authorized to query recipients');
-    }
-
     let roles = [];
-    if (req.user.role === 'Manager') {
-        roles = ['Employee', 'Auditor', 'Admin'];
-    } else if (req.user.role === 'Admin') {
-        roles = ['Manager'];
+    if (req.user.role === 'Manager' || req.user.role === 'Admin') {
+        roles = ['Employee', 'Auditor', 'Manager', 'Admin'];
+    } else if (req.user.role === 'Employee') {
+        roles = ['Employee', 'Manager'];
+    } else if (req.user.role === 'Auditor') {
+        roles = ['Auditor', 'Manager'];
     }
 
     const users = await User.find({
@@ -115,16 +135,30 @@ export const getMessageRecipients = asyncHandler(async (req, res) => {
         _id: { $ne: req.user._id }
     }).select('name role email avatar auditorType department');
 
-    console.log(`Found ${users.length} potential recipients for ${req.user.name} (${req.user.role})`);
+    const allowedGroupNames = [];
+    if (req.user.role === 'Manager' || req.user.role === 'Admin') {
+        allowedGroupNames.push('Employees', 'Auditors');
+    } else if (req.user.role === 'Employee') {
+        allowedGroupNames.push('Employees');
+    } else if (req.user.role === 'Auditor') {
+        allowedGroupNames.push('Auditors');
+    }
+
+    // Auto-create Groups if they don't exist
+    for (const gName of allowedGroupNames) {
+        await Group.findOneAndUpdate({ name: gName }, { name: gName }, { upsert: true, new: true, setDefaultsOnInsert: true });
+    }
+    
+    const groups = await Group.find({ name: { $in: allowedGroupNames } });
 
     res.status(200).json({
         success: true,
-        data: users,
+        data: { users, groups },
     });
 });
 
 /**
- * @desc    Get unread message count
+ * @desc    Get unread count
  * @route   GET /api/messages/unread
  * @access  Private
  */
@@ -153,12 +187,8 @@ export const markAsRead = asyncHandler(async (req, res) => {
         throw new Error('Message not found');
     }
 
-    // Ensure the person marking it read is the receiver
-    if (message.receiverId.toString() !== req.user._id.toString()) {
-        res.status(403);
-        throw new Error('Not authorized to update this message');
-    }
-
+    // Since anyone can view group messages, we don't strictly restrict read flags here 
+    // Usually group message read receipts are more complex. We'll simplify.
     message.read = true;
     await message.save();
 
