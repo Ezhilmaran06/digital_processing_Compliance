@@ -72,6 +72,7 @@ export const login = asyncHandler(async (req, res) => {
                 role: user.role,
                 auditorType: user.auditorType,
                 isActive: user.isActive,
+                forcePasswordReset: user.forcePasswordReset,
                 avatar: user.avatar || null,
                 token,
             },
@@ -203,6 +204,7 @@ export const updatePassword = asyncHandler(async (req, res) => {
     }
 
     user.password = newPassword;
+    user.forcePasswordReset = false;
     await user.save();
 
     // Create audit log

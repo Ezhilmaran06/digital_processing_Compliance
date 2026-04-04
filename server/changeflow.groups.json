@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "69ccd9f38820c1e65850fcb9"
+  },
+  "name": "Employees",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-04-01T08:40:19.049Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:55:30.976Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69ccd9f38820c1e65850fcba"
+  },
+  "name": "Auditors",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-04-01T08:40:19.064Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:55:30.997Z"
+  }
+}]

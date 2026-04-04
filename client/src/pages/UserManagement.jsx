@@ -1,27 +1,13 @@
-import { useState, useEffect } from 'react';
-import adminService from '../services/adminService';
+import React, { useState, useEffect } from 'react';
+import { 
+    Users, Search, UserPlus, Shield, ShieldCheck, Mail, Lock, Eye, EyeOff, Trash2, 
+    UserX, UserCheck, ShieldAlert, Building2, Calendar, Clock, BadgeCheck, Fingerprint 
+} from 'lucide-react';
 import { toast } from 'sonner';
-import { Users, UserX, UserCheck, Trash2, Search, Mail, Shield, BadgeCheck, Clock, ShieldCheck, Fingerprint, Calendar, Building2, Eye, UserPlus, Lock, ShieldAlert } from 'lucide-react';
+import adminService from '../services/adminService';
 import Modal from '../components/Modal';
-
 const UserManagement = () => {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [roleFilter, setRoleFilter] = useState('');
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
-    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [regLoading, setRegLoading] = useState(false);
-    const [regFormData, setRegFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        role: 'Employee',
-        notificationEmail: ''
-    });
-
+    // Utility to construct secure avatar URL with cache busting
     const getAvatarUrl = (path) => {
         if (!path) return null;
         if (path.startsWith('http')) return path;
@@ -31,54 +17,41 @@ const UserManagement = () => {
         return `${baseUrl}${cleanPath}?t=${timestamp}`;
     };
 
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [roleFilter, setRoleFilter] = useState('');
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [regLoading, setRegLoading] = useState(false);
+    const [resendLoading, setResendLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [regFormData, setRegFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        role: 'Employee',
+        notificationEmail: ''
+    });
+
     useEffect(() => {
         loadUsers();
     }, [roleFilter]);
 
     const loadUsers = async () => {
+        setLoading(true);
         try {
-            setLoading(true);
-            const params = {};
-            if (roleFilter) params.role = roleFilter;
-
-            const response = await adminService.getUsers(params);
-            let data = response.data || [];
-
-            // Local search filtering if needed, though backend supports it too
-            if (searchQuery) {
-                data = data.filter(u =>
-                    u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    u.email.toLowerCase().includes(searchQuery.toLowerCase())
-                );
-            }
-
-            setUsers(data);
+            const data = await adminService.getUsers({
+                role: roleFilter,
+                search: searchQuery
+            });
+            setUsers(data.data);
         } catch (error) {
-            console.error('Failed to load users:', error);
-            toast.error('Failed to sync system users');
+            toast.error('Failed to synchronize identity nodes');
         } finally {
             setLoading(false);
-        }
-    };
-
-    const handleToggleStatus = async (user) => {
-        try {
-            await adminService.updateUser(user._id, { isActive: !user.isActive });
-            toast.success(`User ${user.isActive ? 'deactivated' : 'activated'} successfully`);
-            loadUsers();
-        } catch (error) {
-            toast.error(error.message || 'Action failed');
-        }
-    };
-
-    const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure? This action is permanent and will remove all user records.')) return;
-        try {
-            await adminService.deleteUser(id);
-            toast.success('User purged from system');
-            loadUsers();
-        } catch (error) {
-            toast.error(error.message || 'Delete failed');
         }
     };
 
@@ -87,7 +60,7 @@ const UserManagement = () => {
         setRegLoading(true);
         try {
             await adminService.createUser(regFormData);
-            toast.success('Identity provisioned successfully');
+            toast.success('Identity provisioned and credentials dispatched');
             setIsRegisterModalOpen(false);
             setRegFormData({ name: '', email: '', password: '', role: 'Employee', notificationEmail: '' });
             loadUsers();
@@ -95,6 +68,28 @@ const UserManagement = () => {
             toast.error(error.response?.data?.message || 'Failed to provision identity');
         } finally {
             setRegLoading(false);
+        }
+    };
+
+    const handleToggleStatus = async (user) => {
+        try {
+            await adminService.updateUser(user._id, { isActive: !user.isActive });
+            toast.success(`Identity ${user.isActive ? 'suspended' : 'restored'} successfully`);
+            loadUsers();
+        } catch (error) {
+            toast.error('Failed to toggle identity status');
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (window.confirm('CRITICAL: Are you sure you want to purge this identity node from the system? This action is irreversible.')) {
+            try {
+                await adminService.deleteUser(id);
+                toast.success('Identity purged successfully');
+                loadUsers();
+            } catch (error) {
+                toast.error('Failed to purge identity');
+            }
         }
     };
 
@@ -108,9 +103,9 @@ const UserManagement = () => {
         setRegFormData({
             name: user.name,
             email: user.email,
-            password: '', // Don't pre-fill password for security
+            password: '', 
             role: user.role,
-            notificationEmail: ''
+            notificationEmail: user.notificationEmail || ''
         });
         setIsEditModalOpen(true);
     };
@@ -135,6 +130,18 @@ const UserManagement = () => {
         }
     };
 
+    const handleResendCredentials = async (id) => {
+        setResendLoading(true);
+        try {
+            const response = await adminService.resendCredentials(id);
+            toast.success(response.message || 'Credentials re-dispatched successfully');
+        } catch (error) {
+            toast.error(error.response?.data?.message || 'Failed to resend credentials');
+        } finally {
+            setResendLoading(false);
+        }
+    };
+
     return (
         <div className="max-w-[1700px] mx-auto space-y-3 animate-fade-in text-tight">
             <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-2">
@@ -144,9 +151,7 @@ const UserManagement = () => {
                 </div>
             </header>
 
-            {/* Controls — styled like RequestsPage */}
             <div className="section-card p-3 mb-1">
-                {/* Top row: search + dropdowns + button */}
                 <div className="flex flex-col md:flex-row gap-2 justify-between items-center mb-3">
                     <div className="relative w-full md:w-1/3 group">
                         <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400 group-focus-within:text-indigo-500 transition-colors">
@@ -183,7 +188,6 @@ const UserManagement = () => {
                     </div>
                 </div>
 
-                {/* Role quick-filter chips */}
                 <div className="flex flex-wrap gap-2">
                     {[
                         { label: 'All', value: '', color: 'slate' },
@@ -213,16 +217,15 @@ const UserManagement = () => {
                 </div>
             </div>
 
-            {/* User Grid/Table */}
             <div className="section-card p-0 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead className="bg-slate-100/50 dark:bg-slate-950/50 border-b-2 border-slate-300 dark:border-indigo-500/40">
                             <tr>
-                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest">Identity Node</th>
+                                <th className="py-4 px-10 text-[9px] font-black text-slate-400 uppercase tracking-widest">Identity Node</th>
                                 <th className="py-4 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Permissions</th>
                                 <th className="py-4 px-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Live Status</th>
-                                <th className="py-4 px-6 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Overrides</th>
+                                <th className="py-4 px-10 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Overrides</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y-2 divide-slate-200 dark:divide-slate-800">
@@ -296,20 +299,19 @@ const UserManagement = () => {
                                                     <Eye size={16} strokeWidth={2.5} />
                                                 </button>
                                                 <button
+                                                    onClick={(e) => { e.stopPropagation(); handleResendCredentials(user._id); }}
+                                                    disabled={resendLoading}
+                                                    className="p-2 bg-amber-50 text-amber-600 border-2 border-amber-500/50 rounded-xl hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-400/30 transition-all shadow-sm disabled:opacity-50"
+                                                    title="Resend Credentials"
+                                                >
+                                                    <Mail size={16} strokeWidth={2.5} className={resendLoading ? 'animate-bounce' : ''} />
+                                                </button>
+                                                <button
                                                     onClick={(e) => { e.stopPropagation(); handleEditUser(user); }}
                                                     className="p-2 bg-indigo-50 text-indigo-600 border-2 border-indigo-500/50 rounded-xl hover:bg-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-500/30 transition-all shadow-sm"
                                                     title="Edit Identity"
                                                 >
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                                                </button>
-                                                <button
-                                                    onClick={(e) => { e.stopPropagation(); handleToggleStatus(user); }}
-                                                    className={`p-2 rounded-xl transition-all shadow-sm border-2 ${user.isActive
-                                                        ? 'bg-amber-50 text-amber-600 border-amber-500/50 hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-500/30'
-                                                        : 'bg-emerald-50 text-emerald-600 border-emerald-500/50 hover:bg-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-500/30'}`}
-                                                    title={user.isActive ? 'Suspend access' : 'Restore access'}
-                                                >
-                                                    {user.isActive ? <UserX size={16} strokeWidth={2.5} /> : <UserCheck size={16} strokeWidth={2.5} />}
                                                 </button>
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); handleDelete(user._id); }}
@@ -328,7 +330,6 @@ const UserManagement = () => {
                 </div>
             </div>
 
-            {/* Profile Details Modal */}
             <Modal
                 isOpen={isDetailsModalOpen}
                 onClose={() => setIsDetailsModalOpen(false)}
@@ -337,10 +338,9 @@ const UserManagement = () => {
             >
                 {selectedUser && (
                     <div className="space-y-8">
-                        {/* Header Section */}
                         <div className="sticky top-0 bg-white dark:bg-slate-900 pb-4 border-b border-slate-100 dark:border-slate-800 z-10 flex flex-col md:flex-row items-center gap-6 pt-2">
                             <div className="relative">
-                                <div className="w-20 h-20 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-xl flex items-center justify-center text-2xl font-black text-indigo-600 dark:text-indigo-400 overflow-hidden group-hover:scale-105 transition-transform">
+                                <div className="w-20 h-20 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-xl flex items-center justify-center text-2xl font-black text-indigo-600 dark:text-indigo-400 overflow-hidden transition-transform">
                                     {selectedUser.avatar ? (
                                         <img
                                             src={getAvatarUrl(selectedUser.avatar)}
@@ -384,9 +384,8 @@ const UserManagement = () => {
                             </div>
                         </div>
 
-                        {/* Details Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 hover:border-indigo-100 dark:hover:border-indigo-900/40 transition-all group">
+                            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 transition-all group">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 group-hover:scale-110 transition-transform">
                                         <Shield className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
@@ -411,7 +410,7 @@ const UserManagement = () => {
                                 </div>
                             </div>
 
-                            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 hover:border-indigo-100 dark:hover:border-indigo-900/40 transition-all group">
+                            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 transition-all group">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="p-3 rounded-xl bg-sky-50 dark:bg-sky-900/20 group-hover:scale-110 transition-transform">
                                         <Building2 className="w-5 h-5 text-sky-600 dark:text-sky-400" />
@@ -434,9 +433,8 @@ const UserManagement = () => {
                             </div>
                         </div>
 
-                        {/* Recent Activity Mini-Section */}
                         <div className="p-6 rounded-[2rem] bg-slate-900 text-white relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-indigo-500/10 mix-blend-overlay group-hover:scale-110 transition-transform duration-700" />
+                            <div className="absolute inset-0 bg-indigo-500/10 mix-blend-overlay transition-transform duration-700" />
                             <div className="relative flex items-center justify-between">
                                 <div className="space-y-1">
                                     <p className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em]">System Telemetry</p>
@@ -454,29 +452,26 @@ const UserManagement = () => {
                             </div>
                         </div>
 
-                        {/* Actions Area */}
                         <div className="flex gap-4 pt-4 border-t-2 border-slate-100 dark:border-slate-800">
                             <button
-                                onClick={(e) => { e.stopPropagation(); handleToggleStatus(selectedUser); setIsDetailsModalOpen(false); }}
-                                className={`flex-1 py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] border-2 transition-all ${selectedUser.isActive
-                                    ? 'bg-amber-50 text-amber-600 border-amber-500/50 hover:bg-amber-500 hover:text-white'
-                                    : 'bg-emerald-50 text-emerald-600 border-emerald-500/50 hover:bg-emerald-500 hover:text-white'
-                                    }`}
+                                onClick={(e) => { e.stopPropagation(); handleResendCredentials(selectedUser._id); }}
+                                disabled={resendLoading}
+                                className="flex-1 py-4 rounded-2xl bg-indigo-50 text-indigo-600 border-2 border-indigo-500/50 font-black uppercase tracking-widest text-[11px] hover:bg-indigo-500 hover:text-white transition-all flex items-center justify-center gap-2"
                             >
-                                {selectedUser.isActive ? 'DEACTIVATE ACCESS' : 'RESTORE ACCESS'}
+                                {resendLoading ? 'RE-DISPATCHING...' : 'RE-DISPATCH CREDENTIALS'}
+                                <Mail size={14} strokeWidth={3} className={resendLoading ? 'animate-bounce' : ''} />
                             </button>
                             <button
                                 onClick={(e) => { e.stopPropagation(); handleDelete(selectedUser._id); setIsDetailsModalOpen(false); }}
-                                className="flex-1 py-4 rounded-2xl bg-rose-50 text-rose-600 border-2 border-rose-500/50 font-black uppercase tracking-widest text-[11px] hover:bg-rose-500 hover:text-white transition-all"
+                                className="flex-[0.5] py-4 rounded-2xl bg-rose-50 text-rose-600 border-2 border-rose-500/50 font-black uppercase tracking-widest text-[11px] hover:bg-rose-500 hover:text-white transition-all"
                             >
-                                PURGE IDENTITY
+                                PURGE
                             </button>
                         </div>
                     </div>
                 )}
             </Modal>
 
-            {/* Provision Identity Modal */}
             <Modal
                 isOpen={isRegisterModalOpen}
                 onClose={() => setIsRegisterModalOpen(false)}
@@ -485,7 +480,6 @@ const UserManagement = () => {
             >
                 <form onSubmit={handleRegisterSubmit} className="space-y-6">
                     <div className="space-y-4">
-                        {/* Name Field */}
                         <div className="relative group">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Full Name</label>
                             <div className="relative">
@@ -501,7 +495,6 @@ const UserManagement = () => {
                             </div>
                         </div>
 
-                        {/* Email Field */}
                         <div className="relative group">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Email Address</label>
                             <div className="relative">
@@ -517,40 +510,47 @@ const UserManagement = () => {
                             </div>
                         </div>
 
-                        {/* Password Field */}
                         <div className="relative group">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Security Password</label>
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     required
                                     value={regFormData.password}
                                     onChange={(e) => setRegFormData({ ...regFormData, password: e.target.value })}
-                                    className="w-full bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-2xl py-3 pl-12 pr-6 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all font-bold text-sm"
-                                    placeholder="Minimum 8 characters"
-                                    minLength={8}
+                                    className="w-full bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-2xl py-3 pl-12 pr-12 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all font-bold text-sm"
+                                    placeholder="Enter password"
+                                    pattern="(?=.*\d)(?=.*[!@#$%^&*-]).{8,}"
+                                    title="Minimum 8 characters, include number & special character"
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-500 transition-colors"
+                                >
+                                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                </button>
                             </div>
+                            <p className="mt-1.5 text-[9px] text-slate-400 font-bold uppercase tracking-wider">Minimum 8 characters, include 1 number & 1 special character</p>
                         </div>
-
-                        {/* Notification Email Field */}
+                    
                         <div className="relative group">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Notification Recipient (Credential Log)</label>
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Personal Email (for credentials)</label>
                             <div className="relative">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
                                 <input
                                     type="email"
+                                    required
                                     value={regFormData.notificationEmail}
                                     onChange={(e) => setRegFormData({ ...regFormData, notificationEmail: e.target.value })}
                                     className="w-full bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-2xl py-3 pl-12 pr-6 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all font-bold text-sm"
-                                    placeholder="manager@company.com (Optional)"
+                                    placeholder="emp123@gmail.com"
                                 />
                             </div>
-                            <p className="mt-1.5 text-[9px] text-slate-400 font-bold uppercase tracking-wider">Specify an email to receive a copy of these credentials</p>
+                            <p className="mt-1.5 text-[9px] text-slate-400 font-bold uppercase tracking-wider">Credentials will be sent securely to this personal email address</p>
                         </div>
 
-                        {/* Role Selection */}
                         <div>
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">System Role</label>
                             <div className="grid grid-cols-2 gap-3">
@@ -613,7 +613,6 @@ const UserManagement = () => {
                 </form>
             </Modal>
 
-            {/* Edit Identity Modal */}
             <Modal
                 isOpen={isEditModalOpen}
                 onClose={() => setIsEditModalOpen(false)}
@@ -622,7 +621,6 @@ const UserManagement = () => {
             >
                 <form onSubmit={handleEditSubmit} className="space-y-6">
                     <div className="space-y-4">
-                        {/* Name Field */}
                         <div className="relative group">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Full Name</label>
                             <div className="relative">
@@ -638,7 +636,6 @@ const UserManagement = () => {
                             </div>
                         </div>
 
-                        {/* Email Field */}
                         <div className="relative group">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Email Address</label>
                             <div className="relative">
@@ -654,9 +651,8 @@ const UserManagement = () => {
                             </div>
                         </div>
 
-                        {/* Password Field (Optional on edit) */}
                         <div className="relative group">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Change Security Password (Leave blank to keep current)</label>
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">Change Security Password (Optional)</label>
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
                                 <input
@@ -664,13 +660,12 @@ const UserManagement = () => {
                                     value={regFormData.password}
                                     onChange={(e) => setRegFormData({ ...regFormData, password: e.target.value })}
                                     className="w-full bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700/50 rounded-2xl py-3 pl-12 pr-6 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all font-bold text-sm"
-                                    placeholder="Minimum 8 characters"
+                                    placeholder="Leave blank to keep current"
                                     minLength={8}
                                 />
                             </div>
                         </div>
 
-                        {/* Role Selection */}
                         <div>
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 block">System Role</label>
                             <div className="grid grid-cols-2 gap-3">
@@ -698,13 +693,6 @@ const UserManagement = () => {
                                 ))}
                             </div>
                         </div>
-                    </div>
-
-                    <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-900/10 border-2 border-indigo-100 dark:border-indigo-900/20 flex gap-4 items-start">
-                        <ShieldCheck className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
-                        <p className="text-[10px] font-bold text-indigo-700 dark:text-amber-400 leading-relaxed uppercase tracking-wider">
-                            Applying these changes will immediately update the identity's permissions and access profile.
-                        </p>
                     </div>
 
                     <div className="flex gap-4 pb-8">

@@ -1,0 +1,242 @@
+[{
+  "_id": {
+    "$oid": "69aa49d4c6394a92affe13ec"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-06T03:28:20.252Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T03:30:26.271Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa49dbc6394a92affe13f0"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "message": "jihbb",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-06T03:28:27.421Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T03:30:26.261Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa4a68c6394a92affe1445"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "message": "helo bro",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-06T03:30:48.425Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T03:31:00.564Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa4acbc6394a92affe1468"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Auditor",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-06T03:32:27.791Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T03:32:36.082Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa4b28c6394a92affe1481"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-06T03:34:00.224Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T04:02:46.133Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa4b86c6394a92affe14b7"
+  },
+  "senderRole": "Auditor",
+  "receiverRole": "Manager",
+  "senderId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "receiverId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "message": "helo",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-06T03:35:34.452Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T03:35:58.796Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa5ac24b42e38b0bb393a1"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699c141346e6765ff29b9bb7"
+  },
+  "message": "hello",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-03-06T04:40:34.715Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T04:40:34.715Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa9584bf0873441e0d0f79"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "message": "hi",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-03-06T08:51:16.359Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T08:51:16.359Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38a0fd65aec839b237e32"
+  },
+  "senderRole": "Auditor",
+  "receiverRole": "Manager",
+  "senderId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "receiverId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-13T03:52:47.137Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T03:55:48.932Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38ac7d65aec839b237e71"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Auditor",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "message": "ji",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-13T03:55:51.666Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T03:56:14.135Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b392ced65aec839b2382ca"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Manager",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-13T04:30:06.291Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T04:30:58.793Z"
+  },
+  "__v": 0
+}]

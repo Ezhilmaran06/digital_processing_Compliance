@@ -1,0 +1,7521 @@
+[{
+  "_id": {
+    "$oid": "698afb16c1a789cb4187578d"
+  },
+  "userId": {
+    "$oid": "698afb15c1a789cb4187578b"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@gmail.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-10T09:32:06.050Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698afb1fc1a789cb41875790"
+  },
+  "userId": {
+    "$oid": "698afb15c1a789cb4187578b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@gmail.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-10T09:32:15.079Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698bf628b3f3e58e5ac95e15"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "ezhilmaran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T03:23:20.136Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698bf635b3f3e58e5ac95e18"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "ezhilmaran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T03:23:33.249Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698bf951b3f3e58e5ac95e39"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "ezhilmaran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T03:36:49.944Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c0244b3f3e58e5ac95e84"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T04:15:00.471Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c0259b3f3e58e5ac95e87"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "ezhilmaran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T04:15:21.438Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1414ca5519c9dd21357b"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698c1414ca5519c9dd213578"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "free wifi",
+    "changeType": "Network",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T05:31:00.348Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c26ca5519c9dd2135d2"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T06:05:26.716Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c39ca5519c9dd2135d5"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "ezhilmaran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:05:45.321Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c41ca5519c9dd2135d8"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "ezhilmaran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:05:53.907Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c4cca5519c9dd2135db"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "ezhilmaran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:06:04.301Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c4fca5519c9dd2135de"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "ezhilmaran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:06:07.782Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c57ca5519c9dd2135e1"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "ezhilmaran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:06:15.354Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c7dca5519c9dd2135e4"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "ezhilmaran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:06:53.411Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1c80ca5519c9dd2135e7"
+  },
+  "userId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "ezhilmaran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:06:56.291Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1cacca5519c9dd2135ec"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:07:40.503Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1cbaca5519c9dd2135ef"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "maran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:07:54.498Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c1cc1ca5519c9dd2135f2"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:08:01.514Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c221c450388c29675c7d1"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:30:52.925Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c2430450388c29675c805"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-11T06:39:44.966Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c427db7bac58205616057"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T08:49:01.036Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c472cb7bac5820561605d"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T09:09:00.035Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c473db7bac58205616060"
+  },
+  "userId": {
+    "$oid": "698afb15c1a789cb4187578b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "cheran@gmail.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T09:09:17.790Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c4745b7bac58205616063"
+  },
+  "userId": {
+    "$oid": "698afb15c1a789cb4187578b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "cheran@gmail.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T09:09:25.930Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c4759b7bac58205616066"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T09:09:45.805Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c477bb7bac582056160bb"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "698c1414ca5519c9dd213578"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "free wifi",
+    "requestCreator": "ezhilmaran@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T09:10:19.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c47adb7bac582056160cd"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T09:11:09.092Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c4815b7bac582056160fa"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698c4815b7bac582056160f6"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "naruto",
+    "changeType": "Infrastructure",
+    "riskLevel": "Medium"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T09:12:53.393Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c5661b7bac582056163fb"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "698c4815b7bac582056160f6"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "naruto",
+    "requestCreator": "maran@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T10:13:53.247Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c5852b7bac58205616499"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698c5852b7bac58205616495"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Minato",
+    "changeType": "Infrastructure",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T10:22:10.246Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698c5a39e34db89d1041755c"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698c5852b7bac58205616495"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Minato"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T10:30:17.748Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cb29a03ae0f853818764d"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T16:47:22.247Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cb2d103ae0f8538187650"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T16:48:17.486Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cb30203ae0f853818766f"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T16:49:06.074Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cb30f03ae0f8538187672"
+  },
+  "userId": {
+    "$oid": "698afb15c1a789cb4187578b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "cheran@gmail.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T16:49:19.657Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cb31803ae0f8538187675"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T16:49:28.965Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cbc000abb069fbdd73bb6"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "698c4815b7bac582056160f6"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "naruto uchiha"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T17:27:28.094Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cbc110abb069fbdd73bd3"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "698c4815b7bac582056160f6"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "naruto uzumaki"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T17:27:45.945Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cbc2e0abb069fbdd73c30"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T17:28:14.030Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cbc3d0abb069fbdd73c33"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T17:28:29.807Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cc75f66e0e50e867babab"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T18:15:59.735Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cc77d66e0e50e867babae"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T18:16:29.646Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cc7835f95cdf8fd6269be"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T18:16:35.272Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cca6c5f95cdf8fd626a46"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698cca6c5f95cdf8fd626a42"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Eren Yeager",
+    "changeType": "Network",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T18:29:00.387Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698ccb245f95cdf8fd626a8b"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698ccb245f95cdf8fd626a87"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "DEMON SLAYER",
+    "changeType": "Database",
+    "riskLevel": "Low"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T18:32:04.512Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698ccd4e5f95cdf8fd626b6a"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698ccd4e5f95cdf8fd626b66"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "mlm lll lj",
+    "changeType": "Database",
+    "riskLevel": "Low"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T18:41:18.081Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698ccdec5f95cdf8fd626c3a"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-11T18:43:56.896Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cce385f95cdf8fd626c3f"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T18:45:12.362Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698cce4f5f95cdf8fd626c42"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-11T18:45:35.755Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d54294396ff8050c51353"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T04:16:41.676Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5aad4396ff8050c513a2"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T04:44:29.104Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5ac34396ff8050c513a5"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "cheran@company.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T04:44:51.955Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5acb4396ff8050c513a8"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T04:44:59.522Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5ae04396ff8050c513d3"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T04:45:20.794Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5af04396ff8050c513d6"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T04:45:36.997Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5afd4396ff8050c513df"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T04:45:49.888Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5b0d4396ff8050c513e2"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T04:46:05.575Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d5baf4396ff8050c51401"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698d5baf4396ff8050c513fd"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "kjqegfig",
+    "changeType": "Infrastructure",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T04:48:47.736Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d62d54396ff8050c514c2"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T05:19:17.341Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d62df4396ff8050c514c5"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "maran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:19:27.220Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d62e34396ff8050c514c8"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:19:31.958Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d62e94396ff8050c514d9"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T05:19:37.230Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d62f44396ff8050c514dc"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:19:48.413Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d64cf4396ff8050c51520"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "698d5baf4396ff8050c513fd"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "kjqegfig",
+    "requestCreator": "maran@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:27:43.579Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d64f04396ff8050c5156d"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T05:28:16.888Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d65004396ff8050c51570"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:28:32.427Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d66408d76b56a6da5af4e"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:33:52.722Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d69b48d76b56a6da5b044"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:48:36.023Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d6a5b8d76b56a6da5b067"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "698d6a5b8d76b56a6da5b063"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "itachi uchiha",
+    "changeType": "Database",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:51:23.963Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d6ab58d76b56a6da5b0c9"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "698d6a5b8d76b56a6da5b063"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "itachi uchiha",
+    "requestCreator": "maran@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:52:53.389Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d6ad18d76b56a6da5b0e7"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "698ccd4e5f95cdf8fd626b66"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "mlm lll lj",
+    "requestCreator": "cheran@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:53:21.948Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d6b478d76b56a6da5b181"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T05:55:19.703Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d6bed8d76b56a6da5b184"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "vignesh@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:58:05.735Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d6bf68d76b56a6da5b187"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "vignesh@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:58:14.220Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d6bfa8d76b56a6da5b18a"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T05:58:18.348Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d737d858af1c348333f94"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-12T06:30:21.446Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698d749b858af1c348333fb7"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-12T06:35:07.131Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698ffd06a786d9109b44fd9b"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-14T04:41:42.466Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698ffd4ba786d9109b44fe40"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-14T04:42:51.632Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698ffd95a786d9109b44fe43"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "vignesh@company.com",
+    "attemptedRole": "Client",
+    "actualRole": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-14T04:44:05.392Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698ffda2a786d9109b44fe46"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-14T04:44:18.367Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69900698a786d9109b44feeb"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-14T05:22:32.051Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69903118a786d9109b44ffaa"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-14T08:23:52.558Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699045e5efc4440260e5b6ef"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-14T09:52:37.444Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699291ce29faa2dd5455df8e"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T03:41:02.790Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699292d729faa2dd5455e07d"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699292d729faa2dd5455e079"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "attack on titan",
+    "changeType": "Network",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T03:45:27.775Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992999d29faa2dd5455e108"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-16T04:14:21.981Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699299b629faa2dd5455e10b"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T04:14:46.945Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992ab1429faa2dd5455e2a6"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-16T05:28:52.674Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992b80309e1f32545c4137e"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T06:24:03.743Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992ba3e09e1f32545c414d1"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-16T06:33:34.513Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992bbb509e1f32545c414d4"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T06:39:49.745Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992bbec09e1f32545c414ff"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699292d729faa2dd5455e079"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "attack on titan 12"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T06:40:44.190Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992bc0909e1f32545c4156f"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699292d729faa2dd5455e079"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "details": {
+    "title": "attack on titan 12",
+    "requestCreator": "maran@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T06:41:13.866Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992bcae09e1f32545c41684"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-16T06:43:58.049Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992bce209e1f32545c41687"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T06:44:50.679Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992d83917a621212e13c5f2"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T08:41:29.187Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992f0d9d104c82ac29b51cb"
+  },
+  "userId": {
+    "$oid": "6992f0d8d104c82ac29b51c9"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+  "details": {
+    "email": "manoj@admin.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T10:26:33.191Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992f0e5d104c82ac29b51ce"
+  },
+  "userId": {
+    "$oid": "6992f0d8d104c82ac29b51c9"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "manoj@admin.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T10:26:45.573Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992f0eed104c82ac29b51d1"
+  },
+  "userId": {
+    "$oid": "6992f0d8d104c82ac29b51c9"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+  "details": {
+    "email": "manoj@admin.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-16T10:26:54.178Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992f13cd104c82ac29b520b"
+  },
+  "userId": {
+    "$oid": "6992f0d8d104c82ac29b51c9"
+  },
+  "action": "ADMIN_ACTION",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "action": "EXPORT_AUDIT_LOGS",
+    "recordCount": 101
+  },
+  "timestamp": {
+    "$date": "2026-02-16T10:28:12.826Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6992f17bd104c82ac29b5212"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-16T10:29:15.666Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6997fa9737ac187d46b81b22"
+  },
+  "userId": {
+    "$oid": "6992f0d8d104c82ac29b51c9"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-20T06:09:27.895Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6997faa837ac187d46b81b25"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-20T06:09:44.530Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699818f7c9f002e4bc584eb4"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-20T08:19:03.839Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69981ec37b9b9b3c9c107ac9"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-20T08:43:47.086Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69981ed27b9b9b3c9c107acc"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-20T08:44:02.743Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69982455fd19c187d10e352b"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-20T09:07:33.871Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69982464fd19c187d10e352e"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "vignesh@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-20T09:07:48.585Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69982475fd19c187d10e3575"
+  },
+  "userId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-20T09:08:05.632Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69983386fd19c187d10e3578"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-20T10:12:22.037Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699833b0fd19c187d10e35bb"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "cheran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-20T10:13:04.880Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699833b2fd19c187d10e35be"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-20T10:13:06.620Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69983a4bfd19c187d10e3699"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-20T10:41:15.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69994cb7718581902b8cfbb9"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T06:12:07.961Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69995213c65c7e3bbc19d49d"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-21T06:34:59.010Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6999525ec65c7e3bbc19d4aa"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "gokul@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T06:36:14.540Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6999526bc65c7e3bbc19d4ad"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "gokul@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T06:36:27.822Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69996baeefab87f8d3fb010a"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "gokul@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T08:24:14.848Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69996cceefab87f8d3fb0178"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "698ccb245f95cdf8fd626a87"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "DEMON SLAYER",
+    "requestCreator": "cheran@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T08:29:02.984Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699972d4e2116bbf93a32156"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "gokul@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T08:54:44.764Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6999876cfd95918eda11e4a2"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "698bf627b3f3e58e5ac95e13"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "ezhilmaran@company.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T10:22:36.143Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6999876ffd95918eda11e4aa"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "698afb15c1a789cb4187578b"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "cheran@gmail.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T10:22:39.682Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6999877bfd95918eda11e4b8"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "6992f0d8d104c82ac29b51c9"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "manoj@admin.com",
+    "deletedUserRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T10:22:51.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69998b0cab3f527470c3d296"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-21T10:38:04.954Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69998b1fab3f527470c3d299"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T10:38:23.062Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69998cdaab3f527470c3d43a"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-21T10:45:46.872Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69998ce6ab3f527470c3d43d"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T10:45:58.735Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69998cf8ab3f527470c3d4a2"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-21T10:46:16.315Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69998d04ab3f527470c3d4a5"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T10:46:28.461Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6999e6ecab3f527470c3d638"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-21T17:10:04.835Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6999e70cab3f527470c3d63c"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-21T17:10:36.189Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bcbbe04b2a8a185c9d717"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T03:38:38.933Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bcbc804b2a8a185c9d71a"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T03:38:48.123Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bcf45a4f31623d7b58aae"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "maran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T03:53:41.754Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bcf53a4f31623d7b58ab1"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T03:53:55.931Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd21906276d74be7f6ffa"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T04:05:45.718Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd23506276d74be7f6ffe"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "maran@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T04:06:13.477Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd23f06276d74be7f7037"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699292d729faa2dd5455e079"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "attack on titan"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T04:06:23.619Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd7458028c5e4303e2650"
+  },
+  "userId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T04:27:49.136Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd7538028c5e4303e2653"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "cheran@company.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T04:28:03.526Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd7588028c5e4303e2656"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T04:28:08.716Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd81efb74f2ec8999d5a6"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "cheran@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T04:31:26.125Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd820fb74f2ec8999d5a9"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "cheran@company.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T04:31:28.108Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bd82bfb74f2ec8999d5ac"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "cheran@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T04:31:39.734Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be27defdd3e9dddfef645"
+  },
+  "userId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T05:15:41.333Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be28cefdd3e9dddfef648"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "gokul@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:15:56.458Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be28eefdd3e9dddfef64b"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "gokul@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:15:58.913Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be301efdd3e9dddfef7f8"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "698cce385f95cdf8fd626c3d"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "vignesh@company.com",
+    "deletedUserRole": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:17:53.957Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be304efdd3e9dddfef800"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "698c472bb7bac5820561605b"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "cheran@company.com",
+    "deletedUserRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:17:56.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be307efdd3e9dddfef808"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "698c1cacca5519c9dd2135ea"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "maran@company.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:17:59.052Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be314efdd3e9dddfef86c"
+  },
+  "userId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T05:18:12.053Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be353efdd3e9dddfef872"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:19:15.472Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be360efdd3e9dddfef875"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:19:28.890Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be369efdd3e9dddfef8a1"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "6999525ec65c7e3bbc19d4a8"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "gokul@company.com",
+    "deletedUserRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:19:37.864Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be382efdd3e9dddfef8d2"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:20:02.128Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be38cefdd3e9dddfef93d"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T05:20:12.432Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be87df51455c1e40ecce0"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "naruto@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:41:17.361Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699be885f51455c1e40ecce3"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "naruto@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T05:41:25.648Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf152951e2d562be9281c"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T06:18:58.753Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf174951e2d562be92822"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:19:32.736Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf17f951e2d562be92825"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:19:43.099Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1c1951e2d562be9287b"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T06:20:49.563Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1cc951e2d562be9287e"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:00.248Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1d7951e2d562be928b4"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699292d729faa2dd5455e079"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "attack on titan"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:11.039Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1d9951e2d562be928b9"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698d6a5b8d76b56a6da5b063"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "itachi uchiha"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:13.402Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1db951e2d562be928be"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698d5baf4396ff8050c513fd"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "kjqegfig"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:15.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1de951e2d562be928c3"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698ccd4e5f95cdf8fd626b66"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "mlm lll lj"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:18.353Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1e0951e2d562be928c8"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698ccb245f95cdf8fd626a87"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "DEMON SLAYER"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:20.544Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1e2951e2d562be928cd"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698cca6c5f95cdf8fd626a42"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Eren Yeager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:22.763Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1e5951e2d562be928d2"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698c4815b7bac582056160f6"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "naruto uzumaki"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:25.106Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1e7951e2d562be928d7"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "698c1414ca5519c9dd213578"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "free wifi"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:27.044Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1ec951e2d562be928da"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T06:21:32.769Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf1f9951e2d562be928dd"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "naruto@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:21:45.611Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf2a6951e2d562be928fe"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699bf2a6951e2d562be928fb"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Naruto shippuden",
+    "changeType": "Database",
+    "riskLevel": "Medium"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:24:38.882Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf303951e2d562be92922"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699bf303951e2d562be9291f"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "tale of jiriya",
+    "changeType": "Database",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:26:11.576Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf309951e2d562be9292d"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T06:26:17.454Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf315951e2d562be92930"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:26:29.878Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf4ce951e2d562be92970"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T06:33:50.904Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf51c951e2d562be92973"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "naruto@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:35:08.047Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf549951e2d562be929ef"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T06:35:53.115Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf5bf951e2d562be929f5"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:37:51.796Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf5c9951e2d562be929f8"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:38:01.871Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf6bb951e2d562be92a2e"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T06:42:03.640Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf6c6951e2d562be92a31"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T06:42:14.397Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0d6b46e6765ff29b9822"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:18:51.955Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0d9346e6765ff29b9828"
+  },
+  "userId": {
+    "$oid": "699c0d9346e6765ff29b9825"
+  },
+  "action": "ACCOUNT_CREATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:19:31.462Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0d9e46e6765ff29b982b"
+  },
+  "userId": {
+    "$oid": "699c0d9346e6765ff29b9825"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:19:42.595Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0ded46e6765ff29b985b"
+  },
+  "userId": {
+    "$oid": "699c0d9346e6765ff29b9825"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:21:01.503Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0df946e6765ff29b985e"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:21:13.334Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0dff46e6765ff29b987c"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699bf303951e2d562be9291f"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "tale of jiriya",
+    "requestCreator": "naruto@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:21:19.897Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0e1b46e6765ff29b98bd"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699bf2a6951e2d562be928fb"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Naruto shippuden",
+    "requestCreator": "naruto@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:21:47.851Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0e2246e6765ff29b98c0"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:21:54.653Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0e3c46e6765ff29b98c3"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:22:20.312Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0e5846e6765ff29b9918"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:22:48.114Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0e8f46e6765ff29b9924"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699c0e8f46e6765ff29b9921"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "s-rank",
+    "changeType": "Security",
+    "riskLevel": "Low"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:23:43.556Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0e9746e6765ff29b992f"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:23:51.602Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c0fc546e6765ff29b9932"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:28:53.904Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c100f46e6765ff29b99f3"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:30:07.925Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c141346e6765ff29b9bba"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "699c141346e6765ff29b9bb7"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "zenitsu@comapny.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:47:15.844Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c141a46e6765ff29b9bc0"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:47:22.994Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c143446e6765ff29b9bc3"
+  },
+  "userId": {
+    "$oid": "699c141346e6765ff29b9bb7"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "zenitsu@comapny.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:47:48.318Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c147246e6765ff29b9c18"
+  },
+  "userId": {
+    "$oid": "699c141346e6765ff29b9bb7"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:48:50.226Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c147e46e6765ff29b9c1b"
+  },
+  "userId": {
+    "$oid": "699c141346e6765ff29b9bb7"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:49:02.237Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c148746e6765ff29b9c1e"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "eren@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:49:11.458Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c148946e6765ff29b9c21"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:49:13.766Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c165c46e6765ff29b9ccd"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:57:00.755Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c168b46e6765ff29b9cd0"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T08:57:47.081Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c16d446e6765ff29b9d48"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T08:59:00.995Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1ca346e6765ff29b9d4b"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:23:47.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1cee46e6765ff29b9de1"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T09:25:02.137Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1d0746e6765ff29b9de4"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:25:27.860Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1ddf46e6765ff29b9ef8"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T09:29:03.424Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1de846e6765ff29b9efb"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "eren@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:29:12.901Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1def46e6765ff29b9efe"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:29:19.159Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1f5e46e6765ff29ba004"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T09:35:26.264Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1f6846e6765ff29ba007"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "mikasa@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:35:36.936Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1f7646e6765ff29ba00a"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:35:50.180Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1f9846e6765ff29ba03e"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T09:36:24.528Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c1faa46e6765ff29ba041"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:36:42.126Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c201646e6765ff29ba067"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T09:38:30.337Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c201f46e6765ff29ba06a"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:38:39.048Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c20c246e6765ff29ba13a"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "699c20c246e6765ff29ba137"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "sasukue@comapny.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:41:22.986Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c20d446e6765ff29ba142"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "699c20c246e6765ff29ba137"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "sasukue@comapny.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T09:41:40.162Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c26c546e6765ff29ba226"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T10:07:01.955Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c669c368018be5742e4f2"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:39:24.379Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c66b9368018be5742e50c"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T14:39:53.345Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c66c1368018be5742e50f"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "naruto@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:40:01.399Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c66e4368018be5742e56b"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T14:40:36.512Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c66ee368018be5742e56e"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "mikasa@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:40:46.314Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c66f5368018be5742e571"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:40:53.659Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c66fd368018be5742e591"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699c0e8f46e6765ff29b9921"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "s-rank",
+    "requestCreator": "itachi@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:41:01.270Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c6719368018be5742e5fc"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T14:41:29.029Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c6726368018be5742e5ff"
+  },
+  "userId": {
+    "$oid": "699c0d9346e6765ff29b9825"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:41:42.085Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c6735368018be5742e639"
+  },
+  "userId": {
+    "$oid": "699c0d9346e6765ff29b9825"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T14:41:57.749Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c6743368018be5742e63c"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:42:11.304Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c67b3368018be5742e718"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T14:44:03.872Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c67cd368018be5742e71b"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "naruto@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:44:29.247Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c68b7368018be5742e7d8"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-23T14:48:23.577Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c68c0368018be5742e7db"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-23T14:48:32.701Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc6ae4ad63c679b79f213"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:06:06.913Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc7204ad63c679b79f23c"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699fc7204ad63c679b79f239"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Operation d",
+    "changeType": "Infrastructure",
+    "riskLevel": "Critical"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:08:00.274Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc7664ad63c679b79f264"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699fc7664ad63c679b79f261"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "solo mission",
+    "changeType": "Security",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:09:10.797Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc7714ad63c679b79f274"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699fc7664ad63c679b79f261"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "solo mission"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:09:21.708Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc7a24ad63c679b79f2e7"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-26T04:10:10.428Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc7ae4ad63c679b79f2ea"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:10:22.759Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc8454ad63c679b79f31e"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "rengoku@company.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:12:53.845Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc8724ad63c679b79f328"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "akazha@gmail.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:13:38.274Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc89b4ad63c679b79f368"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-26T04:14:19.794Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc8ab4ad63c679b79f36b"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "eren@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:14:35.539Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc8b24ad63c679b79f36e"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:14:42.736Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc9004ad63c679b79f39d"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_UPDATED",
+  "targetUserId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": {
+      "name": "AKAZHA",
+      "email": "akazha@company.com",
+      "role": "Employee",
+      "notificationEmail": ""
+    }
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:16:00.601Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc9054ad63c679b79f3a3"
+  },
+  "userId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "akazha@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:16:05.931Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fca094ad63c679b79f3ec"
+  },
+  "userId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699fca094ad63c679b79f3e9"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "DEmon mark",
+    "changeType": "Application",
+    "riskLevel": "Low"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:20:25.441Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fca0f4ad63c679b79f3f7"
+  },
+  "userId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-26T04:20:31.944Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fca4f4ad63c679b79f3fe"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_UPDATED",
+  "targetUserId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": {
+      "name": "RENGOKU",
+      "email": "rengoku@company.com",
+      "password": "reng2006",
+      "role": "Employee",
+      "notificationEmail": ""
+    }
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:21:35.291Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fca804ad63c679b79f406"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:22:24.804Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fcb8d4ad63c679b79f486"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "699fcb8d4ad63c679b79f483"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "heart blaze",
+    "changeType": "Network",
+    "riskLevel": "Medium"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:26:53.772Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fce3dfb754d3893919484"
+  },
+  "userId": {
+    "$oid": "699c0d9346e6765ff29b9825"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "minato@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:38:21.072Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fce52fb754d3893919487"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T04:38:42.642Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fce5ffb754d38939194d5"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-26T04:38:55.193Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a01fea9b8d87d27d0144ee"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T10:26:50.641Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a020559b8d87d27d01453e"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "699c0d9346e6765ff29b9825"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "minato@company.com",
+    "deletedUserRole": "Client"
+  },
+  "timestamp": {
+    "$date": "2026-02-26T10:28:37.716Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a116347353f59cf6993443"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T03:57:40.104Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a116c67353f59cf6993473"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "minato@company.com",
+    "createdUserRole": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:00:06.093Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a116cc7353f59cf6993479"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T04:00:12.684Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a116da7353f59cf699347c"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:00:26.072Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11a417353f59cf699352d"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T04:14:57.066Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11a507353f59cf6993530"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:15:12.253Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11aad7353f59cf6993600"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699fc7664ad63c679b79f261"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "solo mission",
+    "requestCreator": "itachi@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:16:45.504Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11ad97353f59cf6993679"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T04:17:29.350Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11ae97353f59cf699367c"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:17:45.504Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11ed73c4b35279382418b"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699fc7664ad63c679b79f261"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "solo mission",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:34:31.844Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11ee53c4b35279382419d"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699bf303951e2d562be9291f"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "tale of jiriya",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:34:45.713Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11eec3c4b3527938241af"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699c0e8f46e6765ff29b9921"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "s-rank",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:34:52.451Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11eef3c4b3527938241c1"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699bf2a6951e2d562be928fb"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Naruto shippuden",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:34:55.280Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11f0d3c4b35279382421e"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T04:35:25.139Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11f1d3c4b352793824221"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:35:41.357Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11f4b3c4b3527938242d9"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699fcb8d4ad63c679b79f483"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "heart blaze",
+    "requestCreator": "rengoku@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:36:27.841Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a11ffe3c4b352793824302"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699fca094ad63c679b79f3e9"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "DEmon mark",
+    "requestCreator": "akazha@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:39:26.548Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1202a3c4b352793824373"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T04:40:10.029Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a120393c4b352793824376"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T04:40:25.859Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a125f8ec335e13f04fccd0"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699fcb8d4ad63c679b79f483"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "heart blaze",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:04:56.826Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1260aec335e13f04fcd09"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "699fc7204ad63c679b79f239"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Operation d",
+    "requestCreator": "itachi@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:05:14.599Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1262bec335e13f04fcd55"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "699fca094ad63c679b79f3e9"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "DEmon mark",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:05:47.255Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a27ec335e13f04fcfa2"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:22:47.267Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a31ec335e13f04fcfd2"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699fcb8d4ad63c679b79f483"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "heart blaze"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:22:57.854Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a34ec335e13f04fcfd7"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699fca094ad63c679b79f3e9"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "DEmon mark"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:23:00.607Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a37ec335e13f04fcfdc"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699fc7664ad63c679b79f261"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "solo mission"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:23:03.273Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a39ec335e13f04fcfe1"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699fc7204ad63c679b79f239"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Operation d"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:23:05.758Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a3cec335e13f04fcfe6"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699c0e8f46e6765ff29b9921"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "s-rank"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:23:08.182Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a3eec335e13f04fcfeb"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699bf303951e2d562be9291f"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "tale of jiriya"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:23:10.676Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a41ec335e13f04fcff0"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_DELETED",
+  "requestId": {
+    "$oid": "699bf2a6951e2d562be928fb"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "Naruto shippuden"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:23:13.369Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12a81ec335e13f04fd059"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:24:17.845Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12ac7ec335e13f04fd07a"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "69a12ac6ec335e13f04fd077"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "sharingan",
+    "changeType": "Application",
+    "riskLevel": "Low"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:25:27.013Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12af8ec335e13f04fd088"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "69a12af8ec335e13f04fd085"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "S Rank mission",
+    "changeType": "Infrastructure",
+    "riskLevel": "Medium"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:26:16.209Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12b11ec335e13f04fd0d2"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "69a12af8ec335e13f04fd085"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "S Rank mission",
+    "requestCreator": "itachi@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:26:41.810Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12b26ec335e13f04fd11a"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a12af8ec335e13f04fd085"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "S Rank mission",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:27:02.994Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12c17ec335e13f04fd16e"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "69a12ac6ec335e13f04fd077"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "sharingan",
+    "requestCreator": "itachi@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:31:03.476Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12cddec335e13f04fd239"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "69a12cddec335e13f04fd236"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "ninja war",
+    "changeType": "Database",
+    "riskLevel": "High"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:34:21.796Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12d2fec335e13f04fd2da"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "69a12cddec335e13f04fd236"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "ninja war",
+    "requestCreator": "itachi@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:35:43.230Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12d48ec335e13f04fd2f8"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a12ac6ec335e13f04fd077"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "sharingan",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:36:08.232Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a12df9ec335e13f04fd3c0"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a12cddec335e13f04fd236"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "ninja war",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:39:05.080Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1320aec335e13f04fd6c1"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DEACTIVATED",
+  "targetUserId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": {
+      "isActive": false
+    }
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:56:26.952Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1320fec335e13f04fd6c9"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_ACTIVATED",
+  "targetUserId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": {
+      "isActive": true
+    }
+  },
+  "timestamp": {
+    "$date": "2026-02-27T05:56:31.859Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a13b5fec335e13f04fdb42"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T06:36:15.858Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a13bbcec335e13f04fdb5a"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T06:37:48.041Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a13bf0ec335e13f04fdb75"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "69a13bf0ec335e13f04fdb72"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "heart blaze",
+    "changeType": "Network",
+    "riskLevel": "Critical"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T06:38:40.035Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a13c23ec335e13f04fdb83"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "69a13c23ec335e13f04fdb80"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "demon hunting",
+    "changeType": "Security",
+    "riskLevel": "Low"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T06:39:31.956Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15de242ee5ff1a6a29c92"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T09:03:30.074Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15dec42ee5ff1a6a29c95"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T09:03:40.783Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15e0e42ee5ff1a6a29ce3"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T09:04:14.794Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15e1242ee5ff1a6a29ce6"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T09:04:18.445Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15e2342ee5ff1a6a29ce9"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T09:04:35.677Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15e4d42ee5ff1a6a29cf7"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T09:05:17.332Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15e6c42ee5ff1a6a29d5f"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T09:05:48.938Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15e8142ee5ff1a6a29d62"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T09:06:09.841Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15ee342ee5ff1a6a29e0a"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T09:07:47.248Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a15efb42ee5ff1a6a29e0d"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T09:08:11.811Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1626f42ee5ff1a6a29e75"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-02-27T09:22:55.940Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a16bc142ee5ff1a6a29eca"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-02-27T10:02:41.186Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a7e79a0919effc409da5e4"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "itachi@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-04T08:04:42.962Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a7e7a10919effc409da5e7"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "itachi@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-04T08:04:49.785Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a7e7db0919effc409da647"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-03-04T08:05:47.599Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a7e8020919effc409da68f"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-03-04T08:06:26.940Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a805900919effc409da791"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-03-04T10:12:32.167Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a80c9d0919effc409daa4e"
+  },
+  "userId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-03-04T10:42:37.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a80cb10919effc409daa51"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-04T10:42:57.264Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a80cc40919effc409daa77"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "69a13c23ec335e13f04fdb80"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "demon hunting",
+    "requestCreator": "rengoku@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-03-04T10:43:16.159Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a80cee0919effc409daabf"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a13c23ec335e13f04fdb80"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "demon hunting",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-04T10:43:58.017Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a8f7cfb58d8f0bcbeb1938"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-03-05T03:26:07.817Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a8f7f6b58d8f0bcbeb19a8"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-03-05T03:26:46.851Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a8f801b58d8f0bcbeb19ab"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-05T03:26:57.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a8fd9668a366a875503b8b"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email",
+      "auditorType"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-05T03:50:46.594Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a900573ec3dfa71b7030a1"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email",
+      "auditorType"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-05T04:02:31.483Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a900633ec3dfa71b7030b7"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "PROFILE_UPDATED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": [
+      "name",
+      "email",
+      "auditorType"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-05T04:02:43.938Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa49a6c6394a92affe136f"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-03-06T03:27:34.670Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa4a34c6394a92affe141f"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-03-06T03:29:56.824Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aa4a4dc6394a92affe1422"
+  },
+  "userId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "naruto@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-06T03:30:21.686Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3845a61db31963a18f0ce"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "mikasa@company.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:28:26.415Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3846561db31963a18f0d1"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "mikasa@company.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:28:37.425Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3846b61db31963a18f0d4"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:28:43.670Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3866c61db31963a18f164"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "eren@company.com",
+    "attemptedRole": "Admin",
+    "actualRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:37:16.872Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3867361db31963a18f167"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:37:23.070Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b387de61db31963a18f235"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "699bf5bf951e2d562be929f2"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "itachi@company.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:43:26.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b387e261db31963a18f23d"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "699be87df51455c1e40eccdd"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "naruto@company.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:43:30.936Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38890d65aec839b237cfb"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T03:46:24.216Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38c5ed65aec839b237f5b"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T04:02:38.680Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38cfed65aec839b238005"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a13c23ec335e13f04fdb80"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "demon hunting",
+    "updatedFields": [
+      "title",
+      "description",
+      "changeType",
+      "riskLevel",
+      "justification",
+      "plannedStartDate",
+      "plannedEndDate",
+      "implementationPlan",
+      "rollbackPlan",
+      "impactAssessment",
+      "affectedDepartments"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-13T04:05:18.052Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38d05d65aec839b23800f"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a13c23ec335e13f04fdb80"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "demon hunting",
+    "updatedFields": [
+      "title",
+      "description",
+      "changeType",
+      "riskLevel",
+      "justification",
+      "plannedStartDate",
+      "plannedEndDate",
+      "implementationPlan",
+      "rollbackPlan",
+      "impactAssessment",
+      "affectedDepartments"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-13T04:05:25.306Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38d15d65aec839b238017"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a13c23ec335e13f04fdb80"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "demon hunting",
+    "updatedFields": [
+      "title",
+      "description",
+      "changeType",
+      "riskLevel",
+      "justification",
+      "plannedStartDate",
+      "plannedEndDate",
+      "implementationPlan",
+      "rollbackPlan",
+      "impactAssessment",
+      "affectedDepartments"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-13T04:05:41.720Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b38d23d65aec839b238021"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69a13c23ec335e13f04fdb80"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "demon hunting",
+    "updatedFields": [
+      "title",
+      "description",
+      "changeType",
+      "riskLevel",
+      "justification",
+      "plannedStartDate",
+      "plannedEndDate",
+      "implementationPlan",
+      "rollbackPlan",
+      "impactAssessment",
+      "affectedDepartments"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-13T04:05:55.314Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c833b00e8b432dc6d37c"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "eren@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:17:55.107Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c838b00e8b432dc6d37f"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:18:00.709Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c84eb00e8b432dc6d3a9"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Invalid password",
+    "email": "rengoku@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:18:22.438Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c856b00e8b432dc6d3ac"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:18:30.972Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c8d2b00e8b432dc6d3ed"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "minato@company.com",
+    "attemptedRole": "Manager",
+    "actualRole": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:20:34.836Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c8deb00e8b432dc6d3f0"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-03-13T08:20:46.791Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c8f9b00e8b432dc6d3f5"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:21:13.814Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c937b00e8b432dc6d41d"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "rengoku@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:22:15.539Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c982b00e8b432dc6d44d"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:23:30.010Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c998b00e8b432dc6d465"
+  },
+  "userId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "action": "LOGOUT",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "timestamp": {
+    "$date": "2026-03-13T08:23:52.305Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3c9fcb00e8b432dc6d48a"
+  },
+  "userId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "email": "akazha@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:25:32.285Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3caa1b00e8b432dc6d4d6"
+  },
+  "userId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "action": "REQUEST_CREATED",
+  "requestId": {
+    "$oid": "69b3caa1b00e8b432dc6d4d3"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "shadow clone",
+    "changeType": "Application",
+    "riskLevel": "Medium"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:28:17.592Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3caaeb00e8b432dc6d4f3"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "REQUEST_APPROVED",
+  "requestId": {
+    "$oid": "69b3caa1b00e8b432dc6d4d3"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "title": "shadow clone",
+    "requestCreator": "akazha@company.com"
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:28:30.507Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3cabbb00e8b432dc6d539"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "REQUEST_UPDATED",
+  "requestId": {
+    "$oid": "69b3caa1b00e8b432dc6d4d3"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "details": {
+    "title": "shadow clone",
+    "updatedFields": [
+      "status"
+    ]
+  },
+  "timestamp": {
+    "$date": "2026-03-13T08:28:43.362Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c4a8e106d50e0d7f76b2db"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-03-26T03:32:49.516Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccd3300d8a8f0700812cf9"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:11:28.760Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccd684a70f92adac6ff08c"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:25:40.149Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccd9f0f6a903c19728f860"
+  },
+  "userId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "mikasa@company.com",
+    "role": "Manager"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:40:16.964Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdaaff6a903c19728f8a9"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:43:27.900Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdb35f6a903c19728f8ef"
+  },
+  "userId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "akazha@company.com",
+    "role": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:45:41.450Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdb7af6a903c19728f931"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_FAILED",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "reason": "Role mismatch",
+    "email": "minato@company.com",
+    "attemptedRole": "Employee",
+    "actualRole": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:46:50.728Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdb86f6a903c19728f934"
+  },
+  "userId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "minato@company.com",
+    "role": "Auditor"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:47:02.331Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccde5f15a6fa912170a45b"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "69ccde5f15a6fa912170a458"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "inosuk@company.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T08:59:11.847Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cce046fd00f0bd5d73100c"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T09:07:18.363Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cce0b3fd00f0bd5d731048"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "69cce0b3fd00f0bd5d731045"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "sana@company.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T09:09:07.315Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cce0ef1d8de0ba7b921bb2"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "LOGIN_SUCCESS",
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "email": "eren@company.com",
+    "role": "Admin"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T09:10:07.138Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cce2031d8de0ba7b921c2e"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "69cce2031d8de0ba7b921c2b"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "doma@company.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T09:14:43.267Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cce222c724792a1cb43b07"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "69ccde5f15a6fa912170a458"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "inosuk@company.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T09:15:14.493Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cce225c724792a1cb43b0f"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "69cce0b3fd00f0bd5d731045"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "sana@company.com",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T09:15:17.734Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cce76bef9447dbf01ad7c0"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "69cce76bef9447dbf01ad7bd"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "manoj.it23@bitsathy.ac.in",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T09:37:47.493Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccee04f7ce4e8a374aa772"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_UPDATED",
+  "targetUserId": {
+    "$oid": "69cce76bef9447dbf01ad7bd"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "updatedFields": {
+      "name": "mano",
+      "email": "manojkumar.it23@bitsathy.ac.in",
+      "role": "Employee",
+      "notificationEmail": "manoj.it23@bitsathy.ac.in"
+    }
+  },
+  "timestamp": {
+    "$date": "2026-04-01T10:05:56.457Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccee41f7ce4e8a374aa783"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "69ccee40f7ce4e8a374aa780"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "cheran.it23@bitsathy.ac.in",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T10:06:57.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cceeddf7ce4e8a374aa79c"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_CREATED",
+  "targetUserId": {
+    "$oid": "69cceeddf7ce4e8a374aa799"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "createdUserEmail": "muzan@company.com",
+    "createdUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T10:09:33.519Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cceee4f7ce4e8a374aa7a6"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "69cce76bef9447dbf01ad7bd"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "manojkumar.it23@bitsathy.ac.in",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T10:09:40.054Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cceee6f7ce4e8a374aa7ae"
+  },
+  "userId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "action": "USER_DELETED",
+  "targetUserId": {
+    "$oid": "69ccee40f7ce4e8a374aa780"
+  },
+  "ipAddress": "::1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "details": {
+    "deletedUserEmail": "cheran.it23@bitsathy.ac.in",
+    "deletedUserRole": "Employee"
+  },
+  "timestamp": {
+    "$date": "2026-04-01T10:09:42.519Z"
+  },
+  "__v": 0
+}]

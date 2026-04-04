@@ -72,6 +72,14 @@ const adminService = {
 
         return response;
     },
+    
+    /**
+     * Resend credentials to user
+     */
+    resendCredentials: async (id) => {
+        const response = await api.post(`/admin/users/${id}/resend-credentials`);
+        return response;
+    },
 };
 
 export default adminService;

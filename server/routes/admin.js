@@ -7,6 +7,7 @@ import {
     getAnalytics,
     getAuditLogs,
     exportAuditLogs,
+    resendCredentials,
 } from '../controllers/adminController.js';
 import { protect } from '../middleware/auth.js';
 import { isAdmin } from '../middleware/rbac.js';
@@ -28,6 +29,9 @@ router.route('/users')
 router.route('/users/:id')
     .patch(updateUser)
     .delete(deleteUser);
+
+router.route('/users/:id/resend-credentials')
+    .post(resendCredentials);
 
 // Analytics & reporting
 router.get('/analytics', getAnalytics);

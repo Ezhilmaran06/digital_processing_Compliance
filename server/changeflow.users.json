@@ -1,0 +1,198 @@
+[{
+  "_id": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "name": "Eren yeager",
+  "email": "eren@company.com",
+  "password": "$2a$10$Fbv7sMSt0e2eK3olL8nd4.BRfAhNVegK7WDjphJV.RThytX1lv/LC",
+  "role": "Admin",
+  "department": "",
+  "isActive": true,
+  "avatar": "/uploads/file-1771835405260-78183371.jpg",
+  "twoFactorEnabled": false,
+  "lastLogin": {
+    "$date": "2026-04-01T09:10:07.149Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-23T05:19:15.284Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T09:10:07.150Z"
+  },
+  "employeeId": "EMP-0002",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "name": "Mikasa",
+  "email": "mikasa@company.com",
+  "password": "$2a$10$w53mJtrgFMZeTqj.tKhBMe29CwYjsBgoyC4fPEKKg6LPWf0H4LIVS",
+  "role": "Manager",
+  "department": "",
+  "isActive": true,
+  "avatar": "/uploads/file-1771828415311-362997934.jpg",
+  "twoFactorEnabled": false,
+  "lastLogin": {
+    "$date": "2026-04-01T08:40:16.980Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-23T06:19:32.492Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:40:16.980Z"
+  },
+  "employeeId": "EMP-0004",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c141346e6765ff29b9bb7"
+  },
+  "name": "Zenitsu Agatsuma",
+  "email": "zenitsu@comapny.com",
+  "password": "$2a$10$QoOaMR4bqeXNSCIJvJpr7eWTwNLtmkPYVjt1KjwDi6mFytLK3hPMG",
+  "role": "Employee",
+  "department": "",
+  "isActive": true,
+  "avatar": "/uploads/file-1771836499853-113648908.jpg",
+  "twoFactorEnabled": false,
+  "lastLogin": {
+    "$date": "2026-02-23T08:47:48.321Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-23T08:47:15.639Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-23T08:48:50.223Z"
+  },
+  "employeeId": "EMP-0007",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "name": "RENGOKU",
+  "email": "rengoku@company.com",
+  "password": "$2a$10$IGd99cEZh.H6PrY7G0yFz.F3p0Jvw9x3cwlkEK8vI0lFvx26vMAZy",
+  "role": "Employee",
+  "department": "",
+  "isActive": true,
+  "avatar": "/uploads/file-1772079825898-27428426.jpg",
+  "twoFactorEnabled": false,
+  "lastLogin": {
+    "$date": "2026-03-13T08:22:15.544Z"
+  },
+  "notificationEmail": "",
+  "createdAt": {
+    "$date": "2026-02-26T04:12:53.631Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T08:22:15.544Z"
+  },
+  "employeeId": "EMP-0008",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "name": "AKAZHA",
+  "email": "akazha@company.com",
+  "password": "$2a$10$bT9cO.X40GwmX9TvpkSA9.zNBRy65zABo3JZ4TAHiOwXqWxQ.bcBG",
+  "role": "Employee",
+  "department": "",
+  "isActive": true,
+  "avatar": "/uploads/file-1772079534208-994408568.jpg",
+  "twoFactorEnabled": false,
+  "lastLogin": {
+    "$date": "2026-04-01T08:45:41.452Z"
+  },
+  "notificationEmail": "",
+  "createdAt": {
+    "$date": "2026-02-26T04:13:38.074Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:45:41.453Z"
+  },
+  "employeeId": "EMP-0009",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "name": "MINATO N",
+  "email": "minato@company.com",
+  "password": "$2a$10$BlI7H0pG8WhUuIxPiKIux.LG79ggYfmTK85VRzjeObe10ugNiLekq",
+  "role": "Auditor",
+  "department": "",
+  "isActive": true,
+  "avatar": "/uploads/file-1772164912214-925774738.jpg",
+  "twoFactorEnabled": false,
+  "lastLogin": {
+    "$date": "2026-04-01T08:47:02.333Z"
+  },
+  "notificationEmail": "",
+  "createdAt": {
+    "$date": "2026-02-27T04:00:05.883Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:47:02.333Z"
+  },
+  "employeeId": "EMP-0010",
+  "__v": 0,
+  "auditorType": "Application"
+},
+{
+  "_id": {
+    "$oid": "69cce2031d8de0ba7b921c2b"
+  },
+  "name": "DOMA",
+  "email": "doma@company.com",
+  "password": "$2a$10$5wkYCPdRX7/sGtMPgKuqyuqj1fgHlvRFPmhWsMM1PExfkWN.08N3u",
+  "role": "Employee",
+  "auditorType": "",
+  "department": "",
+  "isActive": true,
+  "avatar": "",
+  "twoFactorEnabled": false,
+  "lastLogin": null,
+  "forcePasswordReset": true,
+  "notificationEmail": "ezhilmaran026@gmail.com",
+  "createdAt": {
+    "$date": "2026-04-01T09:14:43.134Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T09:14:43.134Z"
+  },
+  "employeeId": "EMP-0013",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69cceeddf7ce4e8a374aa799"
+  },
+  "name": "MUZAN",
+  "email": "muzan@company.com",
+  "password": "$2a$10$ASaKuAamQZdzyuc4SmCDzeOYJ.sgWd1426pWYf/FULN/oEE6vCb1G",
+  "role": "Employee",
+  "auditorType": "",
+  "department": "",
+  "isActive": true,
+  "avatar": "",
+  "twoFactorEnabled": false,
+  "lastLogin": null,
+  "forcePasswordReset": true,
+  "notificationEmail": "imjetly02@gmail.com",
+  "createdAt": {
+    "$date": "2026-04-01T10:09:33.329Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T10:09:33.329Z"
+  },
+  "employeeId": "EMP-0016",
+  "__v": 0
+}]

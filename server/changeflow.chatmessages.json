@@ -1,0 +1,225 @@
+[{
+  "_id": {
+    "$oid": "69b393dd1acd5434c85e9bfd"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Admin",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699be353efdd3e9dddfef86f"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-13T04:34:37.901Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T04:34:54.820Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3940b1acd5434c85e9c2c"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699c141346e6765ff29b9bb7"
+  },
+  "message": "hi",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-03-13T04:35:23.961Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T04:35:23.961Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b394121acd5434c85e9c30"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-13T04:35:30.819Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T04:35:42.192Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b394171acd5434c85e9c36"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-13T04:35:35.757Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T08:25:40.418Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3cbfbb00e8b432dc6d5c0"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Auditor",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "message": "hi",
+  "read": true,
+  "createdAt": {
+    "$date": "2026-03-13T08:34:03.341Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T08:34:12.424Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccda9ef6a903c19728f8a1"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Group",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": null,
+  "groupId": {
+    "$oid": "69ccd9f38820c1e65850fcb9"
+  },
+  "message": "gm to all",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-04-01T08:43:10.090Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:43:10.090Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdb44f6a903c19728f91c"
+  },
+  "senderRole": "Employee",
+  "receiverRole": "Group",
+  "senderId": {
+    "$oid": "699fc8724ad63c679b79f325"
+  },
+  "receiverId": null,
+  "groupId": {
+    "$oid": "69ccd9f38820c1e65850fcb9"
+  },
+  "message": "hi",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-04-01T08:45:56.665Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:45:56.665Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdb8ff6a903c19728f952"
+  },
+  "senderRole": "Auditor",
+  "receiverRole": "Group",
+  "senderId": {
+    "$oid": "69a116c57353f59cf6993470"
+  },
+  "receiverId": null,
+  "groupId": {
+    "$oid": "69ccd9f38820c1e65850fcba"
+  },
+  "message": "h",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-04-01T08:47:11.113Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:47:11.113Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdb98f6a903c19728f95d"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Group",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": null,
+  "groupId": {
+    "$oid": "69ccd9f38820c1e65850fcba"
+  },
+  "message": "helo",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-04-01T08:47:20.790Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:47:20.790Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ccdce9f6a903c19728f9a4"
+  },
+  "senderRole": "Manager",
+  "receiverRole": "Employee",
+  "senderId": {
+    "$oid": "699bf174951e2d562be9281f"
+  },
+  "receiverId": {
+    "$oid": "699fc8454ad63c679b79f31b"
+  },
+  "groupId": null,
+  "message": "🤔",
+  "read": false,
+  "createdAt": {
+    "$date": "2026-04-01T08:52:57.248Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-01T08:52:57.248Z"
+  },
+  "__v": 0
+}]

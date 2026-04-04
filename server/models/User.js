@@ -65,6 +65,10 @@ const userSchema = new mongoose.Schema(
             type: Date,
             default: null,
         },
+        forcePasswordReset: {
+            type: Boolean,
+            default: false,
+        },
         notificationEmail: {
             type: String,
             trim: true,
