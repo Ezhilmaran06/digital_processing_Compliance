@@ -3,10 +3,10 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { storage as cloudinaryStorage, isCloudinaryConfigured } from '../utils/cloudinary.js';
+import { getCloudinaryStorage, isCloudinaryConfigured } from '../utils/cloudinary.js';
 
 // --- PERSISTENCE INSTRUCTIONS ---
-// 1. Install dependencies: 
+// 1. Install dependencies (Optional, code will fallback automatically if missing):
 //    npm install cloudinary multer-storage-cloudinary
 // 2. Set environment variables in Render/Local .env:
 //    CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
@@ -21,7 +21,7 @@ const debugLog = (msg) => {
     } catch (e) { }
 };
 
-// Ensure upload directory exists - absolute path to server/uploads
+// Local storage fallback
 const uploadDir = path.resolve(__dirname, '../uploads');
 if (!fs.existsSync(uploadDir)) {
     try {
@@ -31,24 +31,11 @@ if (!fs.existsSync(uploadDir)) {
     }
 }
 
-const router = express.Router();
-
-// Local Multer Configuration (Fallback)
 const localStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        if (!fs.existsSync(uploadDir)) {
-            try {
-                fs.mkdirSync(uploadDir, { recursive: true });
-            } catch (err) {
-                return cb(err);
-            }
-        }
-        cb(null, uploadDir);
-    },
-    filename: function (req, file, cb) {
+    destination: (req, file, cb) => cb(null, uploadDir),
+    filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const name = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname).toLowerCase();
-        cb(null, name);
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname).toLowerCase());
     },
 });
 
@@ -64,36 +51,35 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-// INITIALIZE UPLOADER
-// Use Cloudinary if configured, otherwise fallback to local
-let storageToUse = localStorage;
-let usingCloudinary = false;
-
-if (isCloudinaryConfigured()) {
-    try {
-        storageToUse = cloudinaryStorage;
-        usingCloudinary = true;
-        debugLog('Using Cloudinary for image storage');
-    } catch (e) {
-        debugLog(`Failed to initialize Cloudinary storage: ${e.message}. Falling back to local.`);
-    }
-} else {
-    debugLog('Cloudinary not configured. Using local storage (ephemeral on Render).');
-}
-
-const upload = multer({
-    storage: storageToUse,
-    limits: {
-        fileSize: parseInt(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024, // 5MB limit
-    },
-    fileFilter: fileFilter,
-});
+const router = express.Router();
 
 /**
  * Image upload route for profile pictures
  */
-router.post('/upload', (req, res, next) => {
-    upload.single('file')(req, res, (err) => {
+router.post('/upload', async (req, res, next) => {
+    let storageToUse = localStorage;
+    let usingCloudinary = false;
+
+    // Try to get cloud storage if configured
+    if (isCloudinaryConfigured()) {
+        try {
+            const cloudStorage = await getCloudinaryStorage();
+            if (cloudStorage) {
+                storageToUse = cloudStorage;
+                usingCloudinary = true;
+            }
+        } catch (e) {
+            debugLog(`Failed to load Cloudinary storage: ${e.message}`);
+        }
+    }
+
+    const upload = multer({
+        storage: storageToUse,
+        limits: { fileSize: 5 * 1024 * 1024 },
+        fileFilter: fileFilter,
+    }).single('file');
+
+    upload(req, res, (err) => {
         if (err instanceof multer.MulterError) {
             return res.status(400).json({ success: false, message: `Upload error: ${err.message}` });
         } else if (err) {
@@ -101,16 +87,11 @@ router.post('/upload', (req, res, next) => {
         }
         
         if (!req.file) {
-            return res.status(400).json({
-                success: false,
-                message: 'No file received',
-            });
+            return res.status(400).json({ success: false, message: 'No file received' });
         }
 
-        // Return a path that is consistent and serves relative to backend host or absolute cloud URL
-        // Frontend 'getAvatarUrl' will handle both cases
         const finalPath = usingCloudinary ? req.file.path : `/uploads/${req.file.filename}`;
-
+        
         res.json({
             success: true,
             data: {
