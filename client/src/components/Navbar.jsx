@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 import { MessageCircle } from 'lucide-react';
 import { MessagePanel } from './MessagePanel';
 import messageService from '../services/messageService';
+import { getAvatarUrl } from '../utils/imageUtils';
 
 const AppNavbar = () => {
     const { user, logout } = useAuth();
@@ -59,14 +60,6 @@ const AppNavbar = () => {
         return cleanCurrent === cleanTarget;
     };
 
-    const getAvatarUrl = (path) => {
-        if (!path) return null;
-        if (path.startsWith('http')) return path;
-        const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '').replace(/\/$/, '') || '';
-        const cleanPath = path.startsWith('/') ? path : `/${path}`;
-        const timestamp = new Date().getTime();
-        return `${baseUrl}${cleanPath}?t=${timestamp}`;
-    };
 
     return (
         <nav className="glass-navbar fixed top-4 left-0 right-0 mx-4 md:mx-8 px-6 py-2.5 rounded-[2rem] shadow-premium z-[100] transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(99,102,241,0.2)] ring-1 ring-white/20 border-2 border-indigo-500/20 dark:border-indigo-400/20">

@@ -6,16 +6,8 @@ import {
 import { toast } from 'sonner';
 import adminService from '../services/adminService';
 import Modal from '../components/Modal';
+import { getAvatarUrl } from '../utils/imageUtils';
 const UserManagement = () => {
-    // Utility to construct secure avatar URL with cache busting
-    const getAvatarUrl = (path) => {
-        if (!path) return null;
-        if (path.startsWith('http')) return path;
-        const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '').replace(/\/$/, '') || '';
-        const cleanPath = path.startsWith('/') ? path : `/${path}`;
-        const timestamp = new Date().getTime();
-        return `${baseUrl}${cleanPath}?t=${timestamp}`;
-    };
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);

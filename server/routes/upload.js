@@ -3,6 +3,8 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,30 +31,67 @@ if (!fs.existsSync(uploadDir)) {
 
 const router = express.Router();
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        debugLog(`Destination called for: ${file.originalname}`);
-        if (!fs.existsSync(uploadDir)) {
-            try {
-                fs.mkdirSync(uploadDir, { recursive: true });
-                debugLog('Created uploadDir in destination');
-            } catch (err) {
-                debugLog(`Failed to create uploadDir in destination: ${err.message}`);
-                return cb(err);
+/**
+ * STORAGE ENGINE SELECTION
+ * We prioritize Cloudinary for production/persistience, 
+ * but allow local storage fallback for development.
+ */
+let storage;
+let isCloudinary = false;
+
+// Check if Cloudinary keys are configured
+if (process.env.CLOUDINARY_CLOUD_NAME && 
+    process.env.CLOUDINARY_API_KEY && 
+    process.env.CLOUDINARY_API_SECRET &&
+    process.env.CLOUDINARY_CLOUD_NAME !== 'your_cloud_name') {
+    
+    debugLog('Cloudinary keys found, initializing Cloudinary storage');
+    
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    });
+
+    storage = new CloudinaryStorage({
+        cloudinary: cloudinary,
+        params: {
+            folder: 'changeflow_uploads',
+            allowed_formats: ['jpg', 'png', 'jpeg', 'pdf', 'doc', 'docx'],
+            public_id: (req, file) => {
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+                return `${file.fieldname}-${uniqueSuffix}`;
             }
-        } else {
-            debugLog('uploadDir exists in destination');
         }
-        cb(null, uploadDir);
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const name = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname);
-        debugLog(`Generated filename: ${name}`);
-        cb(null, name);
-    },
-});
+    });
+    isCloudinary = true;
+} else {
+    debugLog('Cloudinary keys missing or placeholder, falling back to LOCAL storage');
+    storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            debugLog(`Destination called for: ${file.originalname}`);
+            if (!fs.existsSync(uploadDir)) {
+                try {
+                    fs.mkdirSync(uploadDir, { recursive: true });
+                    debugLog('Created uploadDir in destination');
+                } catch (err) {
+                    debugLog(`Failed to create uploadDir in destination: ${err.message}`);
+                    return cb(err);
+                }
+            } else {
+                debugLog('uploadDir exists in destination');
+            }
+            cb(null, uploadDir);
+        },
+        filename: function (req, file, cb) {
+            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+            const name = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname);
+            debugLog(`Generated filename: ${name}`);
+            cb(null, name);
+        },
+    });
+    isCloudinary = false;
+}
 
 const fileFilter = (req, file, cb) => {
     // Allowed file types
@@ -89,9 +128,10 @@ router.post('/upload', upload.single('file'), (req, res) => {
     res.json({
         success: true,
         data: {
-            filename: req.file.filename,
+            filename: isCloudinary ? req.file.path : req.file.filename,
             originalName: req.file.originalname,
-            path: req.file.path,
+            path: req.file.path, // Full path or Cloudinary URL
+            isCloud: isCloudinary,
             size: req.file.size,
             mimetype: req.file.mimetype,
         },

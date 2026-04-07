@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import authService from '../services/authService';
+import { getAvatarUrl } from '../utils/imageUtils';
 
 const SettingsPage = () => {
     const { user, updateUser } = useAuth();
@@ -103,20 +104,6 @@ const SettingsPage = () => {
         }
     };
 
-    // Helper to get consistent URL for images
-    const getAvatarUrl = (path) => {
-        if (!path) return null;
-        if (path.startsWith('http')) return path;
-
-        // In local development, we sometimes need the absolute URL if proxying fails
-        // for direct image tags. We add a timestamp to prevent browser caching.
-        const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '').replace(/\/$/, '') || '';
-        const cleanPath = path.startsWith('/') ? path : `/${path}`;
-        const timestamp = new Date().getTime();
-        const fullUrl = `${baseUrl}${cleanPath}?t=${timestamp}`;
-        console.log(`[DEBUG_AVATAR] Path: ${path}, BaseUrl: ${baseUrl}, FullUrl: ${fullUrl}`);
-        return fullUrl;
-    };
 
     return (
         <main className="max-w-[1200px] mx-auto px-4 py-4 animate-fade-in pb-20 text-tight">

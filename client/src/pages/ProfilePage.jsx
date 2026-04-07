@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import profileService from '../services/profileService';
 import { toast } from 'sonner';
+import { getAvatarUrl } from '../utils/imageUtils';
 import {
     User, Mail, Building2, ShieldCheck, Clock, Calendar,
     Edit3, Lock, Award, TrendingUp, FileText, CheckCircle2,
@@ -208,12 +209,6 @@ const ProfilePage = () => {
         return new Date(date).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     };
 
-    const getAvatarUrl = (path) => {
-        if (!path) return null;
-        if (path.startsWith('http')) return path;
-        const base = import.meta.env.VITE_API_URL?.replace('/api', '').replace(/\/$/, '') || '';
-        return `${base}${path.startsWith('/') ? path : '/' + path}`;
-    };
 
     const roleGradient = {
         Employee: ['from-indigo-500', 'to-violet-600'],
