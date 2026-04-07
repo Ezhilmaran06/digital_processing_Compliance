@@ -5,6 +5,7 @@ import requestService from '../services/requestService';
 import KPICard from '../components/KPICard';
 import StatusChart from '../components/StatusChart';
 import { toast } from 'sonner';
+import { getAvatarUrl, getInitials } from '../utils/imageUtils';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -15,14 +16,6 @@ const AdminDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('overview');
 
-    const getAvatarUrl = (path) => {
-        if (!path) return null;
-        if (path.startsWith('http')) return path;
-        const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '').replace(/\/$/, '') || '';
-        const cleanPath = path.startsWith('/') ? path : `/${path}`;
-        const timestamp = new Date().getTime();
-        return `${baseUrl}${cleanPath}?t=${timestamp}`;
-    };
 
     useEffect(() => {
         loadData();
@@ -216,13 +209,13 @@ const AdminDashboard = () => {
                                                                 alt={user.name}
                                                                 className="w-full h-full object-cover"
                                                                 onError={(e) => {
+                                                                    e.target.onerror = null;
+                                                                    e.target.src = '';
                                                                     e.target.style.display = 'none';
-                                                                    e.target.parentElement.textContent = user.name?.[0]?.toUpperCase() || '?';
                                                                 }}
                                                             />
-                                                        ) : (
-                                                            user.name?.[0]?.toUpperCase()
-                                                        )}
+                                                        ) : null}
+                                                        {!user.avatar && <span>{getInitials(user.name)}</span>}
                                                     </div>
                                                     <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-slate-900 ${user.isActive ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-slate-300 dark:bg-slate-700'}`}></div>
                                                 </div>
@@ -383,13 +376,13 @@ const AdminDashboard = () => {
                                                                     alt={log.userId.name}
                                                                     className="w-full h-full object-cover"
                                                                     onError={(e) => {
+                                                                        e.target.onerror = null;
+                                                                        e.target.src = '';
                                                                         e.target.style.display = 'none';
-                                                                        e.target.parentElement.textContent = log.userId?.name?.slice(0, 1).toUpperCase() || 'S';
                                                                     }}
                                                                 />
-                                                            ) : (
-                                                                log.userId?.name?.slice(0, 1).toUpperCase() || 'S'
-                                                            )}
+                                                            ) : null}
+                                                            {!log.userId?.avatar && <span>{getInitials(log.userId?.name)}</span>}
                                                         </div>
                                                         <p className="text-sm font-black text-slate-900 dark:text-white leading-none">{log.userId?.name || 'SYSTEM ROOT'}</p>
                                                     </div>

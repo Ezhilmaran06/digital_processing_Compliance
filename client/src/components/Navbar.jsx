@@ -5,7 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 import { MessageCircle } from 'lucide-react';
 import { MessagePanel } from './MessagePanel';
 import messageService from '../services/messageService';
-import { getAvatarUrl } from '../utils/imageUtils';
+import { getAvatarUrl, getInitials } from '../utils/imageUtils';
 
 const AppNavbar = () => {
     const { user, logout } = useAuth();
@@ -130,10 +130,14 @@ const AppNavbar = () => {
                                         src={getAvatarUrl(user.avatar)}
                                         alt={user.name}
                                         className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = ''; // Clear source
+                                            e.target.style.display = 'none';
+                                        }}
                                     />
-                                ) : (
-                                    user?.name?.charAt(0)
-                                )}
+                                ) : null}
+                                {!user?.avatar && <span>{getInitials(user?.name)}</span>}
                             </div>
                             <div className="text-left hidden lg:block">
                                 <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">{user?.name}</p>
@@ -190,10 +194,14 @@ const AppNavbar = () => {
                                             src={getAvatarUrl(user.avatar)}
                                             alt={user.name}
                                             className="w-full h-full object-cover"
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = ''; 
+                                                e.target.style.display = 'none';
+                                            }}
                                         />
-                                    ) : (
-                                        user?.name?.charAt(0)
-                                    )}
+                                    ) : null}
+                                    {!user?.avatar && <span>{getInitials(user?.name)}</span>}
                                 </div>
                                 <div>
                                     <p className="text-sm font-bold dark:text-white">{user?.name}</p>

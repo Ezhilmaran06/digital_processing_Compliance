@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import profileService from '../services/profileService';
 import { toast } from 'sonner';
-import { getAvatarUrl } from '../utils/imageUtils';
 import {
     User, Mail, Building2, ShieldCheck, Clock, Calendar,
     Edit3, Lock, Award, TrendingUp, FileText, CheckCircle2,
     AlertTriangle, X, Eye, EyeOff, Loader2, BadgeCheck,
     Fingerprint, ChevronRight, BarChart3, Zap
 } from 'lucide-react';
+import { getAvatarUrl, getInitials } from '../utils/imageUtils';
 
 /* ─────────────────────────────────────────────
    Modal Base
@@ -283,10 +283,19 @@ const ProfilePage = () => {
                         <div className="relative -mt-10 mb-3">
                             <div className="relative inline-block">
                                 <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${grad[0]} ${grad[1]} ring-4 ring-white dark:ring-slate-900 shadow-xl overflow-hidden flex items-center justify-center`}>
-                                    {profile?.avatar
-                                        ? <img src={getAvatarUrl(profile.avatar)} alt={profile.name} className="w-full h-full object-cover" />
-                                        : <span className="text-white text-3xl font-black select-none">{profile?.name?.charAt(0)}</span>
-                                    }
+                                    {profile?.avatar ? (
+                                        <img
+                                            src={getAvatarUrl(profile.avatar)}
+                                            alt={profile.name}
+                                            className="w-full h-full object-cover"
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = '';
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
+                                    ) : null}
+                                    {!profile?.avatar && <span className="text-white text-3xl font-black select-none">{getInitials(profile?.name)}</span>}
                                 </div>
                                 {/* Online dot */}
                                 <div className="absolute bottom-1 right-1 w-4 h-4 bg-emerald-400 border-2 border-white dark:border-slate-900 rounded-full shadow-sm" />

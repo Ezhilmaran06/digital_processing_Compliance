@@ -6,7 +6,7 @@ import {
 import { toast } from 'sonner';
 import adminService from '../services/adminService';
 import Modal from '../components/Modal';
-import { getAvatarUrl } from '../utils/imageUtils';
+import { getAvatarUrl, getInitials } from '../utils/imageUtils';
 const UserManagement = () => {
 
     const [users, setUsers] = useState([]);
@@ -253,13 +253,13 @@ const UserManagement = () => {
                                                             alt={user.name}
                                                             className="w-full h-full object-cover"
                                                             onError={(e) => {
+                                                                e.target.onerror = null;
+                                                                e.target.src = ''; 
                                                                 e.target.style.display = 'none';
-                                                                e.target.parentElement.textContent = user.name?.[0]?.toUpperCase() || '?';
                                                             }}
                                                         />
-                                                    ) : (
-                                                        user.name?.[0]?.toUpperCase()
-                                                    )}
+                                                    ) : null}
+                                                    {!user.avatar && <span>{getInitials(user.name)}</span>}
                                                 </div>
                                                 <div>
                                                     <p className="text-sm font-black text-slate-900 dark:text-white leading-tight mb-0.5 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors uppercase tracking-tight">{user.name}</p>
@@ -339,13 +339,13 @@ const UserManagement = () => {
                                             alt={selectedUser.name}
                                             className="w-full h-full object-cover"
                                             onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = '';
                                                 e.target.style.display = 'none';
-                                                e.target.parentElement.textContent = selectedUser.name?.[0]?.toUpperCase() || '?';
                                             }}
                                         />
-                                    ) : (
-                                        selectedUser.name?.[0]?.toUpperCase()
-                                    )}
+                                    ) : null}
+                                    {!selectedUser.avatar && <span>{getInitials(selectedUser.name)}</span>}
                                 </div>
                                 <div className={`absolute -bottom-1 -right-1 w-6 h-6 rounded-lg border-2 border-white dark:border-slate-900 shadow-lg flex items-center justify-center ${selectedUser.isActive ? 'bg-emerald-500 shadow-emerald-500/20' : 'bg-slate-400 shadow-slate-500/20'}`}>
                                     {selectedUser.isActive ? <BadgeCheck className="w-3 h-3 text-white" /> : <Clock className="w-3 h-3 text-white" />}

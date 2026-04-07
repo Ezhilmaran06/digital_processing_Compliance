@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import authService from '../services/authService';
-import { getAvatarUrl } from '../utils/imageUtils';
+import { getAvatarUrl, getInitials } from '../utils/imageUtils';
 
 const SettingsPage = () => {
     const { user, updateUser } = useAuth();
@@ -134,10 +134,14 @@ const SettingsPage = () => {
                                         src={getAvatarUrl(user.avatar)}
                                         alt={user.name}
                                         className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = ''; // Clear source to show initials fallback
+                                            e.target.style.display = 'none';
+                                        }}
                                     />
-                                ) : (
-                                    user?.name?.charAt(0)
-                                )}
+                                ) : null}
+                                {!user?.avatar && <span>{getInitials(user?.name)}</span>}
 
                                 {uploading && (
                                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center">

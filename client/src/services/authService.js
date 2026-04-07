@@ -87,11 +87,7 @@ const authService = {
         });
 
         if (uploadResponse.success) {
-            // If it's a Cloudinary upload, the filename is already the full URL
-            const avatarPath = uploadResponse.data.isCloud 
-                ? uploadResponse.data.filename 
-                : `/uploads/${uploadResponse.data.filename}`;
-            
+            const avatarPath = `/uploads/${uploadResponse.data.filename}`;
             // 2. Update user profile with the new avatar path
             const profileResponse = await api.patch('/auth/avatar', { avatar: avatarPath });
 

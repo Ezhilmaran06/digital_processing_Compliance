@@ -3,8 +3,14 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { v2 as cloudinary } from 'cloudinary';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import { storage as cloudinaryStorage, isCloudinaryConfigured } from '../utils/cloudinary.js';
+
+// --- PERSISTENCE INSTRUCTIONS ---
+// 1. Install dependencies: 
+//    npm install cloudinary multer-storage-cloudinary
+// 2. Set environment variables in Render/Local .env:
+//    CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
+// --------------------------------
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,126 +21,107 @@ const debugLog = (msg) => {
     } catch (e) { }
 };
 
+// Ensure upload directory exists - absolute path to server/uploads
 const uploadDir = path.resolve(__dirname, '../uploads');
-debugLog(`Resolved uploadDir: ${uploadDir}`);
-
 if (!fs.existsSync(uploadDir)) {
     try {
         fs.mkdirSync(uploadDir, { recursive: true });
-        debugLog('Created uploadDir in initialization');
     } catch (err) {
-        debugLog(`Failed to create uploadDir in initialization: ${err.message}`);
+        debugLog(`Failed to create local uploadDir: ${err.message}`);
     }
-} else {
-    debugLog('uploadDir already exists in initialization');
 }
 
 const router = express.Router();
 
-/**
- * STORAGE ENGINE SELECTION
- * We prioritize Cloudinary for production/persistience, 
- * but allow local storage fallback for development.
- */
-let storage;
-let isCloudinary = false;
-
-// Check if Cloudinary keys are configured
-if (process.env.CLOUDINARY_CLOUD_NAME && 
-    process.env.CLOUDINARY_API_KEY && 
-    process.env.CLOUDINARY_API_SECRET &&
-    process.env.CLOUDINARY_CLOUD_NAME !== 'your_cloud_name') {
-    
-    debugLog('Cloudinary keys found, initializing Cloudinary storage');
-    
-    cloudinary.config({
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET
-    });
-
-    storage = new CloudinaryStorage({
-        cloudinary: cloudinary,
-        params: {
-            folder: 'changeflow_uploads',
-            allowed_formats: ['jpg', 'png', 'jpeg', 'pdf', 'doc', 'docx'],
-            public_id: (req, file) => {
-                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-                return `${file.fieldname}-${uniqueSuffix}`;
+// Local Multer Configuration (Fallback)
+const localStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        if (!fs.existsSync(uploadDir)) {
+            try {
+                fs.mkdirSync(uploadDir, { recursive: true });
+            } catch (err) {
+                return cb(err);
             }
         }
-    });
-    isCloudinary = true;
-} else {
-    debugLog('Cloudinary keys missing or placeholder, falling back to LOCAL storage');
-    storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            debugLog(`Destination called for: ${file.originalname}`);
-            if (!fs.existsSync(uploadDir)) {
-                try {
-                    fs.mkdirSync(uploadDir, { recursive: true });
-                    debugLog('Created uploadDir in destination');
-                } catch (err) {
-                    debugLog(`Failed to create uploadDir in destination: ${err.message}`);
-                    return cb(err);
-                }
-            } else {
-                debugLog('uploadDir exists in destination');
-            }
-            cb(null, uploadDir);
-        },
-        filename: function (req, file, cb) {
-            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-            const name = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname);
-            debugLog(`Generated filename: ${name}`);
-            cb(null, name);
-        },
-    });
-    isCloudinary = false;
-}
+        cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const name = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname).toLowerCase();
+        cb(null, name);
+    },
+});
 
 const fileFilter = (req, file, cb) => {
-    // Allowed file types
-    const allowedTypes = /jpeg|jpg|png|pdf|doc|docx|xls|xlsx|txt/;
+    const allowedTypes = /jpeg|jpg|png|gif|webp|svg/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
 
     if (mimetype && extname) {
         return cb(null, true);
     } else {
-        cb(new Error('Only images, PDFs, and documents are allowed'));
+        cb(new Error('Only standard image formats (JPG, PNG, GIF, WebP, SVG) are allowed'));
     }
 };
 
+// INITIALIZE UPLOADER
+// Use Cloudinary if configured, otherwise fallback to local
+let storageToUse = localStorage;
+let usingCloudinary = false;
+
+if (isCloudinaryConfigured()) {
+    try {
+        storageToUse = cloudinaryStorage;
+        usingCloudinary = true;
+        debugLog('Using Cloudinary for image storage');
+    } catch (e) {
+        debugLog(`Failed to initialize Cloudinary storage: ${e.message}. Falling back to local.`);
+    }
+} else {
+    debugLog('Cloudinary not configured. Using local storage (ephemeral on Render).');
+}
+
 const upload = multer({
-    storage: storage,
+    storage: storageToUse,
     limits: {
-        fileSize: parseInt(process.env.MAX_FILE_SIZE) || 10 * 1024 * 1024, // 10MB default
+        fileSize: parseInt(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024, // 5MB limit
     },
     fileFilter: fileFilter,
 });
 
 /**
- * File upload route
+ * Image upload route for profile pictures
  */
-router.post('/upload', upload.single('file'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({
-            success: false,
-            message: 'Please upload a file',
-        });
-    }
+router.post('/upload', (req, res, next) => {
+    upload.single('file')(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            return res.status(400).json({ success: false, message: `Upload error: ${err.message}` });
+        } else if (err) {
+            return res.status(400).json({ success: false, message: err.message });
+        }
+        
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'No file received',
+            });
+        }
 
-    res.json({
-        success: true,
-        data: {
-            filename: isCloudinary ? req.file.path : req.file.filename,
-            originalName: req.file.originalname,
-            path: req.file.path, // Full path or Cloudinary URL
-            isCloud: isCloudinary,
-            size: req.file.size,
-            mimetype: req.file.mimetype,
-        },
+        // Return a path that is consistent and serves relative to backend host or absolute cloud URL
+        // Frontend 'getAvatarUrl' will handle both cases
+        const finalPath = usingCloudinary ? req.file.path : `/uploads/${req.file.filename}`;
+
+        res.json({
+            success: true,
+            data: {
+                filename: req.file.filename || req.file.originalname,
+                originalName: req.file.originalname,
+                path: finalPath,
+                size: req.file.size,
+                mimetype: req.file.mimetype,
+                storage: usingCloudinary ? 'cloudinary' : 'local'
+            },
+        });
     });
 });
 
