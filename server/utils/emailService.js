@@ -127,7 +127,7 @@ export const sendCriticalNotification = async ({ recipients, requestData, creato
             </div>
             
             <div style="text-align: center; margin-top: 35px;">
-                <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/requests" style="background-color: #111827; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 800; display: inline-block; text-transform: uppercase; letter-spacing: 0.05em; font-size: 14px;">Review Request →</a>
+                <a href="${process.env.FRONTEND_URL || 'https://digital-processing-compliance-tool.netlify.app'}/requests" style="background-color: #111827; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 800; display: inline-block; text-transform: uppercase; letter-spacing: 0.05em; font-size: 14px;">Review Request →</a>
             </div>
             
             <p style="color: #94a3b8; font-size: 12px; text-align: center; margin-top: 30px;">
