@@ -3,6 +3,7 @@ import Request from '../models/Request.js';
 import User from '../models/User.js';
 import fs from 'fs';
 import { createAuditLog, getClientIp } from '../middleware/auditLogger.js';
+import { sendCriticalNotification } from '../utils/emailService.js';
 
 /**
  * @desc    Create a new change request
@@ -34,6 +35,30 @@ export const createRequest = asyncHandler(async (req, res) => {
             riskLevel: request.riskLevel,
         },
     });
+
+    // 3. Handle Critical Risk Notifications
+    if (request.riskLevel === 'Critical') {
+        const managers = await User.find({ role: 'Manager', isActive: true }).select('email');
+        const matchingAuditors = await User.find({ 
+            role: 'Auditor', 
+            isActive: true, 
+            auditorType: request.changeType 
+        }).select('email');
+
+        const recipients = [...new Set([
+            ...managers.map(m => m.email),
+            ...matchingAuditors.map(a => a.email)
+        ])];
+
+        if (recipients.length > 0) {
+            sendCriticalNotification({
+                recipients,
+                requestData: request,
+                creatorName: request.createdBy.name
+            });
+            console.log(`[ALERT] Critical risk request detected. Notifying ${recipients.length} stakeholders.`);
+        }
+    }
 
     res.status(201).json({
         success: true,
