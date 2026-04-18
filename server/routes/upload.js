@@ -1,47 +1,17 @@
 import express from 'express';
 import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-import { getCloudinaryStorage, isCloudinaryConfigured } from '../utils/cloudinary.js';
 
-// --- PERSISTENCE INSTRUCTIONS ---
-// 1. Install dependencies (Optional, code will fallback automatically if missing):
-//    npm install cloudinary multer-storage-cloudinary
-// 2. Set environment variables in Render/Local .env:
-//    CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
+// --- DATABASE STORAGE VERSION ---
+// This version stores images as Base64 strings directly in MongoDB.
+// This is the most reliable way to handle images on ephemeral platforms like Render & Netlify
+// without using external cloud storage like Cloudinary or S3.
 // --------------------------------
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const debugLog = (msg) => {
-    try {
-        fs.appendFileSync(path.join(__dirname, '../upload_debug.log'), `[${new Date().toISOString()}] ${msg}\n`);
-    } catch (e) { }
-};
-
-// Local storage fallback
-const uploadDir = path.resolve(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-    try {
-        fs.mkdirSync(uploadDir, { recursive: true });
-    } catch (err) {
-        debugLog(`Failed to create local uploadDir: ${err.message}`);
-    }
-}
-
-const localStorage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, uploadDir),
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname).toLowerCase());
-    },
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|gif|webp|svg/;
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+    const extname = allowedTypes.test(file.originalname.toLowerCase().split('.').pop());
     const mimetype = allowedTypes.test(file.mimetype);
 
     if (mimetype && extname) {
@@ -51,34 +21,18 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 2 * 1024 * 1024 }, // Limit to 2MB for DB storage
+    fileFilter: fileFilter,
+}).single('file');
+
 const router = express.Router();
 
 /**
- * Image upload route for profile pictures
+ * Image upload route - Converts to Base64 for database storage
  */
-router.post('/upload', async (req, res, next) => {
-    let storageToUse = localStorage;
-    let usingCloudinary = false;
-
-    // Try to get cloud storage if configured
-    if (isCloudinaryConfigured()) {
-        try {
-            const cloudStorage = await getCloudinaryStorage();
-            if (cloudStorage) {
-                storageToUse = cloudStorage;
-                usingCloudinary = true;
-            }
-        } catch (e) {
-            debugLog(`Failed to load Cloudinary storage: ${e.message}`);
-        }
-    }
-
-    const upload = multer({
-        storage: storageToUse,
-        limits: { fileSize: 5 * 1024 * 1024 },
-        fileFilter: fileFilter,
-    }).single('file');
-
+router.post('/upload', (req, res) => {
     upload(req, res, (err) => {
         if (err instanceof multer.MulterError) {
             return res.status(400).json({ success: false, message: `Upload error: ${err.message}` });
@@ -90,20 +44,26 @@ router.post('/upload', async (req, res, next) => {
             return res.status(400).json({ success: false, message: 'No file received' });
         }
 
-        const finalPath = usingCloudinary ? req.file.path : `/uploads/${req.file.filename}`;
-        
-        res.json({
-            success: true,
-            data: {
-                filename: req.file.filename || req.file.originalname,
-                originalName: req.file.originalname,
-                path: finalPath,
-                size: req.file.size,
-                mimetype: req.file.mimetype,
-                storage: usingCloudinary ? 'cloudinary' : 'local'
-            },
-        });
+        try {
+            // Convert file buffer to Base64 string
+            const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+            
+            res.json({
+                success: true,
+                data: {
+                    filename: req.file.originalname,
+                    originalName: req.file.originalname,
+                    path: base64Image, // This will be stored in the User.avatar field in the DB
+                    size: req.file.size,
+                    mimetype: req.file.mimetype,
+                    storage: 'database'
+                },
+            });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Error processing image' });
+        }
     });
 });
 
 export default router;
+

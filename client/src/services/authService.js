@@ -87,7 +87,7 @@ const authService = {
         });
 
         if (uploadResponse.success) {
-            const avatarPath = `/uploads/${uploadResponse.data.filename}`;
+            const avatarPath = uploadResponse.data.path;
             // 2. Update user profile with the new avatar path
             const profileResponse = await api.patch('/auth/avatar', { avatar: avatarPath });
 

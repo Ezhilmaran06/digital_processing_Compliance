@@ -5,8 +5,8 @@
 export const getAvatarUrl = (path) => {
     if (!path) return null;
     
-    // If it's already a full URL (like from Unsplash or Cloudinary), return as is
-    if (path.startsWith('http')) return path;
+    // If it's already a full URL (like from Unsplash or Cloudinary) or a Base64 string, return as is
+    if (path.startsWith('http') || path.startsWith('data:')) return path;
 
     // Get the base API URL from environment variables
     // In production, this should be the Render URL

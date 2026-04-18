@@ -38,10 +38,20 @@ const app = express();
 
 const server = http.createServer(app);
 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:3000',
+    'https://digital-processing-compliance-tool.netlify.app',
+    ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : []),
+    ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : [])
+].map(url => url.trim()).filter(Boolean);
+
 // Initialize Socket.io
 initIo(server, {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: allowedOrigins,
     credentials: true,
+    methods: ["GET", "POST"]
 });
 
 /**
@@ -56,8 +66,25 @@ app.use(helmet({
 
 // CORS - Enable Cross-Origin Resource Sharing
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+        
+        const isAllowed = allowedOrigins.some(allowed => 
+            allowed === origin || 
+            (allowed.includes('localhost') && origin.includes('localhost'))
+        );
+        
+        if (isAllowed || origin.endsWith('netlify.app')) {
+            callback(null, true);
+        } else {
+            console.warn(`[CORS] Rejected origin: ${origin}`);
+            callback(null, false); // Just reject, don't throw error to avoid crashing
+        }
+    },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
 }));
 
 /**
