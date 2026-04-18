@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
 import Request from '../models/Request.js';
+import { createAuditLog, getClientIp } from '../middleware/auditLogger.js';
 
 /**
  * @desc    Get current user profile with computed stats
@@ -82,24 +83,42 @@ export const updateProfile = asyncHandler(async (req, res) => {
         throw new Error('User not found');
     }
 
-    if (name) user.name = name.trim();
-    if (department !== undefined) user.department = department.trim();
-    if (avatar) user.avatar = avatar;
+    try {
+        if (name) user.name = name.trim();
+        if (department !== undefined) user.department = department.trim();
+        if (avatar) user.avatar = avatar;
 
-    await user.save();
+        await user.save();
 
-    res.json({
-        success: true,
-        message: 'Profile updated successfully',
-        data: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            department: user.department,
-            role: user.role,
-            avatar: user.avatar,
-        },
-    });
+        // Create audit log
+        await createAuditLog({
+            userId: user._id,
+            action: 'PROFILE_UPDATED',
+            ipAddress: getClientIp(req),
+            userAgent: req.get('user-agent'),
+            details: {
+                updatedFields: Object.keys(req.body).filter(k => k !== 'avatar'),
+                hasAvatar: !!avatar
+            },
+        });
+
+        res.json({
+            success: true,
+            message: 'Profile updated successfully',
+            data: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                department: user.department,
+                role: user.role,
+                avatar: user.avatar,
+            },
+        });
+    } catch (error) {
+        console.error('[PROFILE_UPDATE_ERROR]', error);
+        res.status(500);
+        throw new Error(`Failed to update profile: ${error.message}`);
+    }
 });
 
 /**

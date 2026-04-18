@@ -222,34 +222,83 @@ export const updatePassword = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc    Update user avatar
- * @route   PATCH /api/auth/me/avatar
+ * @desc    Get current user avatar
+ * @route   GET /api/auth/avatar
  * @access  Private
  */
-export const updateAvatar = asyncHandler(async (req, res) => {
-    console.log(`[AVATAR_UPDATE] Submitting update for user: ${req.user._id}, path: ${req.body.avatar}`);
-    const user = await User.findById(req.user._id);
-
-    if (!req.body.avatar) {
-        res.status(400);
-        throw new Error('Please provide an avatar path');
+export const getAvatar = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id).select('avatar');
+    
+    if (!user) {
+        res.status(404);
+        throw new Error('User not found');
     }
 
-    user.avatar = req.body.avatar;
-    await user.save();
+    if (!user.avatar) {
+        // Return a transparent 1x1 pixel gif or just 204
+        return res.status(204).end();
+    }
 
-    // Create audit log
-    await createAuditLog({
-        userId: user._id,
-        action: 'AVATAR_UPDATED',
-        ipAddress: getClientIp(req),
-        userAgent: req.get('user-agent'),
-    });
-
+    // If it's base64, we can serve it by stripping metadata if we want, 
+    // but usually browser handles base64 in src.
+    // If someone calls this API via GET, they probably want the path or the data.
     res.json({
         success: true,
         data: {
-            avatar: user.avatar,
-        },
+            avatar: user.avatar
+        }
     });
+});
+
+/**
+ * @desc    Update user avatar (accepts Base64 or path)
+ * @route   PATCH /api/auth/avatar
+ * @access  Private
+ */
+export const updateAvatar = asyncHandler(async (req, res) => {
+    const { avatar } = req.body;
+    
+    console.log(`[AVATAR_UPDATE] Submitting update for user: ${req.user?._id}`);
+    
+    if (!avatar) {
+        res.status(400);
+        throw new Error('Please provide an avatar path or base64 data');
+    }
+
+    const user = await User.findById(req.user._id);
+    if (!user) {
+        res.status(404);
+        throw new Error('User not found');
+    }
+
+    try {
+        user.avatar = avatar;
+        await user.save();
+
+        console.log(`[AVATAR_UPDATE] Successfully updated avatar for user: ${user.email}`);
+
+        // Create audit log
+        await createAuditLog({
+            userId: user._id,
+            action: 'AVATAR_UPDATED',
+            ipAddress: getClientIp(req),
+            userAgent: req.get('user-agent'),
+            details: {
+                // Don't log full base64 in audit logs as it bloats DB
+                avatarType: avatar.startsWith('data:') ? 'base64' : 'path',
+                avatarLength: avatar.length
+            }
+        });
+
+        res.json({
+            success: true,
+            data: {
+                avatar: user.avatar,
+            },
+        });
+    } catch (saveError) {
+        console.error('[AVATAR_UPDATE_ERROR]', saveError);
+        res.status(500);
+        throw new Error(`Failed to save avatar: ${saveError.message}`);
+    }
 });

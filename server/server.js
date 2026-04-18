@@ -90,8 +90,8 @@ app.use(cors({
 /**
  * Body Parser Middleware
  */
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Rate limiting - Prevent abuse
 const limiter = rateLimit({
