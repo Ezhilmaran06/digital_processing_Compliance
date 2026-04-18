@@ -39,15 +39,14 @@ export const createRequest = asyncHandler(async (req, res) => {
     // 3. Handle Critical Risk Notifications
     if (request.riskLevel === 'Critical') {
         const managers = await User.find({ role: 'Manager', isActive: true }).select('email');
-        const matchingAuditors = await User.find({ 
+        const allAuditors = await User.find({ 
             role: 'Auditor', 
-            isActive: true, 
-            auditorType: request.changeType 
+            isActive: true 
         }).select('email');
 
         const recipients = [...new Set([
             ...managers.map(m => m.email),
-            ...matchingAuditors.map(a => a.email)
+            ...allAuditors.map(a => a.email)
         ])];
 
         if (recipients.length > 0) {
